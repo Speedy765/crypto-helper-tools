@@ -1,0 +1,27 @@
+<div style="float:left; width: 700px;">
+  <div style="width: 400px"> Last <b>{{interval}} minutes</b>, sorted by % increase: </div>
+
+  <table class="table table-striped" style="width: 700px">
+    <thead class="thead-inverse">
+     <tr>
+       <th style="width : 50px"></th>
+       <th style="width : 100px">Start</th>
+       <th style="width : 100px">Price </th>
+       <th style="width : 200px">Price increase</th>
+       <th style="width : 200px">Volume </th>
+       <th style="width : 200px">Volume increase </th>
+       <th style="width : 200px"> </th>
+       <span>
+     </tr>
+   </thead>
+    <tr ng-repeat="coin in tops[interval]">
+      <td style="width : 50px"><a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> </td>
+      <td style="width : 100px">{{coin.start}} </td>
+      <td style="width : 100px">{{coin.price}} </td>
+      <td style="width : 100px">{{coin.diffSinceStart}}% </td>
+      <td style="width : 200px">{{coin.volume}} </td>
+      <td style="width : 200px">{{coin.volumeDiff}}% </td>
+      <span>
+    </tr>
+  </table>
+</div>

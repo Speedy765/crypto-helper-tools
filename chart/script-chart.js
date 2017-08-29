@@ -13,6 +13,8 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
   $rootScope.finalList = [];
   $rootScope.labels = [];
   $rootScope.data = [];
+  var bid = [];
+  var ask = [];
   $http.get(backend).
     then(handleResponse);
 
@@ -21,11 +23,14 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
       item = response.data.result
       $rootScope.labels.push($rootScope.labels.length);
       document.title = $rootScope.coin + " - " + item.Bid;
-      $rootScope.data.push(item.Bid);
+      bid.push(item.Bid);
+      ask.push(item.Ask);
       if ($rootScope.data.length > 60 * 30) {
-        $rootScope.data.splice(0,1);
+        bid.splice(0,1);
+        ask.splice(0,1);
         $rootScope.labels.splice(0,1);
       }
+      $rootScope.data = [bid, ask];
     }
   }
 
