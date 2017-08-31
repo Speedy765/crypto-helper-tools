@@ -1,0 +1,16 @@
+{
+  "name": "mjo_sell_assister",
+  "version": "0.0.1",
+  "description": "Gives the price of the last buy order if it would be dumped again market price.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Martijn de Jongh",
+  "license": "MIT",
+  "dependencies": {
+    "jsonfile": "^3.0.1",
+    "moment": "^2.18.1",
+    "node.bittrex.api": "^0.4.3"
+  }
+}
