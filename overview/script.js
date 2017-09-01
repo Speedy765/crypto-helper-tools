@@ -61,8 +61,8 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
             volumeLog : []
           };
         }
-        coins[coin].priceLog.push(item.Last);
-        coins[coin].volumeLog.push(item.BaseVolume);
+        coins[coin].priceLog.push(item.Last.toFixed(8));
+        coins[coin].volumeLog.push(item.BaseVolume.toFixed(0));
 
       });
       keys = Object.keys(coins);
