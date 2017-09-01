@@ -27,13 +27,13 @@
      btc: 1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7</br>
      ltc: LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP</div>
   <div>Hosting is not free, please consider donating something if using on regular basis</div>
-  <h3>{{coin}}, price per second, from to to bottom: ask, bid, 0,5btc support</h3>
+  <h3>{{coin}}, price per second, from top to bottom: ask, bid, 0,5btc support</h3>
   <canvas id="line" class="chart chart-line" chart-data="data"
   chart-labels="labels" chart-colors="colors" chart-series="series" chart-options="options"
   chart-dataset-override="datasetOverride">
 </canvas>
-<h3>{{coin}}, Orders filled last 60 seconds (beta)</h3>
-  <canvas id="orderChart" class="chart chart-line" chart-data="orderData"
+<h3>{{coin}}, Orders filled (beta)</h3>
+  <canvas id="bar" class="chart chart-bar" chart-data="orderData"
   chart-labels="orderLabels" chart-colors="colors" chart-series="series" chart-options="orderOptions"
   chart-dataset-override="datasetOverride">
   </canvas

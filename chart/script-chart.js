@@ -56,8 +56,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 
   var backendLog = "https://x64bepwna0.execute-api.eu-west-1.amazonaws.com/v1?market=BTC-" + $rootScope.coin.toUpperCase();
 
-  var buys = [];
-  var sells = [];
+  var orderLog = [];
   $rootScope.orderLabels = [];
   $http.get(backendLog).
     then(handleOrderResponse);
@@ -65,39 +64,26 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
   function handleOrderResponse(response) {
     if (response.data && response.data.success) {
       var items = response.data.result;
-      buys.push(0);
-      sells.push(0);
-      var t1 = new Date();
-      t1.setHours(t1.getHours() - 2);
-      var t2;
-
-      items.every(function(item) {
-        t2 = new Date(item.TimeStamp);
-        var dif = t1.getTime() - t2.getTime();
-
-        var Seconds_from_T1_to_T2 = dif / 1000;
-        var Seconds_Between_Dates = Math.abs(Seconds_from_T1_to_T2);
-        if (Seconds_Between_Dates < 60) {
+      orderLog = [];
+      $rootScope.orderLabels = [];
+      console.debug(items[0].TimeStamp);
+      items.forEach(function(item) {
+        if (item.Total > 0.01) {
           if (item.OrderType === "BUY") {
-            buys[buys.length - 1] += item.Total;
+            orderLog.push(item.Total);
+            $rootScope.orderLabels.push("");
           }
           else if (item.OrderType === "SELL") {
-            sells[sells.length - 1] += item.Total;
+            orderLog.push(0 - item.Total);
+            $rootScope.orderLabels.push("");
           }
-          return true;
-        }
-        else {
-          return false;
         }
       });
-      $rootScope.orderLabels.push(buys.length);
-      if (buys.length > 60) {
-        buys.splice(0,1);
-        sells.splice(0,1);
+      if (orderLog.length > 60) {
+        orderLog.splice(0,1);
         $rootScope.orderLabels.splice(0,1);
       }
-      console.debug("sell" + sells[sells.length - 1]);
-      $rootScope.orderData = [buys, sells];
+      $rootScope.orderData = [orderLog];
     }
   }
 
@@ -130,7 +116,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
   };
 
   $rootScope.orderOptions = {
-    type: "line",
+    type: "bar",
     animation : {
       duration : 0
     },
