@@ -4,7 +4,9 @@
 <html ng-app="bittrexApp">
 
 <head>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
   <script src="script.js"></script>
   <script>
@@ -21,17 +23,40 @@
 
 <!-- define angular controller -->
 <body ng-controller="mainController">
-  <div>Donations are welcome on: </br>
-     btc: 1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7</br>
-     ltc: LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6 col-sm-push-3 col-xs-12" style="padding-top:25px">
+			<div class="panel panel-default">
+			  <div class="panel-heading">Donations are welcome on:</div>
+			  <div class="panel-body">
+				<div class="input-group">
+				  <span class="input-group-addon">Btc</span>
+				  <input type="text"  class="form-control" disabled value="1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7" />
+				</div>
+				<div class="input-group" style="padding-top: 10px">
+				  <span class="input-group-addon">Ltc</span>
+				  <input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
+				</div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
 
-
-  <div style="float:left">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-lg-6">
     <div  ng-repeat="interval in intervals" coin-table-interval></div>
-  </div>
-  <div style="float:left">
-    <div coin-table-main> </div>
-  </div>
+		
+		</div>
+		
+		
+		<div class="col-xs-12 col-sm-12 col-lg-6">
+			<div coin-table-main> </div>
+		
+		</div>
+	</div>
+</div>
 </body>
 
 </html>

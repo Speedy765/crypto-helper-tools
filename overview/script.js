@@ -23,17 +23,17 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
   var backend = "https://yh4brn8jmd.execute-api.eu-west-1.amazonaws.com/temp"
   var lastItems;
   var coins = {};
-  var coin, startPrice, currentPrice, startVolume, currentVolume;
+  var coin, startPrice, currentPrice, startVolume, currentVolume, hide;
   var keys;
   var topIntervals = [1,5,15,30, 60, 240];
   $rootScope.intervals = topIntervals;
   var tops = {};
-
+  
   $rootScope.finalList = [];
 
   $http.get(backend).
     then(handleResponse);
-
+	
   function handleResponse(response) {
     if (response.data && response.data.success) {
       lastItems = response.data.result.filter(function(item) {
@@ -67,39 +67,40 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
       });
       keys = Object.keys(coins);
       $rootScope.finalList = [];
+	  
       keys.forEach(function(key) {
         currentPrice = coins[key].priceLog[coins[key].priceLog.length - 1];
         startPrice = coins[key].priceLog[0];
         currentVolume = coins[key].volumeLog[coins[key].volumeLog.length - 1];
         startVolume = coins[key].volumeLog[0];
+		
+			$rootScope.finalList.push({
+			  coin: key,
+			  start: startPrice,
+			  price: currentPrice,
+			  volume: coins[key].volumeLog[coins[key].volumeLog.length - 1],
+			  diffSinceStart: Number(((currentPrice * 100) / startPrice - 100).toFixed(1)),
+			  volumeDiff: Number(((currentVolume * 100) / startVolume - 100).toFixed(1)),
+			});
+			topIntervals.forEach(function(top) {
+			  if (coins[key].priceLog.length > (top * 60) / 5 ) {
+				currentPrice = coins[key].priceLog[coins[key].priceLog.length - 1];
+				startPrice = coins[key].priceLog[coins[key].priceLog.length - (top * 60) / 5];
+				currentVolume = coins[key].volumeLog[coins[key].volumeLog.length - 1];
 
-        $rootScope.finalList.push({
-          coin: key,
-          start: startPrice,
-          price: currentPrice,
-          volume: coins[key].volumeLog[coins[key].volumeLog.length - 1],
-          diffSinceStart: Number(((currentPrice * 100) / startPrice - 100).toFixed(1)),
-          volumeDiff: Number(((currentVolume * 100) / startVolume - 100).toFixed(1))
-        });
-        topIntervals.forEach(function(top) {
-          if (coins[key].priceLog.length > (top * 60) / 5 ) {
-            currentPrice = coins[key].priceLog[coins[key].priceLog.length - 1];
-            startPrice = coins[key].priceLog[coins[key].priceLog.length - (top * 60) / 5];
-            currentVolume = coins[key].volumeLog[coins[key].volumeLog.length - 1];
-
-            startVolume = coins[key].volumeLog[coins[key].volumeLog.length - (top * 60) / 5];
-            if (coins[key].volumeLog[coins[key].volumeLog.length - 1] > 50) {
-              tops[top].push({
-                coin: key,
-                start: startPrice,
-                price: currentPrice,
-                volume: coins[key].volumeLog[coins[key].volumeLog.length - 1],
-                diffSinceStart: Number(((currentPrice * 100) / startPrice - 100).toFixed(1)),
-                volumeDiff: Number(((currentVolume * 100) / startVolume - 100).toFixed(1))
-              })
-            }
-          };
-        });
+				startVolume = coins[key].volumeLog[coins[key].volumeLog.length - (top * 60) / 5];
+				if (coins[key].volumeLog[coins[key].volumeLog.length - 1] > 50) {
+				  tops[top].push({
+					coin: key,
+					start: startPrice,
+					price: currentPrice,
+					volume: coins[key].volumeLog[coins[key].volumeLog.length - 1],
+					diffSinceStart: Number(((currentPrice * 100) / startPrice - 100).toFixed(1)),
+					volumeDiff: Number(((currentVolume * 100) / startVolume - 100).toFixed(1))
+				  })
+				}
+			  };
+			});
       });
       $rootScope.finalList.sort(function(a, b) {
         return b.diffSinceStart - a.diffSinceStart;
@@ -120,6 +121,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
     $http.get(backend).
       then(handleResponse);
   }, 5000);
+  
 
 });
 

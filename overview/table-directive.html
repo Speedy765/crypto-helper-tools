@@ -1,29 +1,31 @@
-<div style="margin-left: 20px">
-  <div style="width: 400px"> Total since {{startTime}} sorted by % increase: </div>
-  <table class="table table-striped" style="float:left; width: 700px">
-     <thead class="thead-inverse">
-      <tr>
-        <th style="width : 50px"></th>
-        <th style="width : 100px">Start </th>
-        <th style="width : 100px">Price </th>
-        <th style="width : 200px;text-align:right;">Price increase</th>
-        <th style="width : 200px;text-align:right;">Volume </th>
-        <th style="width : 200px;text-align:right;">Volume increase </th>
-        <th style="width : 200px"> </th>
-        <span>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="coin in finalList">
-        <td style="width : 50px"><a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> </td>
-        <td style="width : 100px">{{coin.start}} </td>
-        <td style="width : 100px">{{coin.price}} </td>
-        <td style="width : 100px;text-align:right;">{{coin.diffSinceStart}}% </td>
-        <td style="width : 200px;text-align:right;">{{coin.volume}} </td>
-        <td style="width : 200px;text-align:right;">{{coin.volumeDiff}}% </td>
-        <td style="width : 200px" ng-click="ignore(coin.coin)">ignore </td>
-        <span>
-      </tr>
-    </tbody>
-  </table>
+<div class="panel panel-default">
+	<div class="panel-heading">Total since {{startTime}} sorted by % increase: {{ resetHide }}</div>
+	<div class="panel-body">
+		<table class="table table-striped table-condensed table-bordered table-hover" ng-if="finalList">
+			<thead>
+				<tr>
+					<th>Coin</th>
+					<th>Start</th>
+					<th>Price</th>
+					<th>Price Increase</th>
+					<th>Volume</th>
+					<th>Volume Increase</th>
+					<th>Ignore</th>
+				</tr>
+			</thead>
+			<tbody>	
+				<tr ng-repeat="coin in finalList | orderBy:'volumeDiff':true" ng-if="!coin.hide">
+				  <td style="width : 50px"><a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> </td>
+				  <td style="width : 100px">{{coin.start}} </td>
+				  <td style="width : 100px">{{coin.price}} </td>
+				  <td style="width : 100px;text-align:right;">{{coin.diffSinceStart}}% </td>
+				  <td style="width : 200px;text-align:right;">{{coin.volume}} </td>
+				  <td style="width : 200px;text-align:right;">{{coin.volumeDiff}}% </td>
+				  <td><a href="javascript:void(0)" ng-click="ignore(coin.coin)" class="btn-link">Ignore {{ coin.hide }} </a></td>
+				  <span>
+				</tr>
+			</tbody>
+		</table>
+		<span ng-if="!finalList">Waiting for data..</span>
+	</div>
 </div>
