@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">Last <b>{{interval}} minutes</b>, sorted by % increase: </div>
 	<div class="panel-body">
-		<table class="table table-striped table-condensed table-bordered table-hover" ng-if="tops[interval]">
+		<table class="table table-striped table-bordered table-condensed table-hover" ng-if="tops[interval]">
 			<thead>
 				<tr>
 					<th>Coin</th>
@@ -14,13 +14,12 @@
 			</thead>
 			<tbody>	
 				<tr ng-repeat="coin in tops[interval]">
-				  <td style="width : 50px"><a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> </td>
-				  <td style="width : 100px">{{coin.start}} </td>
-				  <td style="width : 100px">{{coin.price}} </td>
-				  <td style="width : 100px;text-align:right;">{{coin.diffSinceStart}}% </td>
-				  <td style="width : 200px;text-align:right;">{{coin.volume}} </td>
-				  <td style="width : 200px;text-align:right;">{{coin.volumeDiff}}% </td>
-				  <span>
+				  <td ><a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> </td>
+				  <td>{{coin.start}} </td>
+				  <td>{{coin.price}} </td>
+				  <td>{{coin.diffSinceStart}}% </td>
+				  <td>{{coin.volume}} </td>
+				  <td>{{coin.volumeDiff}}% </td>
 				</tr>
 			</tbody>
 		</table>

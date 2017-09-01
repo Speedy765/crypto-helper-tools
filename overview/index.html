@@ -23,28 +23,25 @@
 
 <!-- define angular controller -->
 <body ng-controller="mainController">
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-6 col-sm-push-3 col-xs-12" style="padding-top:25px">
-			<div class="panel panel-default">
-			  <div class="panel-heading">Donations are welcome on:</div>
-			  <div class="panel-body">
-				<div class="input-group">
-				  <span class="input-group-addon">Btc</span>
-				  <input type="text"  class="form-control" disabled value="1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7" />
-				</div>
-				<div class="input-group" style="padding-top: 10px">
-				  <span class="input-group-addon">Ltc</span>
-				  <input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
-				</div>
-			  </div>
+		<div class="col-sm-3 col-xs-12" style="padding-top:25px;">
+			<span>Donations are welcome on:</span>
+			<div class="input-group">
+				<span class="input-group-addon">Btc</span>
+				<input type="text"  class="form-control" disabled value="1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7" />
+			</div>
+			<div class="input-group" style="padding-top: 10px">
+				<span class="input-group-addon">Ltc</span>
+				<input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" style="padding-top:30px;">
 	<div class="row">
+	
 		<div class="col-xs-12 col-sm-12 col-lg-6">
     <div  ng-repeat="interval in intervals" coin-table-interval></div>
 		
