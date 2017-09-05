@@ -7,9 +7,9 @@
 					<th>Coin</th>
 					<th>Start</th>
 					<th>Price</th>
-					<th>Price Increase</th>
-					<th>Volume</th>
-					<th>Volume Increase</th>
+					<th style="text-align:right">Price<br/>Increase</th>
+					<th style="text-align:right">Volume</th>
+					<th style="text-align:right">Volume<br/>Increase</th>
 					<th>Ignore</th>
 				</tr>
 			</thead>
@@ -18,9 +18,9 @@
 				  <td><a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> </td>
 				  <td>{{coin.start}} </td>
 				  <td>{{coin.price}} </td>
-				  <td>{{coin.diffSinceStart}}% </td>
-				  <td>{{coin.volume}} </td>
-				  <td>{{coin.volumeDiff}}% </td>
+				  <td style="text-align:right">{{coin.diffSinceStart}}% </td>
+				  <td style="text-align:right">{{coin.volume}} </td>
+				  <td style="text-align:right">{{coin.volumeDiff}}% </td>
 				  <td><a href="javascript:void(0)" ng-click="ignore(coin.coin)" class="btn-link">Ignore {{ coin.hide }} </a></td>
 				</tr>
 			</tbody>
