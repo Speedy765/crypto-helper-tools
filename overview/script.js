@@ -20,7 +20,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
     localStorage.setItem("ignoreList", ignoreList.join(","));
   };
 
-  var backend = "https://yh4brn8jmd.execute-api.eu-west-1.amazonaws.com/temp"
+  var backend = "http://34.240.107.131:1339"
   var lastItems;
   var coins = {};
   var coin, startPrice, currentPrice, startVolume, currentVolume, hide;
@@ -28,12 +28,12 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
   var topIntervals = [1,5,15,30, 60, 240];
   $rootScope.intervals = topIntervals;
   var tops = {};
-  
+
   $rootScope.finalList = [];
 
   $http.get(backend).
     then(handleResponse);
-	
+
   function handleResponse(response) {
     if (response.data && response.data.success) {
       lastItems = response.data.result.filter(function(item) {
@@ -61,19 +61,19 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
             volumeLog : []
           };
         }
-        coins[coin].priceLog.push(item.Last.toFixed(8));
+        coins[coin].priceLog.push(item.Bid.toFixed(8));
         coins[coin].volumeLog.push(item.BaseVolume.toFixed(0));
 
       });
       keys = Object.keys(coins);
       $rootScope.finalList = [];
-	  
+
       keys.forEach(function(key) {
         currentPrice = coins[key].priceLog[coins[key].priceLog.length - 1];
         startPrice = coins[key].priceLog[0];
         currentVolume = coins[key].volumeLog[coins[key].volumeLog.length - 1];
         startVolume = coins[key].volumeLog[0];
-		
+
 			$rootScope.finalList.push({
 			  coin: key,
 			  start: startPrice,
@@ -120,8 +120,8 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
   setInterval(function() {
     $http.get(backend).
       then(handleResponse);
-  }, 5000);
-  
+  }, 10000);
+
 
 });
 

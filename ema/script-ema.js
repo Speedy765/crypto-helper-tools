@@ -27,7 +27,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
   var tops = {};
   var log = {};
   var emaValue = {};
-  var emas = [120, 240];
+  var emas = [12, 26];
   emas.forEach(function(ema) {
     emaValue[ema] = [];
   });

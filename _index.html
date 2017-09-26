@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<!-- define angular app -->
+<html ng-app="bittrexApp">
+
+<head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105407554-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<!-- define angular controller -->
+<body>
+  <h1>Welcome to my crypto tools that work on data from Bittrex</h1>
+  <div>
+  <p> I created some tooling because the charts on Bittrex are almost 5 minutes old. So its hard to see what happens in the past 5 minutes with the actual price without remembering all lots of small numbers. </p>
+
+  </div>
+  <p> Currently there are 3 tools:</p>
+  <ul>
+    <li><a href="overview/index.html">Global overview sorted on price</a></li>
+    <li><a href="chart/index.html?coin=ETH">Price of a coin per second</a></li>
+    <li><a href="ema/index.html?coin=ETH">24 hour data with avarages of last 1 and 2 hours</a></li>
+  </ul>
+
+  <p>For covering some of the costs <a href="https://coin-hive.com/">https://coin-hive.com/</a> is used with a single thread to mine some XMR using your browser.</p>
+  <p>If you contribute or donate to keep the site running you will get a mine free version</p>
+  <p> Are you a css, html, or javascript guru? Feel free to help me improve the tools in anyway. </br>
+    You can find the code on <a href="https://github.com/Speedy765/crypto-helper-tools">Github </a> </p>
+
+  <h2> Advanced users:</h2>
+  <h4> Sell assist bot</h4>
+  <p> There is also a bot that gives you information of your latest order on a coin, showing the current % of profit or loss. </br>
+    You can find it on <a href="https://github.com/Speedy765/crypto-helper-tools/tree/master/sell_aid_script">Github </a> </p>
+</body>
+
+</html>
