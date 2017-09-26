@@ -9,7 +9,7 @@ Since they lack:
 I decided to make some nice graphs for myself and the tweakers community and others interested.
 
 ## Demo
-https://s3-eu-west-1.amazonaws.com/bittrex-reporting-tool/index.html
+http://www.cryptotracky.com
 
 ### Todo
 Better readme :-)
