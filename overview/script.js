@@ -96,6 +96,9 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 			
 			topIntervals.forEach(function(top) {
 			  if (coins[key].priceLog.length > (top * 60) / 5 ) {
+				startPrice = coins[key].priceLog[coins[key].priceLog.length - (top * 60) / 5];
+				startVolume = coins[key].volumeLog[coins[key].volumeLog.length - (top * 60) / 5];
+				
 				if (coins[key].volumeLog[coins[key].volumeLog.length - 1] > volumeIntervalLimit) {
 				  tops[top].push({
 					coin: key,
