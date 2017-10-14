@@ -4,17 +4,47 @@
 		<table class="table table-striped table-bordered table-condensed table-hover" ng-if="finalList">
 			<thead>
 				<tr>
-					<th>Coin</th>
-					<th>Start</th>
-					<th>Price</th>
-					<th style="text-align:right">Price<br/>Increase</th>
-					<th style="text-align:right">Volume</th>
-					<th style="text-align:right">Volume<br/>Increase</th>
+					<th>
+						<a href="#" ng-click="orderByField='coin'; reverseSort = !reverseSort">
+							Coin
+							<span ng-show="orderByField == 'coin'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
+					<th>
+						<a href="#" ng-click="orderByField='start'; reverseSort = !reverseSort">
+							Start
+							<span ng-show="orderByField == 'start'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
+					<th>
+						<a href="#" ng-click="orderByField='price'; reverseSort = !reverseSort">
+							Price
+							<span ng-show="orderByField == 'price'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
+					<th style="text-align:right">
+						<a href="#" ng-click="orderByField='diffSinceStart'; reverseSort = !reverseSort">
+							Price<br/>Increase
+							<span ng-show="orderByField == 'diffSinceStart'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
+					<th style="text-align:right">
+						<a href="#" ng-click="orderByField='volume'; reverseSort = !reverseSort">
+							Volume
+							<span ng-show="orderByField == 'volume'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
+					<th style="text-align:right">
+						<a href="#" ng-click="orderByField='volumeDiff'; reverseSort = !reverseSort">
+							Volume<br/>Increase
+							<span ng-show="orderByField == 'volumeDiff'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
 					<th>Ignore</th>
 				</tr>
 			</thead>
 			<tbody>	
-				<tr ng-repeat="coin in finalList | orderBy:'volumeDiff':true" ng-if="!coin.hide">
+				<tr ng-repeat="coin in finalList | orderBy:orderByField:reverseSort" ng-if="!coin.hide">
 				  <td><a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> </td>
 				  <td>{{coin.start}} </td>
 				  <td>{{coin.price}} </td>

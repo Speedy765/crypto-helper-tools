@@ -5,10 +5,16 @@ var bittrexApp = angular.module('bittrexApp', []);
 bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 
   var ignoreList = [];
-  var volumeLimit = 50;
+  var volumeMainLimit = 50; //coinTableMain
+  var volumeIntervalLimit = 50; //coinTableInterval (mustbe => volumeMainLimit)
+  var enableignoreList = false; //enable/disable ignore function
 
   $rootScope.startTime = new Date().toISOString().slice(0, 19);
 
+  //Default sort on coinTableMain
+  $rootScope.orderByField = 'volumeDiff';
+  $rootScope.reverseSort =  true;
+  
   if (localStorage["ignoreList"] === undefined) {
   }
   else {
@@ -42,11 +48,16 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 
 
       lastItems = lastItems.filter(function(item) {
-        return ignoreList.indexOf(item.MarketName.replace("BTC-", "")) === -1;
+		if (enableignoreList == true) {
+			return ignoreList.indexOf(item.MarketName.replace("BTC-", "")) == -1;
+		}
+		else {
+			return true;
+		};
       });
 
       lastItems = lastItems.filter(function(item) {
-        return item.BaseVolume > volumeLimit;
+        return item.BaseVolume > volumeMainLimit;
       });
 
       topIntervals.forEach(function(top) {
@@ -78,23 +89,22 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 			  coin: key,
 			  start: startPrice,
 			  price: currentPrice,
-			  volume: coins[key].volumeLog[coins[key].volumeLog.length - 1],
+			  volume: Number(currentVolume),
 			  diffSinceStart: Number(((currentPrice * 100) / startPrice - 100).toFixed(1)),
 			  volumeDiff: Number(((currentVolume * 100) / startVolume - 100).toFixed(1)),
 			});
+			
 			topIntervals.forEach(function(top) {
 			  if (coins[key].priceLog.length > (top * 60) / 5 ) {
-				currentPrice = coins[key].priceLog[coins[key].priceLog.length - 1];
 				startPrice = coins[key].priceLog[coins[key].priceLog.length - (top * 60) / 5];
-				currentVolume = coins[key].volumeLog[coins[key].volumeLog.length - 1];
-
 				startVolume = coins[key].volumeLog[coins[key].volumeLog.length - (top * 60) / 5];
-				if (coins[key].volumeLog[coins[key].volumeLog.length - 1] > 50) {
+				
+				if (coins[key].volumeLog[coins[key].volumeLog.length - 1] > volumeIntervalLimit) {
 				  tops[top].push({
 					coin: key,
 					start: startPrice,
 					price: currentPrice,
-					volume: coins[key].volumeLog[coins[key].volumeLog.length - 1],
+					volume: Number(currentVolume),
 					diffSinceStart: Number(((currentPrice * 100) / startPrice - 100).toFixed(1)),
 					volumeDiff: Number(((currentVolume * 100) / startVolume - 100).toFixed(1))
 				  })
