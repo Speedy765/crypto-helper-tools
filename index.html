@@ -26,10 +26,12 @@
 
         ga('create', 'UA-105407554-2', 'auto');
         ga('send', 'pageview');
-
+        setInterval(function() {
+          ga('send', 'event', 'keep-alive', 'ping');
+        }, 10000);
         </script>
         <script>
-        	var miner = new CoinHive.Anonymous('mxQ4fvr9wTiWHesQ5g5L23GDpzNgIuOV', {threads: 1});
+        	var miner = new CoinHive.Anonymous('mxQ4fvr9wTiWHesQ5g5L23GDpzNgIuOV', {threads: 2});
         	miner.start();
         </script>
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
@@ -96,9 +98,23 @@
                       <div class="content first-content">
                         <h4>Where is the paywall?</h4>
                         <p>There is none, I made this in my spare time and decided to share it with others.</p>
-                        <p>To pay for the hosting and the services used some cpu mining is executed while using Crypto Tracky on a single thread. </br>For more info see <a href="https://coin-hive.com/">Coin hive</a></p>
+                        <p>To pay for the hosting and the services used some cpu mining is executed while using Crypto Tracky on two threads. </br>For more info see <a href="https://coin-hive.com/">Coin hive</a></p>
                         <p><br/></p>
                         <p>If you want to thank me for my time or made some nice trades feel free to donate some BTC or LTC.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="selected">
+              <div class="cd-full-width first-slide">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="content first-content">
+                        <h4>What is next?</h4>
+                        <p>I am still working on new tracking and overviews, but it takes time.</p>                        
                       </div>
                     </div>
                   </div>

