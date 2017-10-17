@@ -10,9 +10,10 @@
 					<th style="text-align:right">Price<br/>Increase</th>
 					<th style="text-align:right">Volume</th>
 					<th style="text-align:right">Volume<br/>Increase</th>
+					<th>Realtime</th>
 				</tr>
 			</thead>
-			<tbody>	
+			<tbody>
 				<tr ng-repeat="coin in tops[interval]">
 				  <td ><a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> </td>
 				  <td>{{coin.start}} </td>
@@ -20,6 +21,7 @@
 				  <td style="text-align:right">{{coin.diffSinceStart}}% </td>
 				  <td style="text-align:right">{{coin.volume}} </td>
 				  <td style="text-align:right">{{coin.volumeDiff}}% </td>
+				  <td><a target="_blank" href="/chart/index.html?coin={{coin.coin}}">Open</a></td>
 				</tr>
 			</tbody>
 		</table>
