@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-	<div class="panel-heading">Total since {{startTime}}</div>
+	<div class="panel-heading">Total since {{startTime}} sorted by % increase: {{ resetHide }}</div>
 	<div class="panel-body">
 		<table class="table table-striped table-bordered table-condensed table-hover" ng-if="finalList">
 			<thead>
@@ -41,9 +41,10 @@
 						</a>
 					</th>
 					<th>Ignore</th>
+					<th>Realtime</th>
 				</tr>
 			</thead>
-			<tbody>	
+			<tbody>
 				<tr ng-repeat="coin in finalList | orderBy:orderByField:reverseSort" ng-if="!coin.hide">
 				  <td><a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> </td>
 				  <td>{{coin.start}} </td>
@@ -52,12 +53,11 @@
 				  <td style="text-align:right">{{coin.volume}} </td>
 				  <td style="text-align:right">{{coin.volumeDiff}}% </td>
 				  <td><a href="javascript:void(0)" ng-click="ignore(coin.coin)" class="btn-link">Ignore {{ coin.hide }} </a></td>
+
+				  <td><a target="_blank" href="/chart/index.html?coin={{coin.coin}}">Open</a></td>
 				</tr>
 			</tbody>
 		</table>
 		<span ng-if="!finalList">Waiting for data..</span>
-	</div>
-	<div class="panel-footer" ng-show="ignoreList.length > 0">
-		Coins ignored <a ng-href='#here' ng-click='resetHide()' >(Reset)</a>: {{ignoreList.split(",").join(", ")}}
 	</div>
 </div>
