@@ -4,11 +4,12 @@ var bittrexApp = angular.module('bittrexApp', []);
 // create the controller and inject Angular's $scope
 bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 
-	var minVolumeMain = 50;			//Minimum volume for coinTableMain
-	var minVolumeInterval = 50;		//Minimum volume for coinTableInterval (mustbe => minVolumeMain)
-	var maxItemsInterval = 5;		//Number of items per interval
+	var minVolumeMain = 50;							//Minimum volume for coinTableMain
+	var minVolumeInterval = 50;						//Minimum volume for coinTableInterval (can be <= minVolumeMain)
+	var maxItemsInterval = 5;						//Number of items per interval
+	var topIntervals = [1,5,15,30, 60, 240];	//Interval for interval list
 	
-	var logUpdateInterval = 10; 		//Every x seconds there is a log item
+	var logUpdateInterval = 10; 					//Every x seconds there is a log item
 
 	$rootScope.startTime = new Date().toISOString().slice(0, 19);
 
@@ -39,7 +40,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 	var coins = {};
 	var coin, startPrice, currentPrice, startVolume, currentVolume, hide;
 	var keys;
-	var topIntervals = [1,5,15,30, 60, 240];
+	
 	$rootScope.intervals = topIntervals;
 	var tops = {};
 
@@ -49,19 +50,15 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 		then(handleResponse);
 
 	function handleResponse(response) {
-			if (response.data && response.data.success) {
-				lastItems = response.data.result.filter(function(item) {
+		if (response.data && response.data.success) {
+			lastItems = response.data.result.filter(function(item) {
 				return item.MarketName.indexOf("BTC-") > -1;
-			});
-
-			lastItems = lastItems.filter(function(item) {
-				return item.BaseVolume > minVolumeMain;
 			});
 
 			topIntervals.forEach(function(top) {
 				tops[top] = [];
 			});
-
+			
 			lastItems.forEach(function(item) {
 				coin = item.MarketName.replace("BTC-", "");
 				if (!coins[coin]) {
@@ -89,24 +86,31 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 					startPrice = coins[key].priceLog[0];
 					currentVolume = coins[key].volumeLog[coins[key].volumeLog.length - 1];
 					startVolume = coins[key].volumeLog[0];
-
-					$rootScope.finalList.push({
-						coin: key,
-						start: startPrice,
-						price: currentPrice,
-						volume: Number(currentVolume),
-						diffSinceStart: Number(((currentPrice * 100) / startPrice - 100).toFixed(1)),
-						volumeDiff: Number(((currentVolume * 100) / startVolume - 100).toFixed(1)),
-					});
+					
+					if (currentVolume > minVolumeMain) {
+						$rootScope.finalList.push({
+							coin: key,
+							start: startPrice,
+							price: currentPrice,
+							volume: Number(currentVolume),
+							diffSinceStart: Number(((currentPrice * 100) / startPrice - 100).toFixed(1)),
+							volumeDiff: Number(((currentVolume * 100) / startVolume - 100).toFixed(1)),
+						});
+					}
 					
 					topIntervals.forEach(function(top) {
+						//Calculate the number of items before next interval is hit
 						var itemsPerLogInterval = (top * 60) / logUpdateInterval;
 						
-						if (coins[key].priceLog.length > (top * 60) / logUpdateInterval ) {
+						//Number of items is larger the amount per log interval and so the interval can be displayed
+						//if (coins[key].priceLog.length > (top * 60) / logUpdateInterval ) {
+						if (coins[key].priceLog.length > itemsPerLogInterval) {
+							var test1 = coins[key].priceLog.length;
+							var test2 = top * 60;
 							startPrice = coins[key].priceLog[coins[key].priceLog.length - itemsPerLogInterval];
 							startVolume = coins[key].volumeLog[coins[key].volumeLog.length - itemsPerLogInterval];
 							
-							if (coins[key].volumeLog[coins[key].volumeLog.length - 1] > minVolumeInterval) {
+							if (currentVolume > minVolumeInterval) {
 								tops[top].push({
 									coin: key,
 									start: startPrice,
@@ -135,7 +139,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 					$rootScope.tops[top] = tops[top].slice(0,maxItemsInterval);
 				}
 			});
-			}
+		}
 	}
 
 	setInterval(function() {
