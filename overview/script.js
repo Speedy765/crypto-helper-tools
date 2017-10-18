@@ -25,6 +25,14 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 		ignoreList = localStorage["ignoreList"].split(",");
 	}
 	
+	$rootScope.toggleSettingsPanel = function(){
+		if(!$rootScope.showSettingsPanel){
+			$rootScope.showSettingsPanel = true; //Assume it's not clicked if there's no existing value
+		}else{
+			$rootScope.showSettingsPanel = false;
+		}
+	};
+	
 	$rootScope.ignore = function(key) {
 		ignoreList.push(key);
 		localStorage.setItem("ignoreList", ignoreList.join(","));

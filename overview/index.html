@@ -47,6 +47,18 @@
 					<span class="input-group-addon">Ltc</span>
 					<input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
 				</div>
+				<div class="input-group" style="padding-top: 10px">
+					<a href="javascript:void(0)" ng-click="toggleSettingsPanel()" class="btn-link">
+						<span class="input-group-addon">
+							<span ng-show="!showSettingsPanel">Show Settings</span>
+							<span ng-show="showSettingsPanel">Hide Settings</span>
+						</span>
+						<span class="input-group-addon"></span>
+					</a>
+				</div>
+				<div lass="input-group" style="padding-top: 10px" ng-show="showSettingsPanel">
+					<span class="input-group-addon">Here comes the settings panel</span>
+				</div>
 			</div>
       	</div>
       </div>
