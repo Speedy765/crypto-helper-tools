@@ -38,7 +38,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 	$rootScope.intervals = intervals;
 	var tops = {};
 
-	$rootScope.finalList = [];
+
 
 	$http.get(backend).
 		then(handleResponse);
@@ -48,6 +48,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 			var coins = Object.keys(response.data);
 			// console.debug(coins);
 			var coinLog, coinIntervalLog, lastPrice, high, low;
+			$rootScope.finalList = [];
 			coins.forEach(function(key) {
 				coinIntervalLog = [];
 				coinLog = response.data[key].bid;
@@ -65,7 +66,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 				intervals.forEach(function(interval) {
 					//diffSinceStart: Number(((currentPrice * 100) / startPrice - 100).toFixed(1)),
 					// coinIntervalLog.push(coinLog[coinLog.length - interval]);
-					coinIntervalLog.push(Number((coinLog[coinLog.length - interval] * 100) / lastPrice - 100).toFixed(1));
+					coinIntervalLog.push(Number((lastPrice * 100) / coinLog[coinLog.length - interval] - 100).toFixed(1));
 				})
 				// console.debug(coinIntervalLog);
 				$rootScope.finalList.push({

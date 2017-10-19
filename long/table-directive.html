@@ -17,7 +17,7 @@
 					<td>{{coin.current}}</td>
 					<td>{{coin.high}}</td>
 					<td>{{coin.low}}</td>
-					<td ng-repeat="logItem in coin.log track by $index ">{{logItem}}%</td>
+					<td ng-class="{'red-text': logItem < -1, 'green-text': logItem > 1}" ng-repeat="logItem in coin.log track by $index ">{{logItem}}%</td>
 				</tr>
 			</tbody>
 		</table>
