@@ -171,3 +171,9 @@ bittrexApp.directive('coinTableInterval', function() {
   };
 });
 
+bittrexApp.directive('overviewPanelSettings', function() {
+  return {
+    templateUrl: "panel-overview-settings.html"
+  };
+});
+

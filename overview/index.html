@@ -56,16 +56,17 @@
 						<span class="input-group-addon"></span>
 					</a>
 				</div>
-				<div lass="input-group" style="padding-top: 10px" ng-show="showSettingsPanel">
-					<span class="input-group-addon">Here comes the settings panel</span>
-				</div>
+				
 			</div>
       	</div>
       </div>
 
       <div class="container-fluid" style="padding-top:30px;">
       	<div class="row">
-
+			<div class="col-xs-12 col-sm-12 col-lg-12" ng-show="showSettingsPanel">
+				<div overview-Panel-Settings> </div>
+				
+			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-6">
 				<div ng-repeat="interval in intervals" coin-table-interval></div>
 			</div>
