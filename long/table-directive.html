@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+	<div class="panel-heading">Total since {{startTime}}</div>
+	<div class="panel-body">
+		<table class="table table-striped table-bordered table-condensed table-hover" ng-if="finalList">
+			<thead>
+				<tr>
+					<th>Coin</th>
+					<th>Current price</th>
+					<th>24h high</th>
+					<th>24h low</th>
+					<th ng-repeat="header in headers">{{header}} min</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="coin in finalList">
+				  <td><a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> </td>
+					<td>{{coin.current}}</td>
+					<td>{{coin.high}}</td>
+					<td>{{coin.low}}</td>
+					<td ng-repeat="logItem in coin.log track by $index ">{{logItem}}%</td>
+				</tr>
+			</tbody>
+		</table>
+		<span ng-if="!finalList">Waiting for data..</span>
+	</div>
+</div>
