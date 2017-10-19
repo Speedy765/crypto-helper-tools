@@ -43,7 +43,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 		ignoreList = [];
 	}
 	
-	var backend = "http://34.240.107.131:1339"
+	var backend = "http://cryptotracky-overview-608466767.eu-west-1.elb.amazonaws.com/"
 	var lastItems;
 	var coins = {};
 	var coin, startPrice, currentPrice, startVolume, currentVolume, hide;
