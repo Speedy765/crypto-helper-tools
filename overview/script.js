@@ -50,6 +50,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 		$scope.inputMinVolumeMain = minVolumeMain;
 		$scope.inputMinVolumeInterval = minVolumeInterval;
 		$scope.inputMaxItemsInterval = maxItemsInterval;
+		$rootScope.firstInterval = Math.min.apply(null, topIntervals);
 
 	}
 
