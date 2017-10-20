@@ -29,7 +29,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 		ignoreList = [];
 	}
 
-	var backend = "http://34.240.107.131:1337/min"
+	var backend = "http://34.240.107.131:1337/min?intervals=" + intervals.join(",");
 	var lastItems;
 	var coins = {};
 	var coin, startPrice, currentPrice, startVolume, currentVolume, hide;
@@ -44,38 +44,13 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 		then(handleResponse);
 
 	function handleResponse(response) {
-		if (response.data && response.data.ETH.bid.length) {
+		if (response.data && response.data.ETH.log.length) {
 			var coins = Object.keys(response.data);
-			// console.debug(coins);
-			var coinLog, coinIntervalLog, lastPrice, high, low;
 			$rootScope.finalList = [];
+			var coinData;
 			coins.forEach(function(key) {
-				coinIntervalLog = [];
-				coinLog = response.data[key].bid;
-				lastPrice = coinLog[coinLog.length - 1];
-				high = 0;
-				low = 100000000000;
-				coinLog.forEach(function(logPrice) {
-					if (logPrice > high) {
-						high = logPrice;
-					}
-					if (logPrice < low) {
-						low = logPrice;
-					}
-				})
-				intervals.forEach(function(interval) {
-					//diffSinceStart: Number(((currentPrice * 100) / startPrice - 100).toFixed(1)),
-					// coinIntervalLog.push(coinLog[coinLog.length - interval]);
-					coinIntervalLog.push(Number((lastPrice * 100) / coinLog[coinLog.length - interval] - 100).toFixed(1));
-				})
-				// console.debug(coinIntervalLog);
-				$rootScope.finalList.push({
-					coin: key,
-					log : coinIntervalLog,
-					current: lastPrice,
-					high: high,
-					low: low
-				});
+				coinData = response.data[key];
+				$rootScope.finalList.push(coinData);
 			});
 		}
 	}
