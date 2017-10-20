@@ -24,7 +24,7 @@
 					</th>
 					<th style="text-align:right">
 						<a href="#" ng-click="orderByField='diffSinceStart'; reverseSort = !reverseSort">
-							Price
+							Price Diff.
 							<span ng-show="orderByField == 'diffSinceStart'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 						</a>
 					</th>
@@ -36,7 +36,7 @@
 					</th>
 					<th style="text-align:right">
 						<a href="#" ng-click="orderByField='volumeDiff'; reverseSort = !reverseSort">
-							Volume
+							Volume Diff.
 							<span ng-show="orderByField == 'volumeDiff'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 						</a>
 					</th>
@@ -53,7 +53,7 @@
 				  <td style="text-align:right">{{coin.volume}} </td>
 				  <td style="text-align:right">{{coin.volumeDiff}}% </td>
 				  <td><a href="javascript:void(0)" ng-click="ignore(coin.coin)" class="btn-link">Ignore {{ coin.hide }} </a></td>
-
+				  
 				  <td><a target="_blank" href="/chart/index.html?coin={{coin.coin}}">Open</a></td>
 				</tr>
 			</tbody>

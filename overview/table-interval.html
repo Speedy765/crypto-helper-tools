@@ -7,9 +7,9 @@
 					<th>Coin</th>
 					<th>Start</th>
 					<th>Price</th>
-					<th style="text-align:right">Price<</th>
+					<th style="text-align:right">Price Diff.</th>
 					<th style="text-align:right">Volume</th>
-					<th style="text-align:right">Volume</th>
+					<th style="text-align:right">Volume Diff.</th>
 					<th>Realtime</th>
 				</tr>
 			</thead>
@@ -25,7 +25,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<span ng-if="!tops[interval] && interval === 1">
+		<span ng-if="!tops[interval] && interval == firstInterval">
 			<div class="panel-body">
 				<h4> Getting started</h4>
 	      <p>Here you can see the prices of almost all coins tradeable on Bittrex.</br>
