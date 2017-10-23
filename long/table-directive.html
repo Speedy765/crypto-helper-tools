@@ -4,20 +4,57 @@
 		<table class="table table-striped table-bordered table-condensed table-hover" ng-if="finalList">
 			<thead>
 				<tr>
-					<th>Coin</th>
-					<th>Current price</th>
-					<th>24h high</th>
-					<th>24h low</th>
-					<th ng-repeat="header in headers">{{header}} min</th>
+					<th>
+						<a href="#" ng-click="orderByField='coin'; reverseSort = !reverseSort">
+							Coin
+							<span ng-show="orderByField == 'coin'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
+					<th>
+						<a href="#" ng-click="orderByField='current'; reverseSort = !reverseSort">
+							Current price
+							<span ng-show="orderByField == 'current'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
+					<th>
+						<a href="#" ng-click="orderByField='high'; reverseSort = !reverseSort">
+							24h high
+							<span ng-show="orderByField == 'high'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
+					<th>
+						<a href="#" ng-click="orderByField='low'; reverseSort = !reverseSort; orderByFieldLog=-1">
+							24h low
+							<span ng-show="orderByField == 'low'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
+					<th style="text-align:right" ng-repeat="header in headers">
+						<a href="#" ng-click="$parent.orderByFieldLog=header; $parent.reverseSort = !$parent.reverseSort; $parent.orderByField='log[' + $index + ']' ">
+							{{header}} min<span ng-show="$parent.orderByFieldLog == header"><span ng-show="!$parent.reverseSort">^</span><span ng-show="$parent.reverseSort">v</span></span>
+						</a>
+					</th>
+					<!-- <th style="text-align:right">
+						<a href="#" ng-click="orderByFieldLog=1; reverseSort = !reverseSort; orderByField='log[1]'">
+							{{headers[1]}} min<span ng-show="orderByFieldLog == 1"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
+					<th style="text-align:right">
+						<a href="#" ng-click="orderByFieldLog=2; reverseSort = !reverseSort; orderByField='log[2]'">
+							{{headers[2]}} min<span ng-show="orderByFieldLog == 2"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+						</a>
+					</th>
+					 -->
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="coin in finalList">
+				<tr ng-repeat="coin in finalList | orderBy:orderByField:reverseSort">
 				  <td><a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> </td>
 					<td>{{coin.current}}</td>
-					<td>{{coin.high}}</td>
+					<td>{{coin.high}}</td> 
 					<td>{{coin.low}}</td>
-					<td ng-class="{'red-text': logItem < -1, 'green-text': logItem > 1}" ng-repeat="logItem in coin.log track by $index ">{{logItem}}%</td>
+					<td style="text-align:right" ng-class="{'red-text': logItem < -1, 'green-text': logItem > 1}" ng-repeat="logItem in coin.log track by $index ">
+						{{logItem.toFixed(1)}}%
+					</td>
 				</tr>
 			</tbody>
 		</table>
