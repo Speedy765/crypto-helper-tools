@@ -13,10 +13,14 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 
 	$rootScope.startTime = new Date().toISOString().slice(0, 19);
 
+	//Use localstorage for debuging
+	var debug = false;
+	
 	//Default sort on coinTableMain
 	$rootScope.orderByField = 'volumeDiff';
 	$rootScope.reverseSort =  true;
 
+	//Functions for coin ignores are next
 	var ignoreList = [];
 	if (localStorage["ignoreList"] === undefined) {
 		//ignoreList = undefined;
@@ -25,6 +29,23 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 		ignoreList = localStorage["ignoreList"].split(",");
 	}
 	
+	$rootScope.ignore = function(key) {
+		ignoreList.push(key);
+		localStorage.setItem("ignoreList", ignoreList.join(","));
+		
+		//update data without loading new data
+		updateData(true);
+	};
+
+	$rootScope.resetHide = function(){
+		localStorage.removeItem("ignoreList");
+		ignoreList = [];
+	
+		//update data without loading new data
+		updateData(true);
+	}
+	
+		
 	$rootScope.toggleSettingsPanel = function(){
 		if(!$rootScope.showSettingsPanel){
 			$rootScope.showSettingsPanel = true; //Assume it's not clicked if there's no existing value
@@ -32,49 +53,71 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 			$rootScope.showSettingsPanel = false;
 		}
 	};
-	
-	$rootScope.ignore = function(key) {
-		ignoreList.push(key);
-		localStorage.setItem("ignoreList", ignoreList.join(","));
-	};
 
-	$rootScope.resetHide = function(){
-		localStorage.removeItem("ignoreList");
-		ignoreList = [];
-	}
-	
+	//Function for updating data
+	var tempResponce = [];
+	function updateData(keepOldData){
+		if (debug && localStorage["testjes-overview"] && (tempResponce == [] || !keepOldData)){
+			tempResponce = {
+				data: JSON.parse(localStorage["testjes-overview"])
+			};
+			handleResponse(tempResponce);
+			
+		}else if(tempResponce == [] || !keepOldData){
+			$http.get(backend).
+			then(handleResponse);
 		
+		}else{
+			handleResponse(tempResponce, keepOldData);
+		}
+	}
+
+	//Functions for settings are next
 	function initSettings(){
-		$rootScope.intervals = topIntervals;
+		//Initalize variables
 		$scope.inputIntervals = topIntervals.join(",");
-		$scope.inputMinVolumeMain = minVolumeMain;
+		$rootScope.intervals = topIntervals;
+		backend = "http://cryptotracky-overview-608466767.eu-west-1.elb.amazonaws.com/"
+		$rootScope.firstInterval = Math.min.apply(null, topIntervals);
+		
 		$scope.inputMinVolumeInterval = minVolumeInterval;
 		$scope.inputMaxItemsInterval = maxItemsInterval;
-		$rootScope.firstInterval = Math.min.apply(null, topIntervals);
-
+		
+		$scope.inputMinVolumeMain = minVolumeMain;
+		
 	}
 
 	$rootScope.updateSettings = function(){
+		//Fill variables with form data
 		topIntervals = $scope.inputIntervals.split(",").map(Number).filter(Boolean);
-		$rootScope.intervals = topIntervals;
-		
 		minVolumeInterval = parseInt($scope.inputMinVolumeInterval);
 		maxItemsInterval = parseInt($scope.inputMaxItemsInterval);
 		
 		minVolumeMain = parseInt($scope.inputMinVolumeMain);
+
+		//Reinitalize variables
+		initSettings();
+		
+		//update data without loading new data
+		updateData(true);
 		
 	}
 	$rootScope.saveSettings = function(){
+		//Save variables to localstorage
+		localStorage["topIntervals"] = $scope.inputIntervals.split(",").map(Number).filter(Boolean);
+		localStorage["minVolumeInterval"] = parseInt($scope.inputMinVolumeInterval);
+		localStorage["maxItemsInterval"] = parseInt($scope.inputMaxItemsInterval);
+		localStorage["minVolumeMain"] = parseInt($scope.inputMinVolumeMain);
+		localStorage["settingsSaved"] = true;
+		
+		//Run an update
 		$rootScope.updateSettings();
 		
-		localStorage["topIntervals"] = topIntervals.join(",");
-		localStorage["minVolumeInterval"] = minVolumeInterval;
-		localStorage["maxItemsInterval"] = maxItemsInterval;
-		localStorage["minVolumeMain"] = minVolumeMain;
-		localStorage["settingsSaved"] = true;
 	}
 	
 	$rootScope.loadSettings = function(){
+		//If settings are saved, then load them from localstorage
+		//Else reset to defaults
 		if (localStorage["settingsSaved"]){
 			topIntervals = localStorage["topIntervals"].split(",");
 			minVolumeInterval = parseInt(localStorage["minVolumeInterval"]);
@@ -85,58 +128,72 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 			$rootScope.resetSettings();
 		}
 		
+		//update data without loading new data
+		updateData(true);
 
-	}	
+	}
+	
 	$rootScope.resetSettings = function(){
+		//Reset variables to default and initialize them
 		topIntervals = defaultTopIntervals;
 		minVolumeInterval = defaultMinVolumeInterval;
 		maxItemsInterval = defaultMaxItemsInterval;
 		minVolumeMain = defaultMinVolumeMain;
+		
 		initSettings();
+
+		//update data without loading new data
+		updateData(true);
+
 	}
 	
 	
-	//Run initSettings once to fill the settings panel
+	//Run loadSettings once to fill the settings panel
 	$rootScope.loadSettings();
 	
-	var backend = "http://cryptotracky-overview-608466767.eu-west-1.elb.amazonaws.com/"
 	var lastItems;
 	var coins = {};
 	var coin, startPrice, currentPrice, startVolume, currentVolume, hide;
 	var keys;
 	
-	$rootScope.intervals = topIntervals;
-	
 	var tops = {};
 
-	$rootScope.finalList = [];
+	// clean $rootScope.finalList = [];
 	
-	$http.get(backend).
-		then(handleResponse);
-
-	function handleResponse(response) {
+	function handleResponse(response, keepOldData) {
 		if (response.data && response.data.success) {
-			lastItems = response.data.result.filter(function(item) {
-				return item.MarketName.indexOf("BTC-") > -1;
-			});
+			//Fill tempResponce for updating without retrieving
+			tempResponce = {data: response.data
+			}; 
+			
+			//If debug and no local data stored jet, then save
+			if (debug && !localStorage["testjes-overview"]){
+				localStorage["testjes-overview"] = JSON.stringify(tempResponce.data);
+			}
+			
+			if (!keepOldData){
+				lastItems = response.data.result.filter(function(item) {
+					return item.MarketName.indexOf("BTC-") > -1;
+				});
 
-			topIntervals.forEach(function(top) {
-				tops[top] = [];
-			});
-			
-			lastItems.forEach(function(item) {
-				coin = item.MarketName.replace("BTC-", "");
-				if (!coins[coin]) {
-					coins[coin] = {
-						priceLog : [],
-						volumeLog : []
-					};
-				}
-				coins[coin].priceLog.push(item.Bid.toFixed(8));
-				coins[coin].volumeLog.push(item.BaseVolume.toFixed(0));
+				topIntervals.forEach(function(top) {
+					tops[top] = [];
+				});
 				
-			});
-			
+				lastItems.forEach(function(item) {
+					coin = item.MarketName.replace("BTC-", "");
+					if (!coins[coin]) {
+						coins[coin] = {
+							priceLog : [],
+							volumeLog : []
+						};
+					}
+					coins[coin].priceLog.push(item.Bid.toFixed(8));
+					coins[coin].volumeLog.push(item.BaseVolume.toFixed(0));
+					
+				});
+			}
+				
 			keys = Object.keys(coins);
 			$rootScope.finalList = [];
 			
@@ -202,11 +259,21 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 				}
 			});
 		}
+		
 	}
-
+	
+	//Start the code and load new data
+	updateData();
+	
+	
+	//Update the data with new data in x msec
 	setInterval(function() {
-		$http.get(backend).
-			then(handleResponse);
+		updateData();
+		
+		//refresh screen
+		if(debug){
+			$scope.$apply();
+		}
 	}, 10000);
 
 
