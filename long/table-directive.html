@@ -39,21 +39,25 @@
 							{{header}} min<span ng-show="$parent.orderByFieldLog == header"><span ng-show="!$parent.reverseSort">^</span><span ng-show="$parent.reverseSort">v</span></span>
 						</a>
 					</th>
+					<th> Ignore</th>
+					<th> Live Chart</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="coin in finalList | orderBy:orderByField:reverseSort">
 					<td>
-						<a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a> 
-						<a href="javascript:void(0)" ng-click="ignore(coin.coin)" class="btn-link"> (Ignore)</a>
+						<a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a>
+
 					</td>
 					<td>{{coin.current}}</td>
-					<td>{{coin.high}}</td> 
+					<td>{{coin.high}}</td>
 					<td>{{coin.low}}</td>
 					<td>{{coin.volume}}</td>
 					<td style="text-align:right" ng-class="{'red-text': logItem < -1 && logItem > -9999, 'green-text': logItem > 1}" ng-repeat="logItem in coin.log track by $index ">
 						<span ng-show="logItem !== -9999">{{logItem.toFixed(1)}}%</span>
 					</td>
+					<td> <a href="javascript:void(0)" ng-click="ignore(coin.coin)" class="btn-link"> X</a></td>
+					<td><a target="_blank" href="/chart/index.html?coin={{coin.coin}}">Open</a></td>
 				</tr>
 			</tbody>
 		</table>
