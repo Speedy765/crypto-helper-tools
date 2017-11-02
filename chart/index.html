@@ -53,18 +53,18 @@
                     		<div class="col-sm-3 col-xs-12" style="padding-top:25px;">
               				<span>Donations are welcome on:</span>
               				<div class="input-group">
-              					<span class="input-group-addon">Btc</span>
-              					<input type="text"  class="form-control" disabled value="1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7" />
+              					<span class="input-group-addon" style="user-select:">Btc</span>
+              					<span type="text"  class="form-control">1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7</span>
               				</div>
               				<div class="input-group" style="padding-top: 10px">
-              					<span class="input-group-addon">Ltc</span>
-              					<input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
+              					<span class="input-group-addon" style="user-select:none">Ltc</span>
+              					<span type="text"  class="form-control">LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP</span>
               				</div>
               			</div>
                     	</div>
                     </div>
                     <div>Hosting is not free, please consider donating something if using on regular basis</div>
-                    <h3>From top to bottom: Ask, Bid, 0,5btc support </h3>
+                    <h3>From top to bottom: Ask, Bid, 0,5btc support </h3> <span> % below top of chart for current bid: {{diffFromMax}}</span>
                     <canvas id="line" class="chart chart-line" chart-data="data"
                     chart-labels="labels" chart-colors="colors" chart-series="series" chart-options="options"
                     chart-dataset-override="datasetOverride">

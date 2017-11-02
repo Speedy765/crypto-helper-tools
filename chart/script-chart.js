@@ -35,6 +35,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
       }
       $rootScope.data = [bid,ask, support];
     }
+    calculateStats();
   }
 
    setInterval(function() {
@@ -43,45 +44,16 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
    }, 1000);
 
 
-  // var backendLog = "https://0pz86m8uxc.execute-api.eu-west-1.amazonaws.com/cryptotrackyv1?type=both&market=BTC-" + $rootScope.coin.toUpperCase();
-  //
-  // var orderLog = [];
-  // $rootScope.orderLabels = [];
-  // $http.get(backendLog).
-  //   then(handleOrderResponse);
-  //
-  // function handleOrderResponse(response) {
-  //   if (response.data && response.data.success) {
-  //     var items = response.data.result;
-  //     orderLog = [];
-  //     $rootScope.orderLabels = [];
-  //     console.debug(items[0].TimeStamp);
-  //     items.forEach(function(item) {
-  //       if (item.Total > 0.01) {
-  //         if (item.OrderType === "BUY") {
-  //           orderLog.push(item.Total);
-  //           $rootScope.orderLabels.push("");
-  //         }
-  //         else if (item.OrderType === "SELL") {
-  //           orderLog.push(0 - item.Total);
-  //           $rootScope.orderLabels.push("");
-  //         }
-  //       }
-  //     });
-  //     if (orderLog.length > 60) {
-  //       orderLog.splice(0,1);
-  //       $rootScope.orderLabels.splice(0,1);
-  //     }
-  //     $rootScope.orderData = [orderLog];
-  //   }
-  // }
-  //
-  // setInterval(function() {
-  //   $http.get(backendLog).
-  //     then(handleOrderResponse);
-  // }, 1000);
+   function calculateStats() {
+     var max = bid.reduce(function(a, b) {
+       return Math.max(a, b);
+    });
+    $rootScope.diffFromMax = calculateDiff(bid[bid.length - 1], max);
+   }
 
-
+   function calculateDiff(start,end) {
+     return Number(((end * 100) / start - 100).toFixed(1));
+  }
   $rootScope.options = {
     type: "line",
     animation : {
@@ -103,24 +75,5 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
     },
     label: ["test", "test2"]
   };
-
-  // $rootScope.orderOptions = {
-  //   type: "bar",
-  //   animation : {
-  //     duration : 0
-  //   },
-  //   responsiveAnimationDuration : 0,
-  //   scales: {
-  //     yAxes: [
-  //       {
-  //         id: 'y-axis-1',
-  //         type: 'linear',
-  //         display: true,
-  //         position: 'right'
-  //       }
-  //     ]
-  //   },
-  //   showLine: [false]
-  // };
 
 });
