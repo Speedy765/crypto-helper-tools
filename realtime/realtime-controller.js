@@ -1,13 +1,10 @@
-// create the module and name it scotchApp
-var bittrexApp = angular.module('bittrexApp', []);
+cryptotracky.controller('realtimeController', function($rootScope, $http, $scope, $stateParams) {
 
-// create the controller and inject Angular's $scope
-bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
   $rootScope.colors =  [ '#46BFBD', "#FF0000"];
 
   $rootScope.startTime = new Date().toISOString().slice(0, 19);
 
-  $rootScope.coin = window.location.search.split("=")[1];
+  $rootScope.coin = $stateParams.coin;
   var backend = "https://zurb8jn8d9.execute-api.eu-west-1.amazonaws.com/cryptotrackyv2?coin=" + $rootScope.coin.toUpperCase();
   document.title = $rootScope.coin + "price";
   $rootScope.finalList = [];
@@ -38,7 +35,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
     calculateStats();
   }
 
-   setInterval(function() {
+   updateInterval = setInterval(function() {
      $http.get(backend).
        then(handleResponse);
    }, 1000);
@@ -76,4 +73,11 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
     label: ["test", "test2"]
   };
 
+	$scope.$on("$destroy", function() {
+		clearInterval(updateInterval);
+	});
+
+  if (window.ga) {
+		ga('send', 'pageview');
+	}
 });

@@ -1,0 +1,42 @@
+<div class="container-fluid" ng-controller="overviewController">
+  <div class="row">
+    <div class="col-sm-3 col-xs-12" style="padding-top:25px;">
+  <span style="color:white">Donations are welcome on:</span>
+  <div class="input-group">
+    <span class="input-group-addon">Btc</span>
+    <input type="text"  class="form-control" disabled value="1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7" />
+  </div>
+  <div class="input-group" style="padding-top: 10px">
+    <span class="input-group-addon">Ltc</span>
+    <input type="text"  class="form-control" disabled value="LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP" />
+  </div>
+  <div class="input-group" style="padding-top: 10px">
+    <a href="javascript:void(0)" ng-click="toggleSettingsPanel()" class="btn-link">
+      <span class="input-group-addon">
+        <span ng-show="!showSettingsPanel">Show Settings</span>
+        <span ng-show="showSettingsPanel">Hide Settings</span>
+      </span>
+      <span class="input-group-addon"></span>
+    </a>
+  </div>
+
+</div>
+
+  </div>
+</div>
+
+<div class="container-fluid" style="padding-top:30px;">
+  <div class="row">
+<div class="col-xs-12 col-sm-12 col-lg-12" ng-show="showSettingsPanel">
+  <div overview-Panel-Settings> </div>
+
+</div>
+<div class="col-xs-12 col-sm-12 col-lg-6">
+  <div ng-repeat="interval in intervals" coin-table-interval></div>
+</div>
+
+    <div class="col-xs-12 col-sm-12 col-lg-6">
+      <div coin-table-main> </div>
+    </div>
+  </div>
+</div>

@@ -57,7 +57,7 @@
 						<span ng-show="logItem !== -9999">{{logItem.toFixed(1)}}%</span>
 					</td>
 					<td> <a href="javascript:void(0)" ng-click="ignore(coin.coin)" class="btn-link"> X</a></td>
-					<td><a target="_blank" href="/chart/index.html?coin={{coin.coin}}">Open</a></td>
+					<td><a target="_blank" href="/#!/realtime/{{coin.coin}}" ng-click="logRealtime(coin.coin)">Open</a></td>
 				</tr>
 			</tbody>
 		</table>

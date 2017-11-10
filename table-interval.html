@@ -21,7 +21,7 @@
 				  <td style="text-align:right">{{coin.diffSinceStart}}% </td>
 				  <td style="text-align:right">{{coin.volume}} </td>
 				  <td style="text-align:right">{{coin.volumeDiff}}% </td>
-				  <td><a target="_blank" href="/chart/index.html?coin={{coin.coin}}">Open</a></td>
+				  <td><a target="_blank" href="/#!/realtime/{{coin.coin}}" ng-click="logRealtime(coin.coin)">Open</a></td>
 				</tr>
 			</tbody>
 		</table>

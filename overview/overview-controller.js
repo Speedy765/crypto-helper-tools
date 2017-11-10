@@ -1,8 +1,6 @@
-// create the module and name it scotchApp
-var bittrexApp = angular.module('bittrexApp', []);
+cryptotracky.controller('overviewController', function($rootScope, $http, $scope) {
 
-// create the controller and inject Angular's $scope
-bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
+	document.title = "Overview | Crypto Tracky";
 
 	var defaultMinVolumeMain = 50;							//Minimum volume for coinTableMain
 	var defaultMinVolumeInterval = 50;						//Minimum volume for coinTableInterval (can be <= minVolumeMain)
@@ -267,7 +265,7 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 
 
 	//Update the data with new data in x msec
-	setInterval(function() {
+	var updateInterval = setInterval(function() {
 		updateData();
 
 		//refresh screen
@@ -276,37 +274,11 @@ bittrexApp.controller('mainController', function($rootScope, $http, $scope) {
 		}
 	}, 10000);
 
-
-
-});
-
-bittrexApp.directive('coinTableMain', function() {
-  return {
-    templateUrl: "table-directive.html",
-		link: function($scope) {
-			$scope.log = function(coin) {
-				if (window.amplitude) {
-					amplitude.getInstance().logEvent("Open bittrex", coin);
-				}
-			}
-			$scope.logRealtime = function(coin) {
-				if (window.amplitude) {
-					amplitude.getInstance().logEvent("Open realtime", coin);
-				}
-			}
-		}
-  };
-});
-
-
-bittrexApp.directive('coinTableInterval', function() {
-  return {
-    templateUrl: "table-interval.html"
-  };
-});
-
-bittrexApp.directive('overviewPanelSettings', function() {
-  return {
-    templateUrl: "panel-overview-settings.html"
-  };
+	$scope.$on("$destroy", function() {
+		clearInterval(updateInterval);
+	});
+	
+	if (window.ga) {
+		ga('send', 'pageview');
+	}
 });
