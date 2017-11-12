@@ -1,19 +1,26 @@
-cryptotracky.controller('overviewController', function($rootScope, $http, $scope) {
+cryptotracky.controller('overviewController', function($rootScope, $http, $scope, localStorageService) {
 
 	document.title = "Overview | Crypto Tracky";
 
-	var defaultMinVolumeMain = 50;							//Minimum volume for coinTableMain
-	var defaultMinVolumeInterval = 50;						//Minimum volume for coinTableInterval (can be <= minVolumeMain)
-	var defaultMaxItemsInterval = 5;						//Number of items per interval
-	var defaultTopIntervals = [1,5,15,30, 60, 240];			//Interval for interval list
-
+	var overviewSettings = localStorageService.get("overviewSettings");
+	if (!overviewSettings) {
+		localStorageService.set("overviewSettings",
+			{
+				minVolume : 50,
+				maxItemsInterval : 5,
+				intervals : [1,5,15,30, 60, 240],
+			}
+		);
+		overviewSettings = localStorageService.get("overviewSettings");
+	}
+	$scope.intervals = overviewSettings.intervals;
 	var logUpdateInterval = 10; 							//Every x seconds there is a log item
 
 	$rootScope.startTime = new Date().toISOString().slice(0, 19);
 
 	//Use localstorage for debuging
 	var debug = false;
-
+	var backend = "http://cryptotracky-overview-608466767.eu-west-1.elb.amazonaws.com/";
 	//Default sort on coinTableMain
 	$rootScope.orderByField = 'volumeDiff';
 	$rootScope.reverseSort =  true;
@@ -43,111 +50,24 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 		updateData(true);
 	}
 
-
-	$rootScope.toggleSettingsPanel = function(){
-		if(!$rootScope.showSettingsPanel){
-			$rootScope.showSettingsPanel = true; //Assume it's not clicked if there's no existing value
-		}else{
-			$rootScope.showSettingsPanel = false;
-		}
-	};
-
 	//Function for updating data
-	var tempResponce = [];
+	var tempResponse = [];
 	function updateData(keepOldData){
-		if (debug && localStorage["testjes-overview"] && (tempResponce == [] || !keepOldData)){
-			tempResponce = {
+		if (debug && localStorage["testjes-overview"] && (tempResponse == [] || !keepOldData)){
+			tempResponse = {
 				data: JSON.parse(localStorage["testjes-overview"])
 			};
-			handleResponse(tempResponce);
+			handleResponse(tempResponse);
 
-		}else if(tempResponce == [] || !keepOldData){
+		}else if(tempResponse == [] || !keepOldData){
 			$http.get(backend).
 			then(handleResponse);
 
 		}else{
-			handleResponse(tempResponce, keepOldData);
+			handleResponse(tempResponse, keepOldData);
 		}
 	}
 
-	//Functions for settings are next
-	function initSettings(){
-		//Initalize variables
-		$scope.inputIntervals = topIntervals.join(",");
-		$rootScope.intervals = topIntervals;
-		backend = "http://cryptotracky-overview-608466767.eu-west-1.elb.amazonaws.com/"
-		$rootScope.firstInterval = Math.min.apply(null, topIntervals);
-
-		$scope.inputMinVolumeInterval = minVolumeInterval;
-		$scope.inputMaxItemsInterval = maxItemsInterval;
-
-		$scope.inputMinVolumeMain = minVolumeMain;
-
-	}
-
-	$rootScope.updateSettings = function(){
-		//Fill variables with form data
-		topIntervals = $scope.inputIntervals.split(",").map(Number).filter(Boolean);
-		minVolumeInterval = parseInt($scope.inputMinVolumeInterval);
-		maxItemsInterval = parseInt($scope.inputMaxItemsInterval);
-
-		minVolumeMain = parseInt($scope.inputMinVolumeMain);
-
-		//Reinitalize variables
-		initSettings();
-
-		//update data without loading new data
-		updateData(true);
-
-	}
-	$rootScope.saveSettings = function(){
-		//Save variables to localstorage
-		localStorage["topIntervals"] = $scope.inputIntervals.split(",").map(Number).filter(Boolean);
-		localStorage["minVolumeInterval"] = parseInt($scope.inputMinVolumeInterval);
-		localStorage["maxItemsInterval"] = parseInt($scope.inputMaxItemsInterval);
-		localStorage["minVolumeMain"] = parseInt($scope.inputMinVolumeMain);
-		localStorage["settingsSaved"] = true;
-
-		//Run an update
-		$rootScope.updateSettings();
-
-	}
-
-	$rootScope.loadSettings = function(){
-		//If settings are saved, then load them from localstorage
-		//Else reset to defaults
-		if (localStorage["settingsSaved"]){
-			topIntervals = localStorage["topIntervals"].split(",");
-			minVolumeInterval = parseInt(localStorage["minVolumeInterval"]);
-			maxItemsInterval = parseInt(localStorage["maxItemsInterval"]);
-			minVolumeMain = parseInt(localStorage["minVolumeMain"]);
-			initSettings();
-		}else{
-			$rootScope.resetSettings();
-		}
-
-		//update data without loading new data
-		updateData(true);
-
-	}
-
-	$rootScope.resetSettings = function(){
-		//Reset variables to default and initialize them
-		topIntervals = defaultTopIntervals;
-		minVolumeInterval = defaultMinVolumeInterval;
-		maxItemsInterval = defaultMaxItemsInterval;
-		minVolumeMain = defaultMinVolumeMain;
-
-		initSettings();
-
-		//update data without loading new data
-		updateData(true);
-
-	}
-
-
-	//Run loadSettings once to fill the settings panel
-	$rootScope.loadSettings();
 
 	var lastItems;
 	var coins = {};
@@ -160,13 +80,13 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 
 	function handleResponse(response, keepOldData) {
 		if (response.data && response.data.success) {
-			//Fill tempResponce for updating without retrieving
-			tempResponce = {data: response.data
+			//Fill tempResponse for updating without retrieving
+			tempResponse = {data: response.data
 			};
 
 			//If debug and no local data stored jet, then save
 			if (debug && !localStorage["testjes-overview"]){
-				localStorage["testjes-overview"] = JSON.stringify(tempResponce.data);
+				localStorage["testjes-overview"] = JSON.stringify(tempResponse.data);
 			}
 
 			if (!keepOldData){
@@ -174,7 +94,7 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 					return item.MarketName.indexOf("BTC-") > -1;
 				});
 
-				topIntervals.forEach(function(top) {
+				overviewSettings.intervals.forEach(function(top) {
 					tops[top] = [];
 				});
 
@@ -207,7 +127,7 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 					currentVolume = coins[key].volumeLog[coins[key].volumeLog.length - 1];
 					startVolume = coins[key].volumeLog[0];
 
-					if (currentVolume > minVolumeMain) {
+					if (currentVolume > overviewSettings.minVolume) {
 						$rootScope.finalList.push({
 							coin: key,
 							start: startPrice,
@@ -218,7 +138,7 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 						});
 					}
 
-					topIntervals.forEach(function(top) {
+					overviewSettings.intervals.forEach(function(top) {
 						//Calculate the number of items before next interval is hit
 						var itemsPerLogInterval = (top * 60) / logUpdateInterval;
 
@@ -248,7 +168,7 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 			});
 
 			$rootScope.tops = {};
-			topIntervals.forEach(function(top) {
+			overviewSettings.intervals.forEach(function(top) {
 				if (tops[top].length) {
 					tops[top].sort(function(a, b) {
 						return b.diffSinceStart - a.diffSinceStart;
@@ -277,7 +197,7 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 	$scope.$on("$destroy", function() {
 		clearInterval(updateInterval);
 	});
-	
+
 	if (window.ga) {
 		ga('send', 'pageview');
 	}

@@ -1,5 +1,5 @@
 
-var cryptotracky = angular.module('cryptotracky', ['ui.router', "chart.js"]);
+var cryptotracky = angular.module('cryptotracky', ['ui.router', "chart.js", "LocalStorageModule"]);
 cryptotracky.config(function($stateProvider) {
 
   $stateProvider.state({
@@ -32,38 +32,8 @@ cryptotracky.config(function($stateProvider) {
     url: '/realtime/{coin}',
     templateUrl: 'realtime/realtime.html'
   });
-});
 
-
-cryptotracky.directive('coinTableMain', function() {
-  return {
-    templateUrl: "table-directive.html",
-		link: function($scope) {
-			$scope.log = function(coin) {
-				if (window.amplitude) {
-					amplitude.getInstance().logEvent("Open bittrex", coin);
-				}
-			}
-			$scope.logRealtime = function(coin) {
-				if (window.amplitude) {
-					amplitude.getInstance().logEvent("Open realtime", coin);
-				}
-			}
-		}
-  };
-});
-
-
-cryptotracky.directive('coinTableInterval', function() {
-  return {
-    templateUrl: "table-interval.html"
-  };
-});
-
-cryptotracky.directive('overviewPanelSettings', function() {
-  return {
-    templateUrl: "panel-overview-settings.html"
-  };
+  startAnalytics();
 });
 
 function startAnalytics() {

@@ -1,31 +1,25 @@
 <div class="panel panel-default">
-	<div class="panel-heading">Overview settting</div>
+	<div class="panel-heading">Overview setttings</div>
 	<div class="panel-body">
 		<div class="container-fluid">
       	<div class="row">
-      		<div class="col-sm-3 col-xs-12" style="padding-top:25px;">
+      		<div class="col-sm-3 col-xs-12">
 				<div class="input-group">
 					<span class="input-group-addon">Intervals</span>
-					<input type="text" ng-model="inputIntervals" />
+					<input type="text" ng-model="overviewSettings.intervals" />
 				</div>
 				<div class="input-group">
 					<span class="input-group-addon">Minimum volume maintable</span>
-					<input type="text" ng-model="inputMinVolumeMain" />
-				</div>
-				<div class="input-group">
-					<span class="input-group-addon">Minimum volume intervaltables</span>
-					<input type="text" ng-model="inputMinVolumeInterval" />
+					<input type="text" ng-model="overviewSettings.minVolume" />
 				</div>
 				<div class="input-group">
 					<span class="input-group-addon">Maximum items in intervaltables</span>
-					<input type="text" ng-model="inputMaxItemsInterval" />
+					<input type="text" ng-model="overviewSettings.maxItemsInterval" />
 				</div>
-				<BR />
-				<button type="button" class="btn" ng-click="updateSettings()">Update</button>
+				<br/>
 				<button type="button" class="btn" ng-click="saveSettings()">Save</button>
-				<button type="button" class="btn" ng-click="loadSettings()">Load</button>
 				<button type="button" class="btn" ng-click="resetSettings()">Reset</button>
-				
+
 			</div>
       	</div>
       </div>
