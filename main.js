@@ -1,6 +1,6 @@
 
 var cryptotracky = angular.module('cryptotracky', ['ui.router', "chart.js", "LocalStorageModule"]);
-cryptotracky.config(function($stateProvider) {
+cryptotracky.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state({
     name: 'home',
@@ -32,7 +32,7 @@ cryptotracky.config(function($stateProvider) {
     url: '/realtime/{coin}',
     templateUrl: 'realtime/realtime.html'
   });
-
+  $urlRouterProvider.otherwise('/');
   startAnalytics();
 });
 

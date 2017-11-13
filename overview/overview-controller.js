@@ -8,11 +8,12 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 			{
 				minVolume : 50,
 				maxItemsInterval : 5,
-				intervals : [1,5,15,30, 60, 240],
+				intervals : "1,5,15,30, 60, 240",
 			}
 		);
 		overviewSettings = localStorageService.get("overviewSettings");
 	}
+	overviewSettings.intervals = overviewSettings.intervals.split(",");
 	$scope.intervals = overviewSettings.intervals;
 	var logUpdateInterval = 10; 							//Every x seconds there is a log item
 
@@ -81,8 +82,11 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 	function handleResponse(response, keepOldData) {
 		if (response.data && response.data.success) {
 			//Fill tempResponse for updating without retrieving
-			tempResponse = {data: response.data
-			};
+			tempResponse = {data: response.data};
+
+			overviewSettings = localStorageService.get("overviewSettings")
+			overviewSettings.intervals = overviewSettings.intervals.split(",");
+			$scope.intervals = overviewSettings.intervals;
 
 			//If debug and no local data stored jet, then save
 			if (debug && !localStorage["testjes-overview"]){
@@ -127,7 +131,7 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 					currentVolume = coins[key].volumeLog[coins[key].volumeLog.length - 1];
 					startVolume = coins[key].volumeLog[0];
 
-					if (currentVolume > overviewSettings.minVolume) {
+					if (currentVolume > parseInt(overviewSettings.minVolume)) {
 						$rootScope.finalList.push({
 							coin: key,
 							start: startPrice,
@@ -147,7 +151,7 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 							startPrice = coins[key].priceLog[coins[key].priceLog.length - itemsPerLogInterval];
 							startVolume = coins[key].volumeLog[coins[key].volumeLog.length - itemsPerLogInterval];
 
-							if (currentVolume > minVolumeInterval) {
+							if (currentVolume > overviewSettings.minVolume) {
 								tops[top].push({
 									coin: key,
 									start: startPrice,
@@ -173,7 +177,7 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 					tops[top].sort(function(a, b) {
 						return b.diffSinceStart - a.diffSinceStart;
 					});
-					$rootScope.tops[top] = tops[top].slice(0,maxItemsInterval);
+					$rootScope.tops[top] = tops[top].slice(0,overviewSettings.maxItemsInterval);
 				}
 			});
 		}

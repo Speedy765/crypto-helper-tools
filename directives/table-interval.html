@@ -25,7 +25,8 @@
 				</tr>
 			</tbody>
 		</table>
-		<span ng-if="!tops[interval] && interval == firstInterval">
+		<span ng-if="!tops[interval] && $index == 0">
+
 			<div class="panel-body">
 				<h4> Getting started</h4>
 	      <p>Here you can see the prices of almost all coins tradeable on Bittrex.</br>
@@ -33,6 +34,6 @@
 	      The intervals help you check the history, click a name will open the coin on Bittrex, clicking the <b>Real-time</b> will show you the current price visually faster then Bittrex can.</p>
 	    </div>
 		</span>
-		<span ng-if="!tops[interval] && interval !== firstInterval">Waiting for data...</span>
+		<span ng-if="!tops[interval] && $index !== 0">Waiting for data...</span>
 	</div>
 </div>
