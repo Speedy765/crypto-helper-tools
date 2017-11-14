@@ -6,3 +6,18 @@
   color: #377ab7;
   cursor: pointer;
 }
+
+.btc-price-wrapper {
+  border-top: 3px solid #ffbb05;
+  background:white;
+  width: auto;
+  height: 25px;
+  text-align: center;
+}
+.btc-price-wrapper > div {
+  background:white;
+  display: inline-block;
+}
+.btc-price-wrapper .price {
+  margin-left: 25px;
+}

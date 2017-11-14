@@ -12,7 +12,7 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'overview',
     url: '/overview',
-    templateUrl: "overview/overview.html"
+    templateUrl: "overview/overview-template.html"
   });
 
   $stateProvider.state({
