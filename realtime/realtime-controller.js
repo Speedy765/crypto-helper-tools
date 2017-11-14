@@ -78,6 +78,6 @@ cryptotracky.controller('realtimeController', function($rootScope, $http, $scope
 	});
 
   if (window.ga) {
-		ga('send', 'pageview');
+		ga('send', 'pageview', window.location.hash);
 	}
 });
