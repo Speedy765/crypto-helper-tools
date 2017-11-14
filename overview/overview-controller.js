@@ -17,8 +17,6 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 	$scope.intervals = overviewSettings.intervals;
 	var logUpdateInterval = 10; 							//Every x seconds there is a log item
 
-	$rootScope.startTime = new Date().toISOString().slice(0, 19);
-
 	//Use localstorage for debuging
 	var debug = false;
 	var backend = "http://cryptotracky-overview-608466767.eu-west-1.elb.amazonaws.com/";
