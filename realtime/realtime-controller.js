@@ -2,10 +2,8 @@ cryptotracky.controller('realtimeController', function($rootScope, $http, $scope
 
   $rootScope.colors =  [ '#46BFBD', "#FF0000"];
 
-  $rootScope.startTime = new Date().toISOString().slice(0, 19);
-
   $rootScope.coin = $stateParams.coin;
-  var backend = "https://zurb8jn8d9.execute-api.eu-west-1.amazonaws.com/cryptotrackyv2?coin=" + $rootScope.coin.toUpperCase();
+  var backend = "http://realtimeBalancer-172915299.eu-west-1.elb.amazonaws.com/orderBookToRealtimeChart?coin=" + $rootScope.coin.toUpperCase();
   document.title = $rootScope.coin + "price";
   $rootScope.finalList = [];
   $rootScope.labels = [];
