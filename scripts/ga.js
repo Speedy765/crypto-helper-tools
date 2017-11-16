@@ -4,7 +4,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-105407554-2', 'auto');
-ga('send', 'pageview');
+ga('send', 'pageview', 'home');
 setInterval(function() {
   ga('send', 'event', 'keep-alive', 'ping');
   amplitude.getInstance().logEvent('Keep alive');
