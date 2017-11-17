@@ -9,12 +9,13 @@ cryptotracky.directive('overviewPanelSettings', function(localStorageService) {
       if ($scope.settingsType !== "short") {
         keyToUse += "-" + $scope.settingsType;
       }
+      $scope.overviewSettings = localStorageService.get(keyToUse);
       $scope.resetSettings = function(){
         localStorageService.set(keyToUse,
           {
             minVolume : 50,
             maxItemsInterval : 5,
-            intervals : "1,5,15,30, 60, 240",
+            intervals : $scope.settingsType === "long" ? "30,60,90,120,150,180,210,240,270,300" : "1,5,15,30, 60, 240",
           }
         );
         $scope.overviewSettings = localStorageService.get(keyToUse);
