@@ -18,12 +18,13 @@ cryptotracky.directive('btcPrice', function($http) {
         }
       }
 
+      var backend = "https://api.kraken.com/0/public/Ticker?pair=XBTUSD,XBTEUR";
       // Get prices on load
-      $http.get("https://api.kraken.com/0/public/Ticker?pair=XBTUSD,XBTEUR").then(handleResponse);
+      $http.get(backend).then(handleResponse);
 
       // Refresh them every 60 seconds
       setInterval(function() {
-        $http.get("https://api.kraken.com/0/public/Ticker?pair=XBTUSD").then(handleResponse);
+        $http.get(backend).then(handleResponse);
       }, 1000 * 60);
 
     }

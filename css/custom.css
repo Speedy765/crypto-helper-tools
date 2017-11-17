@@ -21,3 +21,11 @@
 .btc-price-wrapper .price {
   margin-left: 25px;
 }
+
+.red-text {
+  background-color: red;
+}
+
+.green-text {
+  background-color: green;
+}

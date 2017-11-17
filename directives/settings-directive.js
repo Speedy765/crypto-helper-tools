@@ -17,13 +17,13 @@ cryptotracky.directive('overviewPanelSettings', function(localStorageService) {
             intervals : "1,5,15,30, 60, 240",
           }
         );
+        $scope.overviewSettings = localStorageService.get(keyToUse);
       }
 
       $scope.saveSettings = function(){
         localStorageService.set(keyToUse,$scope.overviewSettings);
       }
 
-      $scope.overviewSettings = localStorageService.get(keyToUse);
       if (!$scope.overviewSettings) {
         $scope.resetSettings();
         $scope.overviewSettings = localStorageService.get(keyToUse);

@@ -46,6 +46,8 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 	var tempResponse = [];
 	function updateData(keepOldData){
 		if(tempResponse == [] || !keepOldData){
+			backend = "http://34.240.107.131:1338/min?intervals=" + $scope.inputIntervals;
+			backend = "http://localhost:1338/min?intervals=" + $scope.inputIntervals;
 			$http.get(backend).
 			then(handleResponse);
 
@@ -56,8 +58,7 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 
 	//Initalize variables
 	$scope.inputIntervals = overviewSettings.intervals.split(",");
-	backend = "http://34.240.107.131:1338/min?intervals=" + $scope.inputIntervals;
-	backend = "http://localhost:1338/min?intervals=" + $scope.inputIntervals;
+
 	$rootScope.firstInterval = Math.min.apply(null, $scope.inputIntervals);
 	$rootScope.headers = $scope.inputIntervals;
 
@@ -73,6 +74,11 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 	var tops = {};
 
 	function handleResponse(response, keepOldData) {
+		overviewSettings = localStorageService.get(localStorageKey);
+		$scope.inputIntervals = overviewSettings.intervals.split(",");
+		$rootScope.firstInterval = Math.min.apply(null, $scope.inputIntervals);
+		$rootScope.headers = $scope.inputIntervals;
+		$scope.inputMinVolume = overviewSettings.minVolume;
 		if (response.data && response.data.ETH.log.length) {
 			//Fill tempResponse for updating without retrieving
 			tempResponse = {data: response.data};
@@ -87,20 +93,21 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 				if (ignoreListLong.indexOf(key) == -1){
 					coinData = response.data[key];
 
-					if(coinData.volume.toFixed(0) > overviewSettings.minVolume){
+					if(coinData.volume.toFixed(0) > parseInt(overviewSettings.minVolume)){
 						$rootScope.finalList.push({
 							coin: coinData.coin,
 							current: coinData.current.toFixed(8),
 							volume: Number(coinData.volume.toFixed(0)),
 							high: coinData.high.toFixed(8),
 							low: coinData.low.toFixed(8),
-							log: coinData.log.map(function(x){
+							priceLog: coinData.log.map(function(x){
 								x = Number(x);
 								if(isNaN(x)){
 									x=-9999;
 								};
 								return x;
 							}),
+							volumeLog: coinData.volumeLog
 						});
 					};
 				}
@@ -112,9 +119,13 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 	updateData();
 
 	//Update the data with new data in x msec
-	setInterval(function() {
+	var updateInterval = setInterval(function() {
 		updateData();
-	}, 60000);
+	}, 1000 * 60);
+
+	$scope.$on("$destroy", function() {
+		clearInterval(updateInterval);
+	});
 
 
 });
