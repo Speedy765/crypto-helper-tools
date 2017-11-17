@@ -16,6 +16,12 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   });
 
   $stateProvider.state({
+    name: 'overview-long',
+    url: '/overview-long',
+    templateUrl: "overview-long/overview-long-template.html"
+  });
+
+  $stateProvider.state({
     name: 'faq',
     url: '/faq',
     templateUrl: "faq/faq.html"
@@ -46,7 +52,7 @@ function startAnalytics() {
   setInterval(function() {
     ga('send', 'event', 'keep-alive', 'ping');
     amplitude.getInstance().logEvent('Keep alive');
-  }, 10000);
+  }, 1000 * 60);
 
   (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
   ;r.type="text/javascript";r.async=true

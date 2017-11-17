@@ -12,7 +12,7 @@
 					<span class="input-group-addon">Minimum volume maintable</span>
 					<input type="text" ng-model="overviewSettings.minVolume" />
 				</div>
-				<div class="input-group">
+				<div ng-show="settingsType === 'short'" class="input-group">
 					<span class="input-group-addon">Maximum items in intervaltables</span>
 					<input type="text" ng-model="overviewSettings.maxItemsInterval" />
 				</div>

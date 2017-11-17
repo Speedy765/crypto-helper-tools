@@ -8,7 +8,7 @@ ga('send', 'pageview', 'home');
 setInterval(function() {
   ga('send', 'event', 'keep-alive', 'ping');
   amplitude.getInstance().logEvent('Keep alive');
-}, 10000);
+}, 1000 * 60);
 
 (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
 ;r.type="text/javascript";r.async=true
