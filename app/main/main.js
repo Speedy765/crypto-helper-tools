@@ -5,38 +5,38 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'home',
     url: '/',
-    templateUrl: "home/home.html",
+    templateUrl: "home\home.eba2fa01.html",
     data : { pageTitle: 'Home' }
   });
 
   $stateProvider.state({
     name: 'overview',
     url: '/overview',
-    templateUrl: "overview/overview-template.html"
+    templateUrl: "overview\overview-template.2930932f.html"
   });
 
   $stateProvider.state({
     name: 'overview-long',
     url: '/overview-long',
-    templateUrl: "overview-long/overview-long-template.html"
+    templateUrl: "overview-long\overview-long-template.10ce3411.html"
   });
 
   $stateProvider.state({
     name: 'faq',
     url: '/faq',
-    templateUrl: "faq/faq.html"
+    templateUrl: "faq\faq.e867cd40.html"
   });
 
   $stateProvider.state({
     name: 'help',
     url: '/help',
-    templateUrl: '/help/help.html'
+    templateUrl: 'help\help.4e580326.html'
   });
 
   $stateProvider.state({
     name: 'realtime',
     url: '/realtime/{coin}',
-    templateUrl: 'realtime/realtime.html'
+    templateUrl: 'realtime\realtime.70e8233b.html'
   });
   $urlRouterProvider.otherwise('/');
   startAnalytics();

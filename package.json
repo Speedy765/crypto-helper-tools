@@ -1,0 +1,35 @@
+{
+  "name": "tools-github",
+  "version": "1.0.0",
+  "description": "Some charts visualizing coins found on www.bittrex.com.\r Since they lack:\r - Realtime support of prices\r - A global overview of the state of all coins in a timespan smaller than 24 hours",
+  "main": "main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "angular-local-storage": "^0.7.1",
+    "amazon-cognito-identity-js": "^1.21.0",
+    "bower": "^1.8.2",
+    "http-server": "^0.10.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-file-rev": "^1.4.2",
+    "gulp-if": "^2.0.2",
+    "gulp-s3": "^0.11.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Speedy765/crypto-helper-tools.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Speedy765/crypto-helper-tools/issues"
+  },
+  "homepage": "https://github.com/Speedy765/crypto-helper-tools#readme"
+}

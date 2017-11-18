@@ -47,7 +47,7 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 	function updateData(keepOldData){
 		if(tempResponse == [] || !keepOldData){
 			backend = "http://34.240.107.131:1338/min?intervals=" + $scope.inputIntervals;
-			backend = "http://localhost:1338/min?intervals=" + $scope.inputIntervals;
+			// backend = "http://localhost:1338/min?intervals=" + $scope.inputIntervals;
 			$http.get(backend).
 			then(handleResponse);
 
