@@ -201,6 +201,6 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 	});
 
 	if (window.ga) {
-		ga('send', 'pageview', window.location.hash);
+		ga('send', 'pageview', "overviewController");
 	}
 });

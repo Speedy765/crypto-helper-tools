@@ -5,38 +5,38 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'home',
     url: '/',
-    templateUrl: "home\home.eba2fa01.html",
+    templateUrl: "home/home.html",
     data : { pageTitle: 'Home' }
   });
 
   $stateProvider.state({
     name: 'overview',
     url: '/overview',
-    templateUrl: "overview\overview-template.2930932f.html"
+    templateUrl: "overview/overview-template.html"
   });
 
   $stateProvider.state({
     name: 'overview-long',
     url: '/overview-long',
-    templateUrl: "overview-long\overview-long-template.10ce3411.html"
+    templateUrl: "overview-long/overview-long-template.html"
   });
 
   $stateProvider.state({
     name: 'faq',
     url: '/faq',
-    templateUrl: "faq\faq.e867cd40.html"
+    templateUrl: "faq/faq.html"
   });
 
   $stateProvider.state({
     name: 'help',
     url: '/help',
-    templateUrl: 'help\help.4e580326.html'
+    templateUrl: 'help/help.html'
   });
 
   $stateProvider.state({
     name: 'realtime',
     url: '/realtime/{coin}',
-    templateUrl: 'realtime\realtime.70e8233b.html'
+    templateUrl: 'realtime/realtime.html'
   });
   $urlRouterProvider.otherwise('/');
   startAnalytics();
@@ -51,7 +51,7 @@ function startAnalytics() {
   ga('create', 'UA-105407554-2', 'auto');
   setInterval(function() {
     ga('send', 'event', 'keep-alive', 'ping');
-    amplitude.getInstance().logEvent('Keep alive');
+    amplitude.getInstance().logEvent('Keep alive', window.location.hash);
   }, 1000 * 60);
 
   (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
