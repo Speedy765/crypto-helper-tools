@@ -49,10 +49,16 @@ function startAnalytics() {
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-105407554-2', 'auto');
-  setInterval(function() {
+  ga('send', 'pageview', window.location.hash);
+
+  function log() {
     ga('send', 'event', 'keep-alive', 'ping');
-    amplitude.getInstance().logEvent('Keep alive', window.location.hash);
-  }, 1000 * 60);
+    amplitude.getInstance().logEvent('Keep alive', {value: window.location.hash});
+    ga('send', 'pageview', window.location.hash);
+
+  }
+
+  setInterval(log, 1000 * 60);
 
   (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
   ;r.type="text/javascript";r.async=true

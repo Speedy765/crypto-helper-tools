@@ -16,6 +16,7 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 	//Default sort on coinTableMain
 	$rootScope.orderByField = 'coin';
 	$rootScope.reverseSort =  false;
+	$rootScope.selectedSort = "price";
 
 	//Functions for coin ignores are next
 	var ignoreListLong = [];

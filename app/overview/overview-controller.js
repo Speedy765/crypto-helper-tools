@@ -200,7 +200,4 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 		clearInterval(updateInterval);
 	});
 
-	if (window.ga) {
-		ga('send', 'pageview', "overviewController");
-	}
 });

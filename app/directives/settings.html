@@ -5,16 +5,16 @@
       	<div class="row">
       		<div class="col-sm-3 col-xs-12">
 				<div class="input-group">
-					<span class="input-group-addon">Intervals</span>
-					<input type="text" ng-model="overviewSettings.intervals" />
+					<span style="width:200px" class="input-group-addon">Intervals</span>
+					<input style="width:300px" type="text" ng-model="overviewSettings.intervals" />
 				</div>
 				<div class="input-group">
-					<span class="input-group-addon">Minimum volume maintable</span>
-					<input type="text" ng-model="overviewSettings.minVolume" />
+					<span style="width:200px" class="input-group-addon">Minimum volume maintable</span>
+					<input style="width:300px" type="text" ng-model="overviewSettings.minVolume" />
 				</div>
 				<div ng-show="settingsType === 'short'" class="input-group">
-					<span class="input-group-addon">Maximum items in intervaltables</span>
-					<input type="text" ng-model="overviewSettings.maxItemsInterval" />
+					<span style="width:200px"class="input-group-addon">Maximum items in intervaltables</span>
+					<input style="width:300px" type="text" ng-model="overviewSettings.maxItemsInterval" />
 				</div>
 				<br/>
 				<button type="button" class="btn" ng-click="saveSettings()">Save</button>
