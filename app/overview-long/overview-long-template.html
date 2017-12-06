@@ -28,11 +28,13 @@
     	<div class="panel-heading">
         <span>Show volume <input ng-model="showVolume" type="checkbox"/></span>
         <span style="margin-left: 15px">Sort on
-          <input style="margin-right:5px" name="sort" type="radio" value="price" ng-model="selectedSort">Price</input>
-          <input style="margin-right:5px" name="sort" type="radio" value="volume" ng-model="selectedSort">Volume</input>
+          <input style="margin-right:5px" name="sort" type="radio" value="price" ng-model="selectedSort" ng-click="sortUpdate()">Price</input>
+          <input style="margin-right:5px" name="sort" type="radio" value="volume" ng-model="selectedSort" ng-click="sortUpdate()">Volume</input>
         </span>
       </div>
     	<div class="panel-body">
+        <h3>Overview with prefilled data, no more waiting!</h3>
+        <p> This page is still under heavy development but works fine, you might have to click headers or refresh the page to apply certain changes. </p>
     		<table class="table table-striped table-bordered table-condensed table-hover" ng-if="finalList">
     			<thead>
     				<tr>
@@ -109,7 +111,6 @@
     				</tr>
     			</tbody>
     		</table>
-    		<span ng-if="!finalList">Waiting for data..</span>
     	</div>
     	<div class="panel-footer" ng-show="ignoreListLong.length > 0">
     		Coins ignored <span ng-href='#here' ng-click='resetHide()' >(Reset)</a>: {{ignoreListLong.split(",").join(", ")}}
