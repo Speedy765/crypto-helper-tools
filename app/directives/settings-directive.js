@@ -1,4 +1,4 @@
-cryptotracky.directive('overviewPanelSettings', function(localStorageService) {
+cryptotracky.directive('overviewPanelSettings', function($rootScope, localStorageService) {
   return {
     templateUrl: "directives/settings.html",
     scope: {
@@ -23,6 +23,7 @@ cryptotracky.directive('overviewPanelSettings', function(localStorageService) {
 
       $scope.saveSettings = function(){
         localStorageService.set(keyToUse,$scope.overviewSettings);
+        $rootScope.$emit("settingsUpdate", ["data"]);
       }
 
       if (!$scope.overviewSettings) {

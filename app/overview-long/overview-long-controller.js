@@ -116,6 +116,16 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 		}
 	}
 
+	$scope.sortUpdate = function() {
+		setTimeout(function() {
+			updateData();
+		},0)
+	}
+
+	$rootScope.$on("settingsUpdate", function() {
+		updateData(true);
+	});
+
 	//Start the code and load new data
 	updateData();
 
