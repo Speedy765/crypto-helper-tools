@@ -9,6 +9,7 @@ It tracks your current profit/loss in % based on a single buy order on a single 
 ## Why?
 
 Bittrex does not support trailing stop, now it does!
+
 Fully opensource I do not store your keys anywhere like other sites might do.
 
 # Important
@@ -27,6 +28,7 @@ npm install
 
 ### Tracking
 Add your bittrex keys in the config.json.
+
 This key should have access to `READ INFO`
 
 To start tracking:
@@ -40,8 +42,11 @@ All you have to do is keep track of the % and dump on bittrex when desired % is 
 ### Trailing stop
 
 You can configure a few options in the `config.json`.
+
 `ALLOWED_PERCENTAGE_DROP_DEFAULT` if the profit is not that big yet, use this percentage to allow drop from top.
+
 `SELL_THRESHOLD_IN_SECONDS` How long a potential sell should last, used to cover small changes.
+
 `STOP_LOSS` Stop loss, do I need to say more?
 
 To start:
