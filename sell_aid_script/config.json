@@ -1,4 +1,7 @@
 {
   "APIKEY": "InsertYourApiKeyHere",
-  "APISECRET": "InsertYourApiSecretKeyHere"
+  "APISECRET": "InsertYourApiSecretKeyHere",
+  "ALLOWED_PERCENTAGE_DROP_DEFAULT": "0.5",
+  "SELL_THRESHOLD_IN_SECONDS": "5",
+  "STOP_LOSS": "-5"
 }

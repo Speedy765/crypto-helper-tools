@@ -1,8 +1,19 @@
 # bittrex-sell-aid
 
+## Beta 0.1
+
 ## What does it do?
 
 It tracks your current profit/loss in % based on a single buy order on a single coin. In this % the fee is already calculated and your amount of coins is checked for the current dump price in the orderbook.
+
+## Why?
+
+Bittrex does not support trailing stop, now it does!
+Fully opensource I do not store your keys anywhere like other sites might do.
+
+# Important
+
+Use at your own risk! Test with small trades first to get a feel for the tool.
 
 ## Install
 
@@ -14,21 +25,38 @@ You need to have nodejs install on our system, see https://nodejs.org/en/
 npm install
 ```
 
+### Tracking
 Add your bittrex keys in the config.json.
 This key should have access to `READ INFO`
 
 To start tracking:
 ```shell
-node index.js NEO
+node report-only-multiple.js NEO
 ```
 You can replace `NEO` with any other coin which is tradeable with `BTC` on bittrex.
 
 All you have to do is keep track of the % and dump on bittrex when desired % is reached.
 
-### Donation
-Feel free to donate BTC on `1JUoVvQNsmsEJrZLd9ZMMKoSvTJ52tRTG7`
-or LTC on `LMYDzpbBjuuJ3tssW9h2XKZy9XoYTpYZsP`
+### Trailing stop
 
+You can configure a few options in the `config.json`.
+`ALLOWED_PERCENTAGE_DROP_DEFAULT` if the profit is not that big yet, use this percentage to allow drop from top.
+`SELL_THRESHOLD_IN_SECONDS` How long a potential sell should last, used to cover small changes.
+`STOP_LOSS` Stop loss, do I need to say more?
+
+To start:
+```shell
+node trailing_stop_one_coin_once.js `NEO`
+```
+
+You can replace `NEO` with any other coin which is tradeable with `BTC` on bittrex.
+
+### Contribute
+
+As you can see the source code is right here, feel free to improve the code and submit a pull request.
+
+### Donation
+Made some nice profit while you did other stuff? Feel free to donate LTC on `LgmUnUTuUmR5sCKzxvrudFmXXyDHpY5KS7`
 
 ## License
 

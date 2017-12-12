@@ -1,6 +1,6 @@
 {
-  "name": "mjo_sell_assister",
-  "version": "0.0.1",
+  "name": "cryptotracky_sell_assister",
+  "version": "0.0.2",
   "description": "Gives the price of the last buy order if it would be dumped again market price.",
   "main": "index.js",
   "scripts": {
