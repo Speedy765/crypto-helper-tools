@@ -63,6 +63,12 @@ As you can see the source code is right here, feel free to improve the code and 
 ### Donation
 Made some nice profit while you did other stuff? Feel free to donate LTC on `LgmUnUTuUmR5sCKzxvrudFmXXyDHpY5KS7`
 
+### FAQ
+
+Will my funds be locked?
+
+No, since no order is placed until its time to sell. So you can always sell yourself.
+
 ## License
 
 The MIT License
