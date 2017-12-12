@@ -3,6 +3,9 @@ cryptotracky.controller('realtimeController', function($rootScope, $http, $scope
   $rootScope.colors =  [ '#46BFBD', "#FF0000"];
 
   $rootScope.coin = $stateParams.coin;
+  if ($rootScope.coin.indexOf("-") === -1) {
+    $rootScope.coin = "BTC-" + $rootScope.coin;
+  }
   var backend = "http://realtimeNoSupport-919050512.eu-west-1.elb.amazonaws.com/realtimeChart?coin=" + $rootScope.coin.toUpperCase();
   document.title = $rootScope.coin + "price";
   $rootScope.finalList = [];
