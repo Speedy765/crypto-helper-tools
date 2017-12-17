@@ -19,17 +19,32 @@ cryptotracky.controller('realtimeController', function($rootScope, $http, $scope
   function handleResponse(response) {
     if (response.data && response.data.result) {
       var result = response.data.result;
-      $rootScope.labels.push($rootScope.labels.length);
       document.title = $rootScope.coin + " - " + result.Bid;
 
-     bid.push(result.Bid);
-     ask.push(result.Ask);
-     if (bid.length > 60 * 15) {
+      bid.push(result.Bid);
+      ask.push(result.Ask);
+      if (bid.length > 60 * 15) {
         bid.splice(0,1);
         ask.splice(0,1);
-        $rootScope.labels.splice(0,1);
       }
       $rootScope.data = [bid,ask];
+      $rootScope.labels = [];
+      var dataLength = bid.length;
+      var j =  bid.length;
+      var secondCounter = 0;
+      var minuteCounter = 0;
+      while (j !== 0) {
+        secondCounter++;
+        if (secondCounter === "60") {
+          minuteCounter++;
+          secondCounter = 0;
+          $rootScope.labels.splice(-1,0, "-" + minuteCounter + "min");
+        }
+        else {
+          $rootScope.labels.splice(-1,0, "");
+        }
+        j--;
+      }
     }
     calculateStats();
   }

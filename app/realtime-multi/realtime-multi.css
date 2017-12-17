@@ -1,0 +1,12 @@
+.realtime-multi-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.realtime-chart {
+  padding: 5px;
+  width: 500px;
+  height: 300px;
+}

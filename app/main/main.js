@@ -38,6 +38,12 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
     url: '/realtime/{coin}',
     templateUrl: 'realtime/realtime.html'
   });
+
+  $stateProvider.state({
+    name: 'realtime-multi',
+    url: '/realtime-multi/{coins}',
+    templateUrl: 'realtime-multi/realtime-multi.html'
+  });
   $urlRouterProvider.otherwise('/');
   startAnalytics();
 });
