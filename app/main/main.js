@@ -22,6 +22,12 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   });
 
   $stateProvider.state({
+    name: 'overview-long-binance',
+    url: '/overview-long-binance',
+    templateUrl: "overview-long-binance/overview-long-template.html"
+  });
+
+  $stateProvider.state({
     name: 'faq',
     url: '/faq',
     templateUrl: "faq/faq.html"
