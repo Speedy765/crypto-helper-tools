@@ -1,71 +1,9 @@
-cryptotracky.controller('realtimeController', function($rootScope, $http, $scope, $stateParams) {
+cryptotracky.controller('realtimeController', function($scope, $stateParams, RealtimeService) {
 
-  $rootScope.colors =  [ '#46BFBD', "#FF0000"];
+  this.colors =  [ '#46BFBD', "#FF0000"];
+  this.coin = $stateParams.coin;
 
-  $rootScope.coin = $stateParams.coin;
-  if ($rootScope.coin.indexOf("-") === -1) {
-    $rootScope.coin = "BTC-" + $rootScope.coin;
-  }
-  var backend = "http://realtimeNoSupport-919050512.eu-west-1.elb.amazonaws.com/realtimeChart?coin=" + $rootScope.coin.toUpperCase();
-  document.title = $rootScope.coin + "price";
-  $rootScope.finalList = [];
-  $rootScope.labels = [];
-  $rootScope.data = [];
-  var bid = [];
-  var ask = [];
-  $http.get(backend).
-    then(handleResponse);
-
-  function handleResponse(response) {
-    if (response.data && response.data.result) {
-      var result = response.data.result;
-      document.title = $rootScope.coin + " - " + result.Bid;
-
-      bid.push(result.Bid);
-      ask.push(result.Ask);
-      if (bid.length > 60 * 15) {
-        bid.splice(0,1);
-        ask.splice(0,1);
-      }
-      $rootScope.data = [bid,ask];
-      $rootScope.labels = [];
-      var dataLength = bid.length;
-      var j =  bid.length;
-      var secondCounter = 0;
-      var minuteCounter = 0;
-      while (j !== 0) {
-        secondCounter++;
-        if (secondCounter === "60") {
-          minuteCounter++;
-          secondCounter = 0;
-          $rootScope.labels.splice(-1,0, "-" + minuteCounter + "min");
-        }
-        else {
-          $rootScope.labels.splice(-1,0, "");
-        }
-        j--;
-      }
-    }
-    calculateStats();
-  }
-
-   updateInterval = setInterval(function() {
-     $http.get(backend).
-       then(handleResponse);
-   }, 1000);
-
-
-   function calculateStats() {
-     var max = bid.reduce(function(a, b) {
-       return Math.max(a, b);
-    });
-    $rootScope.diffFromMax = calculateDiff(bid[bid.length - 1], max);
-   }
-
-   function calculateDiff(start,end) {
-     return Number(((end * 100) / start - 100).toFixed(1));
-  }
-  $rootScope.options = {
+  this.options = {
     type: "line",
     animation : {
       duration : 0
@@ -87,8 +25,24 @@ cryptotracky.controller('realtimeController', function($rootScope, $http, $scope
     label: ["test", "test2"]
   };
 
-	$scope.$on("$destroy", function() {
-		clearInterval(updateInterval);
-	});
+  if (this.coin.indexOf("-") === -1) {
+    this.coin = "BTC-" + this.coin;
+  }
+
+  document.title = this.coin + "price";
+
+  this.labels = [];
+  this.data = [];
+  this.diffFromMax = 0;
+
+  RealtimeService.startPoll(this.coin, 1, (res) => {
+    this.data = res.data;
+    this.labels = res.labels;
+    this.diffFromMax = res.diffFromMax;
+  });
+
+  $scope.$on("$destroy", function() {
+    RealtimeService.stopPoll();
+  });
 
 });

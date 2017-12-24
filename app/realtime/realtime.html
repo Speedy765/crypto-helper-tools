@@ -1,9 +1,10 @@
-<ul class="cd-hero-slider" ng-controller="realtimeController">
+<div ng-controller="realtimeController as $ctrl">
+<ul class="cd-hero-slider">
 
   <li class="selected">
     <div class="heading">
 
-        <h1>Real-time price for {{coin}} (beta)</h1>
+        <h1>Real-time price for {{$ctrl.coin}} (beta)</h1>
     </div>
     <div class="cd-full-width">
       <div class="container">
@@ -32,9 +33,9 @@
                 </div>
                 <div>Hosting is not free, please consider donating something if using on regular basis</div>
                 <h3>Showing ask and bid price. Open in <a href="https://bittrex.com/Market/Index?MarketName={{coin}}" target="_blank"> Bittrex</a></h3>
-                <span> % below top of chart for current bid: {{diffFromMax}}</span>
-                <canvas id="line" class="chart chart-line" chart-data="data"
-                chart-labels="labels" chart-colors="colors" chart-series="series" chart-options="options"
+                <span> % below top of chart for current bid: {{$ctrl.diffFromMax}}</span>
+                <canvas id="line" class="chart chart-line" chart-data="$ctrl.data"
+                chart-labels="$ctrl.labels" chart-colors="$ctrl.colors" chart-series="series" chart-options="$ctrl.options"
                 chart-dataset-override="datasetOverride">
               </canvas>
             </div>
@@ -42,5 +43,7 @@
         </div>
       </div>
     </div>
+  </div>
   </li>
 </ul>
+</div>
