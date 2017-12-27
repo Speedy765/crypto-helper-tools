@@ -1,0 +1,77 @@
+<div class="container-fluid" style="padding-top:30px;" ng-controller="hitBtcController">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+      	<div class="panel-heading">Donations are welcome on</div>
+      	<div class="panel-body">
+          <!-- <span>
+            <span>BTC</span>
+            <span> <b>36CFExGwrh925VwTaPZufPtG3kisNfnZvW</b></span>
+          </span> -->
+          <span>
+            <span>LTC</span>
+            <span><b> LgmUnUTuUmR5sCKzxvrudFmXXyDHpY5KS7</b></span>
+          </span>
+          <!-- <span>
+            <span>ETH</span>
+            <span><b> 0x7311e535E8b74cBac0476dAe9dB49DA102c6B5Db</b></span>
+          </span> -->
+        </div>
+      </div>
+    </div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+				</div>
+				<div class="panel-body">
+          <h3>Live overview of HitBTC wallet status</h3>
+					<p>Update every minute. </p>
+          <table class="table-striped table-bordered table-condensed table-hover">
+            <thead>
+              <tr>
+                <th>
+                  <span>
+                    Coin
+                  </span>
+                </th>
+                  <th>
+                    <span>
+                      Fullname
+                    </span>
+                  </th>
+                <th>
+                  <span>
+                    payinEnabled
+                  </span>
+                </th>
+                <th>
+                  <span>
+                    payoutEnabled
+                  </span>
+                </th>
+                <th>
+                  <span>
+                    transferEnabled
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody ng-repeat="market in markets">
+              <tr>
+                <td>
+                  <a href="https://hitbtc.com/{{market.id}}-to-BTC" target="_blank"> {{market.id}}</a>
+                </td>
+                <td>{{market.fullName}}</td>
+                <td ng-class="{'red-text': market.payinEnabled === false, 'green-text': market.payinEnabled}"></td>
+                <td ng-class="{'red-text': market.payoutEnabled === false, 'green-text': market.payoutEnabled}"></td>
+                <td ng-class="{'red-text': market.transferEnabled === false, 'green-text': market.transferEnabled}"></td>
+              </tr>
+            </tbody>
+          </table>
+				</div>
+			</div>
+		</div>
+  </div>
+</div>

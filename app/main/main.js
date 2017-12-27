@@ -50,6 +50,13 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
     url: '/realtime-multi/{coins}',
     templateUrl: 'realtime-multi/realtime-multi.html'
   });
+
+  $stateProvider.state({
+    name: 'hitbtc-status',
+    url: '/hitbtc-status',
+    templateUrl: 'hitbtc/hitbtc-status.html'
+  });
+
   $urlRouterProvider.otherwise('/');
   startAnalytics();
 });
