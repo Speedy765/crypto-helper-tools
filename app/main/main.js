@@ -1,7 +1,8 @@
 
 var cryptotracky = angular.module('cryptotracky', ['ui.router', "chart.js", "LocalStorageModule"]);
-cryptotracky.config(function($stateProvider, $urlRouterProvider) {
+var version = "0.1";
 
+cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'home',
     url: '/',
@@ -68,12 +69,12 @@ function startAnalytics() {
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-105407554-2', 'auto');
-  ga('send', 'pageview', window.location.hash);
+  ga('send', 'pageview', window.location.hash + "-v=" + version);
 
   function log() {
     ga('send', 'event', 'keep-alive', 'ping');
-    amplitude.getInstance().logEvent('Keep alive', {value: window.location.hash});
-    ga('send', 'pageview', window.location.hash);
+    amplitude.getInstance().logEvent('Keep alive', {value: window.location.hash +  "v=" + version});
+    ga('send', 'pageview', window.location.hash + "-v=" + version);
 
   }
 
