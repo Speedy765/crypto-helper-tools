@@ -30,8 +30,21 @@
   background-color: #7abc92;
 }
 
+.green-text-only {
+  color:#7abc92;
+}
+
+.red-text-only {
+  color:#b56969;
+}
+
 .input-group-overview{
    margin-bottom: 5px;
+}
+
+.float-right {
+  float: right;
+  margin-right: 10px;
 }
 
 @media screen and (max-width: 768px) {

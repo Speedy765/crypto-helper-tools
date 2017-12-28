@@ -34,10 +34,17 @@
                 <div>Hosting is not free, please consider donating something if using on regular basis</div>
                 <h3>Showing ask and bid price. Open in <a href="https://bittrex.com/Market/Index?MarketName={{coin}}" target="_blank"> Bittrex</a></h3>
                 <span> % below top of chart for current bid: {{$ctrl.diffFromMax}}</span>
+                <div class="float-right">
+                  <div> 24h diff <span ng-class="{'red-text-only': $ctrl.dayDiff < 0, 'green-text-only': $ctrl.dayDiff > 0}">{{$ctrl.dayDiff}}</span></div>
+                  <div>24 high: <span>{{$ctrl.marketInfo.High}}</span></div>
+                </div>
+
+
                 <canvas id="line" class="chart chart-line" chart-data="$ctrl.data"
                 chart-labels="$ctrl.labels" chart-colors="$ctrl.colors" chart-series="series" chart-options="$ctrl.options"
                 chart-dataset-override="datasetOverride">
               </canvas>
+                <div class="float-right">24  low: <span>{{$ctrl.marketInfo.Low}}</span></div>
             </div>
           </div>
         </div>

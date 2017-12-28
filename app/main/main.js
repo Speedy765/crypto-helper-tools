@@ -1,6 +1,6 @@
 
 var cryptotracky = angular.module('cryptotracky', ['ui.router', "chart.js", "LocalStorageModule"]);
-var version = "0.1";
+var version = "0.2";
 
 cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state({

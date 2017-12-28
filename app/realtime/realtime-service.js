@@ -1,6 +1,6 @@
 
 const baseUrl = "http://realtimeNoSupport-919050512.eu-west-1.elb.amazonaws.com/realtimeChart"
-
+// const baseUrl = "http://localhost:1443/realtimeChart";
 const coinUrl = (coin) => baseUrl + "?coin=" + coin
 
 const getCoinUrl = (coin) => coinUrl(coin.toUpperCase());
@@ -41,6 +41,8 @@ cryptotracky.service('RealtimeService', function($http) {
   // Method that handles the result from the API
   this.handleResult = (result) => {
 
+    this.marketInfo = result;
+
     this.bid.push(result['Bid']);
     this.ask.push(result['Ask']);
 
@@ -55,7 +57,6 @@ cryptotracky.service('RealtimeService', function($http) {
     var j =  this.bid.length;
     var secondCounter = 0;
     var minuteCounter = 0;
-    console.log('j', j)
     while (j !== 0) {
       secondCounter++;
       if (secondCounter === "60") {
@@ -89,6 +90,7 @@ cryptotracky.service('RealtimeService', function($http) {
         data: this.data,
         labels: this.labels,
         diffFromMax: calculateStats(this.bid),
+        marketInfo: this.marketInfo
       }));
   }
 

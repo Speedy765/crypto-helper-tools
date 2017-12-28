@@ -29,7 +29,7 @@ cryptotracky.controller('realtimeController', function($scope, $stateParams, Rea
     this.coin = "BTC-" + this.coin;
   }
 
-  document.title = this.coin + "price";
+  document.title = this.coin;
 
   this.labels = [];
   this.data = [];
@@ -39,6 +39,8 @@ cryptotracky.controller('realtimeController', function($scope, $stateParams, Rea
     this.data = res.data;
     this.labels = res.labels;
     this.diffFromMax = res.diffFromMax;
+    this.marketInfo = res.marketInfo;
+    this.dayDiff = ((this.marketInfo.Bid * 100 / this.marketInfo.PrevDay) - 100).toFixed(1);
   });
 
   $scope.$on("$destroy", function() {
