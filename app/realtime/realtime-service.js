@@ -19,11 +19,21 @@ cryptotracky.service('RealtimeService', function($http) {
   // This is where the interval is stored
   this.interval = null
 
+  // Support multiple coins at once
+  this.coinLog = {};
+
   // Method to start the poll and schedule it
   this.startPoll = (coin, seconds, cb) => {
+    console.debug("Starting poll for " + coin);
     // Initial run
     this.poll(coin, cb)
-
+    this.coinLog[coin] = {
+      ask: [],
+      bid: [],
+      data: [],
+      labels: [],
+      diffFromMax: 0
+    }
     // Set the interval to run the poll
     this.interval = setInterval(() => this.poll(coin, cb), seconds * 1000)
   }
@@ -31,30 +41,23 @@ cryptotracky.service('RealtimeService', function($http) {
   // Method to stop the poll
   this.stopPoll = () => clearInterval(this.interval)
 
-  // These properties store the data from the API
-  this.ask = [];
-  this.bid = [];
-  this.data = [];
-  this.labels = [];
-  this.diffFromMax = 0;
-
   // Method that handles the result from the API
-  this.handleResult = (result) => {
+  this.handleResult = (result, coin) => {
 
-    this.marketInfo = result;
+    this.coinLog[coin].marketInfo = result;
 
-    this.bid.push(result['Bid']);
-    this.ask.push(result['Ask']);
+    this.coinLog[coin].bid.push(result['Bid']);
+    this.coinLog[coin].ask.push(result['Ask']);
 
-    if (this.bid.length > 60 * 15) {
-      this.bid.splice(0,1);
-      this.ask.splice(0,1);
+    if (this.coinLog[coin].bid.length > 60 * 15) {
+      this.coinLog[coin].bid.splice(0,1);
+      this.coinLog[coin].ask.splice(0,1);
     }
 
-    this.data = [this.bid, this.ask];
-    this.labels = [];
+    this.coinLog[coin].data = [this.coinLog[coin].bid, this.coinLog[coin].ask];
+    this.coinLog[coin].labels = [];
 
-    var j =  this.bid.length;
+    var j =  this.coinLog[coin].bid.length;
     var secondCounter = 0;
     var minuteCounter = 0;
     while (j !== 0) {
@@ -62,10 +65,10 @@ cryptotracky.service('RealtimeService', function($http) {
       if (secondCounter === "60") {
         minuteCounter++;
         secondCounter = 0;
-        this.labels.splice(-1,0, "-" + minuteCounter + "min");
+        this.coinLog[coin].labels.splice(-1,0, "-" + minuteCounter + "min");
       }
       else {
-        this.labels.splice(-1,0, "");
+        this.coinLog[coin].labels.splice(-1,0, "");
       }
       j--;
     }
@@ -83,14 +86,14 @@ cryptotracky.service('RealtimeService', function($http) {
           return console.log('There was an error retrieving results from the backend')
         }
         // Handle the result if we have it data
-        return this.handleResult(res)
+        return this.handleResult(res, coin)
       })
       // Invoke the callback with the data needed in the controller
       .then(() => cb({
-        data: this.data,
-        labels: this.labels,
-        diffFromMax: calculateStats(this.bid),
-        marketInfo: this.marketInfo
+        data: this.coinLog[coin].data,
+        labels: this.coinLog[coin].labels,
+        diffFromMax: calculateStats(this.coinLog[coin].bid),
+        marketInfo: this.coinLog[coin].marketInfo
       }));
   }
 

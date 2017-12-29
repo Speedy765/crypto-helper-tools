@@ -1,8 +1,20 @@
 <div>
 	<h3><a href="https://bittrex.com/Market/Index?MarketName={{coin}}" target="_blank"> {{coin}}</a></h3>
 	<span> % below top of chart for current bid: {{diffFromMax}}</span>
+
+	<div class="float-right">
+		<div> 24h diff <span ng-class="{'red-text-only': dayDiff < 0, 'green-text-only': dayDiff > 0}">{{dayDiff}}</span></div>
+		<div>24 high: <span>{{marketInfo.High}}</span></div>
+	</div>
+
+
 	<canvas id="line" class="chart chart-line" chart-data="data"
 		chart-labels="labels" chart-colors="colors" chart-series="series" chart-options="options"
 		chart-dataset-override="datasetOverride">
 	</canvas>
+	<div class="float-right">24  low: <span>{{marketInfo.Low}}</span></div>
+	<!-- <canvas id="line" class="chart chart-line" chart-data="data"
+		chart-labels="labels" chart-colors="colors" chart-series="series" chart-options="options"
+		chart-dataset-override="datasetOverride">
+	</canvas> -->
 </div>

@@ -5,7 +5,8 @@
   justify-content: space-around;
 }
 
-.realtime-chart {
+
+.realtime-multi-wrapper .realtime-chart {
   padding: 5px;
   width: 500px;
   height: 300px;
