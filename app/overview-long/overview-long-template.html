@@ -38,6 +38,11 @@
 				<div class="panel-body">
 					<h3>Overview with prefilled data, no more waiting!</h3>
 					<p> This page is still under heavy development but works fine, you might have to click headers or refresh the page to apply certain changes. </p>
+
+          <h4> Select market: </h4>
+            <input style="margin-right:5px" name="market" type="radio" value="btc" ng-model="activeMarket" ng-click="marketUpdate('btc')">BTC</input>
+            <input style="margin-right:5px" name="market" type="radio" value="eth" ng-model="activeMarket" ng-click="marketUpdate('eth')">ETH</input>
+            <input style="margin-right:5px" name="market" type="radio" value="usdt" ng-model="activeMarket" ng-click="marketUpdate('usdt')">USDT</input>
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-condensed table-hover" ng-if="finalList">
 							<thead>
@@ -86,7 +91,7 @@
 							<tbody ng-repeat="coin in finalList | orderBy:orderByField:reverseSort">
 								<tr >
 									<td>
-										<a href="https://bittrex.com/Market/Index?MarketName=BTC-{{coin.coin}}" target="_blank"> {{coin.coin}}</a>
+										<a href="https://bittrex.com/Market/Index?MarketName={{coin.coin}}" target="_blank"> {{coin.coin}}</a>
 
 									</td>
 									<td>{{coin.current}}</td>

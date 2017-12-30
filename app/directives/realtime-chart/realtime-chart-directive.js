@@ -6,6 +6,9 @@ cryptotracky.directive('realtimeChart', function(RealtimeService) {
     },
     link : function($scope, element) {
 
+      if ($scope.coin.indexOf("-") === -1) {
+        $scope.coin = "BTC-" + $scope.coin;
+      }
       $scope.colors =  [ '#46BFBD', "#FF0000"];
       $scope.options = {
         type: "line",

@@ -17,6 +17,7 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 	$rootScope.orderByField = 'coin';
 	$rootScope.reverseSort =  false;
 	$rootScope.selectedSort = "price";
+	$rootScope.activeMarket = "btc";
 
 	//Functions for coin ignores are next
 	var ignoreListLong = [];
@@ -47,8 +48,8 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 	var tempResponse = [];
 	function updateData(keepOldData){
 		if(tempResponse == [] || !keepOldData){
-			backend = "http://overview-long-balancer-423107294.eu-west-1.elb.amazonaws.com/min?intervals=" + $scope.inputIntervals;
-			// backend = "http://localhost:1338/min?intervals=" + $scope.inputIntervals;
+			// backend = "http://overview-long-balancer-423107294.eu-west-1.elb.amazonaws.com/min?intervals=" + $scope.inputIntervals;
+			backend = "http://34.240.107.131:1405/min?market=" + $rootScope.activeMarket + "&intervals=" + $scope.inputIntervals;
 			$http.get(backend).
 			then(handleResponse);
 
@@ -80,7 +81,7 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 		$rootScope.firstInterval = Math.min.apply(null, $scope.inputIntervals);
 		$rootScope.headers = $scope.inputIntervals;
 		$scope.inputMinVolume = overviewSettings.minVolume;
-		if (response.data && response.data.ETH.log.length) {
+		if (response.data) {
 			//Fill tempResponse for updating without retrieving
 			tempResponse = {data: response.data};
 
@@ -114,6 +115,11 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 				}
 			});
 		}
+	}
+
+	$scope.marketUpdate = function(newMarket) {
+		$rootScope.activeMarket = newMarket;
+		updateData();
 	}
 
 	$scope.sortUpdate = function() {
