@@ -11,6 +11,28 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   });
 
   $stateProvider.state({
+    name: 'login',
+    url: '/login',
+    templateUrl: "login/login-template.html",
+    controller: 'LoginCtrl',
+    data : { pageTitle: 'Login' }
+  });
+
+  $stateProvider.state('signup', {
+    url: '/signup',
+    title: 'Sign Up',
+    templateUrl: 'signup/signup-template.html',
+    controller: 'SignupCtrl'
+  })
+
+  $stateProvider.state('vip', {
+    url: '/vip',
+    title: 'VIP',
+    templateUrl: 'vip/vip-template.html',
+    controller: 'VipCtrl'
+  })
+
+  $stateProvider.state({
     name: 'overview',
     url: '/overview',
     templateUrl: "overview/overview-template.html"
@@ -60,7 +82,10 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');
   startAnalytics();
+  // login();
 });
+
+
 
 function startAnalytics() {
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

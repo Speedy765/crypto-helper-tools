@@ -1,0 +1,63 @@
+<ul class="cd-hero-slider">
+
+  <li class="selected">
+    <div class="heading">
+      <h1>VIP home</h1>
+      <span>Thank you for your support.</span>
+    </div>
+    <div class="cd-full-width first-slide">
+      <div class="container">
+        <div ng-show="vipActive" class="row">
+          <div class="col-md-12">
+            <div class="content first-content">
+              <h4>Confirmed</h4>
+              <p>Your membership is confirmed, enjoy.</p>
+            </div>
+            <div class="content second-content">
+              <div class="row">
+                <div class="col-md-7 left-image">
+                  <img width="600px" src="img/vip/binance.png">
+                </div>
+                <div class="col-md-5">
+                  <div class="right-about-text">
+                    <h4>Overview for Binance</h4>
+                    <p>As VIP you are getting early access to the binance overview.</p>
+                    <div class="primary-button">
+                      <a ui-sref="overview-long-binance">Binance overview</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-7">
+                  <div class="left-about-text">
+                    <h4>Multiple realtime charts.</h4>
+                    <p>As VIP you are getting early access to multiple realtime charts on a single page. You can replace the coins in the url with others.</p>
+                    <div class="primary-button">
+                      <a ui-sref="realtime-multi/usdt-btc,NEO,XRP,ADA,XVG,LSK">Open multichart</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5 right-image">
+                  <img width="400px" src="img/vip/multichart.png">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ng-show="!vipActive"class="row">
+          <div class="col-md-12">
+            <div class="content first-content">
+              <h4>Not confirmed</h4>
+              <p>It seems your account is not validated. Contact me at martijn765@gmail.com or <a href="https://twitter.com/Crypto_Tracky" target="_blank"><b>Twitter</b></a> with your email and txid of your donation.</p>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+
+</ul> <!-- .cd-hero-slider -->

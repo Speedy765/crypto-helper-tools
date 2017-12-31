@@ -1,0 +1,53 @@
+<div class="container-fluid">
+
+  <ul class="cd-hero-slider">
+
+    <li class="selected">
+      <div class="heading">
+        <h1>Login</h1>
+        <!-- <span>Thank you for your support.</span> -->
+      </div>
+      <div class="cd-full-width first-slide">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="content first-content">
+                <div class="panel-body">
+                  <div id="errorMessage" class="alert alert-danger col-sm-12" ng-show="errorMessage">{{errorMessage}}</div>
+                  <form id="loginForm" role="form">
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input id="email" type="text" class="form-control" value="" placeholder="E-mail">
+                    </div>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                      <input id="password" type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="input-group rememberme">
+                      <div class="checkbox">
+                        <label>
+                          <input id="rememberme" type="checkbox" name="rememberme" value="1">Remember me
+                        </label>
+                      </div>
+                    </div>
+                    <div class="button-group">
+                      <button id="loginBtn" type="submit" class="btn btn-primary btn-lg btn-block" ng-click="submit()">Login</button>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-12 control">
+                        <div class="signup"><a href="#" ui-sref="signup">Register</a></div>
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
