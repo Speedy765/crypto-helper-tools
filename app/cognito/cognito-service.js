@@ -53,8 +53,6 @@ cryptotracky.service('cognitoService', function ($q) {
 
     var currentUser = userPool.getCurrentUser();
 
-    console.log(currentUser);
-
     var deferred = $q.defer();
 
     if (currentUser != null) {

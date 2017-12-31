@@ -25,7 +25,7 @@ angular.module('cryptotracky').controller('SignupCtrl', function ($scope, $locat
       } else {
         console.log(result);
 
-        $location.path('/activate');
+        $location.path('/vip');
         $scope.$apply();
       }
     });

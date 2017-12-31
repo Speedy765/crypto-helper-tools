@@ -1,6 +1,7 @@
 angular.module('cryptotracky').controller('LoginCtrl', function ($scope, $location, cognitoService) {
 
-  $scope.submit = function () {
+  $scope.submit = function ($event) {
+    $event.preventDefault();
     var userPool = cognitoService.getUserPool();
 
     var cognitoUser = cognitoService.getUser(userPool, $('#email').val());
