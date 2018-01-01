@@ -42,9 +42,9 @@ cryptotracky.service('RealtimeService', function($http) {
     }
     callBacks[coin] = cb;
     // Set the interval to run the poll
-    if (!this.interval) {
-        this.interval = setInterval(() => this.poll(), seconds * 1000)
-    }
+    this.stopPoll();
+    this.interval = setInterval(() => this.poll(), seconds * 1000)
+
 
   }
 
