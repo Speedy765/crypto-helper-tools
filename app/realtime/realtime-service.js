@@ -1,9 +1,6 @@
 
 const baseUrl = "https://realtime.cryptotracky.com/realtimeChart"
-// const baseUrl = "http://localhost:1443/realtimeChart";
-const coinUrl = (coin) => baseUrl + "?coin=" + coin
-
-const getCoinUrl = (coin) => coinUrl(coin.toUpperCase());
+// const baseUrl = "http://localhost:1400/realtimeChart";
 
 const calculateDiff = (start,end) => {
   return Number(((end * 100) / start - 100).toFixed(1));
@@ -16,26 +13,39 @@ const calculateStats = (bid) => {
 
 cryptotracky.service('RealtimeService', function($http) {
 
+  var activeCoins = [];
+    // Support multiple coins at once
+  var coinLog = {};
+  var callBacks = {}
+
+  function getUrl() {
+    return baseUrl + "?coins=" + activeCoins.join(",");
+  }
   // This is where the interval is stored
   this.interval = null
 
-  // Support multiple coins at once
-  this.coinLog = {};
-
   // Method to start the poll and schedule it
   this.startPoll = (coin, seconds, cb) => {
+    coin = coin.toUpperCase()
     console.debug("Starting poll for " + coin);
+    // Add the coin to the list for polling
+    activeCoins.push(coin);
     // Initial run
-    this.poll(coin, cb)
-    this.coinLog[coin] = {
+    // this.poll(coin, cb)
+    coinLog[coin] = {
       ask: [],
       bid: [],
       data: [],
       labels: [],
-      diffFromMax: 0
+      diffFromMax: 0,
+      marketInfo: {}
     }
+    callBacks[coin] = cb;
     // Set the interval to run the poll
-    this.interval = setInterval(() => this.poll(coin, cb), seconds * 1000)
+    if (!this.interval) {
+        this.interval = setInterval(() => this.poll(), seconds * 1000)
+    }
+
   }
 
   // Method to stop the poll
@@ -44,40 +54,54 @@ cryptotracky.service('RealtimeService', function($http) {
   // Method that handles the result from the API
   this.handleResult = (result, coin) => {
 
-    this.coinLog[coin].marketInfo = result;
+    var coins = Object.keys(result);
+    var singleResult;
 
-    this.coinLog[coin].bid.push(result['Bid']);
-    this.coinLog[coin].ask.push(result['Ask']);
+    coins.forEach(function(coin) {
+      singleResult = result[coin];
+      coinLog[coin].marketInfo = singleResult;
 
-    if (this.coinLog[coin].bid.length > 60 * 15) {
-      this.coinLog[coin].bid.splice(0,1);
-      this.coinLog[coin].ask.splice(0,1);
-    }
+      coinLog[coin].bid.push(singleResult['Bid']);
+      coinLog[coin].ask.push(singleResult['Ask']);
 
-    this.coinLog[coin].data = [this.coinLog[coin].bid, this.coinLog[coin].ask];
-    this.coinLog[coin].labels = [];
-
-    var j =  this.coinLog[coin].bid.length;
-    var secondCounter = 0;
-    var minuteCounter = 0;
-    while (j !== 0) {
-      secondCounter++;
-      if (secondCounter === "60") {
-        minuteCounter++;
-        secondCounter = 0;
-        this.coinLog[coin].labels.splice(-1,0, "-" + minuteCounter + "min");
+      if (coinLog[coin].bid.length > 60 * 15) {
+        coinLog[coin].bid.splice(0,1);
+        coinLog[coin].ask.splice(0,1);
       }
-      else {
-        this.coinLog[coin].labels.splice(-1,0, "");
+
+      coinLog[coin].data = [coinLog[coin].bid, coinLog[coin].ask];
+      coinLog[coin].labels = [];
+
+      var j =  coinLog[coin].bid.length;
+      var secondCounter = 0;
+      var minuteCounter = 0;
+      while (j !== 0) {
+        secondCounter++;
+        if (secondCounter === "60") {
+          minuteCounter++;
+          secondCounter = 0;
+          coinLog[coin].labels.splice(-1,0, "-" + minuteCounter + "min");
+        }
+        else {
+          coinLog[coin].labels.splice(-1,0, "");
+        }
+        j--;
       }
-      j--;
-    }
+      // Invoke the callback with the data needed in the controller
+      callBacks[coin]({
+        data: coinLog[coin].data,
+        labels: coinLog[coin].labels,
+        diffFromMax: calculateStats(coinLog[coin].bid),
+        marketInfo: coinLog[coin].marketInfo
+      });
+    });
+
   }
 
   // The actual method that polls the data
-  this.poll = (coin, cb) => {
+  this.poll = (cb) => {
     // Retrieve the data from the backend
-    $http.get(getCoinUrl(coin))
+    $http.get(getUrl())
       // Fetch the actual result object
       .then(res => res.data && res.data.result ? res.data.result : null)
       .then(res => {
@@ -86,15 +110,8 @@ cryptotracky.service('RealtimeService', function($http) {
           return console.log('There was an error retrieving results from the backend')
         }
         // Handle the result if we have it data
-        return this.handleResult(res, coin)
+        return this.handleResult(res)
       })
-      // Invoke the callback with the data needed in the controller
-      .then(() => cb({
-        data: this.coinLog[coin].data,
-        labels: this.coinLog[coin].labels,
-        diffFromMax: calculateStats(this.coinLog[coin].bid),
-        marketInfo: this.coinLog[coin].marketInfo
-      }));
   }
 
 });
