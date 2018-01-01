@@ -48,7 +48,7 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 	var tempResponse = [];
 	function updateData(keepOldData){
 		if(tempResponse == [] || !keepOldData){
-			backend = "http://overview-long-balancer-423107294.eu-west-1.elb.amazonaws.com/min?market=" + $rootScope.activeMarket + "&intervals=" + $scope.inputIntervals;
+			backend = "https://overview-long.cryptotracky.com/min?market=" + $rootScope.activeMarket + "&intervals=" + $scope.inputIntervals;
 			// backend = "http://34.240.107.131:1405/min?market=" + $rootScope.activeMarket + "&intervals=" + $scope.inputIntervals;
 			$http.get(backend).
 			then(handleResponse);

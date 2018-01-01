@@ -1,5 +1,5 @@
 
-const baseUrl = "http://realtimeNoSupport-919050512.eu-west-1.elb.amazonaws.com/realtimeChart"
+const baseUrl = "https://realtime.cryptotracky.com/realtimeChart"
 // const baseUrl = "http://localhost:1443/realtimeChart";
 const coinUrl = (coin) => baseUrl + "?coin=" + coin
 

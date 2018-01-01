@@ -19,7 +19,7 @@ cryptotracky.controller('overviewController', function($rootScope, $http, $scope
 
 	//Use localstorage for debuging
 	var debug = false;
-	var backend = "http://cryptotracky-overview-608466767.eu-west-1.elb.amazonaws.com/";
+	var backend = "https://overview.cryptotracky.com/";
 	//Default sort on coinTableMain
 	$rootScope.orderByField = 'volumeDiff';
 	$rootScope.reverseSort =  true;
