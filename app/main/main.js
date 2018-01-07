@@ -82,7 +82,6 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');
   startAnalytics();
-  // login();
 });
 
 function startAnalytics() {
