@@ -128,3 +128,16 @@ function startAnalytics() {
 
   amplitude.getInstance().init("a0c5167900b0df014795a4d9ac0b60da");
 }
+
+
+//REDESING JS
+
+$(window).scroll(function() {
+  var scroll = $(window).scrollTop();
+  if (scroll > 1) {
+      $("body").addClass("body-header");
+  }
+  else {
+      $("body").removeClass("body-header");
+  }
+});
