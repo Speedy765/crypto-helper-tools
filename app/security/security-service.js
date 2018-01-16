@@ -1,6 +1,5 @@
 cryptotracky.run(function ($transitions, cognitoService) {
-  // Allow everyone access for now
-  var vipRestriction = false;
+  var vipRestriction = true;
   var restrictedStates = ["overview-long-binance", "realtime-multi"];
   if (vipRestriction) {
     restrictedStates.forEach(function(restrictedState) {
@@ -13,6 +12,4 @@ cryptotracky.run(function ($transitions, cognitoService) {
       });
     });
   }
-
-
 });
