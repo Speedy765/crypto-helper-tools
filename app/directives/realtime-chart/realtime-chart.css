@@ -1,0 +1,24 @@
+.realtime-single-wrapper {
+  border-radius: 15px;
+  border: 1px solid red;
+}
+
+.info-wrapper {
+  height: 100%;
+  font-weight: 600;
+}
+
+.row-wrapper {
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+}
+
+.row-item.first {
+  padding-left: 25px;
+  border-right: 1px solid #ddd;
+}
+
+.row-item {
+  display: inline-block;
+  width: 49%;
+}
