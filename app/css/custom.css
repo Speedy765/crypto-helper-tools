@@ -8,15 +8,13 @@
 }
 
 .btc-price-wrapper {
-  border-top: 3px solid #ffbb05;
-  background:white;
-  width: auto;
+  margin-top: 31px;
   height: 25px;
   text-align: center;
+  color :white;
 }
-.btc-price-wrapper > div {
-  background:white;
-  display: inline-block;
+.btc-price-wrapper > span {
+  margin-left: 10px;
 }
 .btc-price-wrapper .price {
   margin-left: 25px;
@@ -232,7 +230,11 @@ body.body-header .header__login .btn {
 }
 
 .header__menu {
-  width: 60%;
+  width: 40%;
+}
+
+.header__btc_price {
+  width: 20%;
 }
 
 .header__login {

@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="css/fontAwesome.css">
         <link rel="stylesheet" href="css/templatemo-style.css">
         <link rel="stylesheet" href="css/custom.css">
-        <link rel="stylesheet" href="realtime-multi/realtime-multi.css">
+        <link rel="stylesheet" href="pages/realtime-multi/realtime-multi.css">
 
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
@@ -33,17 +33,17 @@
         <script src="directives/settings-directive.js"></script>
         <script src="directives/btc-price/btc-price-directive.js"></script>
         <script src="directives/realtime-chart/realtime-chart-directive.js"></script>
-        <script src="overview/overview-controller.js"></script>
-        <script src="overview-long/overview-long-controller.js"></script>
-        <script src="overview-long-binance/overview-long-controller.js"></script>
-        <script src="realtime/realtime-service.js"></script>
-        <script src="realtime/realtime-controller.js"></script>
-        <script src="realtime-multi/realtime-multi-controller.js"></script>
+        <script src="pages/overview/overview-controller.js"></script>
+        <script src="pages/overview-long/overview-long-controller.js"></script>
+        <script src="pages/overview-long-binance/overview-long-controller.js"></script>
+        <script src="pages/realtime/realtime-service.js"></script>
+        <script src="pages/realtime/realtime-controller.js"></script>
+        <script src="pages/realtime-multi/realtime-multi-controller.js"></script>
         <script src="hitbtc/hitbtc-controller.js"></script>
-        <script src="login/login-controller.js"></script>
-        <script src="signup/signup-controller.js"></script>
+        <script src="pages/login/login-controller.js"></script>
+        <script src="pages/signup/signup-controller.js"></script>
         <script src="cognito/cognito-service.js"></script>
-        <script src="vip/vip-controller.js"></script>
+        <script src="pages/vip/vip-controller.js"></script>
         <script src="security/security-service.js"></script>
 
         <script src="/lib/aws-cognito-sdk.min.js"></script>
@@ -62,55 +62,37 @@
             </div>
             <div class="col-sm-12 header__menu">
               <ul class="menu__block">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Overview</a></li>
-                <li><a href="#">Historic</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a ui-sref="home">Home</a></li>
+                <li><a ui-sref="overview">Overview</a></li>
+                <li><a ui-sref="overview-long">Historic</a></li>
+                <li><a ui-sref="faq">FAQ</a></li>
+                <li><a ui-sref="help">Help</a></li>
+                <li><a ui-sref="vip">VIP</a></li>
+                <li><a href="https://twitter.com/Crypto_Tracky" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
               </ul>
             </div>
+
+            <div class="col-sm-12 header__btc_price">
+              <btc-price></btc-price>
+            </div>
+
             <div class="col-sm-12 header__login">
-              <a href="#" class="btn btn-primary waves-effect waves-button">Login VIP</a>
+              <a ui-sref="vip" class="btn btn-primary waves-effect waves-button">Login VIP</a>
             </div>
           </div>
         </div>
       </header>
-      <div class="main">
-        <div class="banner">
-          <div class="banner__content">
-            <h2 class="banner__title">The website that helps you track coins in real time</h2>
-            <a href="#" class="btn btn-primary">Check graphs</a>
-          </div>
-        </div>
-      </div>
 
-      
-      <!-- <btc-price></btc-price> -->
-
-        <div class="overlay"></div>
-
-        <section class="cd-hero">
-
-          <div class="cd-slider-nav">
-            <nav>
-              <span class="cd-marker item-1"></span>
-              <ul>
-                <li><a ui-sref="home"><div class="image-icon"><img src="img/home-icon.png"></div><h6>{{test}}Welcome</h6></a></li>
-                <li><a ui-sref="overview"><div class="image-icon"><img src="img/projects-icon.png"></div><h6>Overview</h6></a></li>
-                <li><a ui-sref="overview-long"><div class="image-icon"><img src="img/chart-icon.png"></div><h6>Historic</h6></a></li>
-                <li><a ui-sref="faq"><div class="image-icon"><img width="60px" src="img/faq.png"></div><h6>FAQ</h6></a></li>
-                <li><a ui-sref="help"><div class="image-icon"><img width="60px" src="img/help.png"></div><h6>Help</h6></a></li>
-                <li><a ui-sref="vip"><div class="image-icon"><img width="60px" src="img/vip.png"></div><h6>VIP</h6></a></li>
-                <li><a href="https://twitter.com/Crypto_Tracky" target="_blank"><div class="image-icon"><img width="60px" src="img/twitter.png"></div><h6>Twitter</h6></a></li>
-              </ul>
-            </nav>
-          </div>
-          <ui-view></ui-view>
-
-        </section>
-        <footer>
-          <p>Email: martijn765@gmail.com | Twitter: <a href="https://twitter.com/Crypto_Tracky" target="_blank"><b>@Crypto_Tracky</b></a> | Copyright &copy; 2017 | Designed by <a href="http://www.templatemo.com" target="_parent"><em>templatemo</em></a></p>
-        </footer>
+      <ui-view></ui-view>
+      <footer class="footer">
+      	<div class="container">
+      		<div class="row">
+      			<ul>
+      				<li><a href="#" title="contact crytotracky">martijn765@gmail.com</a></li>
+      				<li><a href="https://twitter.com/Crypto_Tracky" target="_blank">@Crypto_Tracky</a></li>
+      			</ul>
+      		</div>
+      	</div>
+      </footer>
     </body>
 </html>

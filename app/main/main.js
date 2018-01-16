@@ -6,14 +6,14 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'home',
     url: '/',
-    templateUrl: "home/home.html",
+    templateUrl: "pages/home/home.html",
     data : { pageTitle: 'Home' }
   });
 
   $stateProvider.state({
     name: 'login',
     url: '/login',
-    templateUrl: "login/login-template.html",
+    templateUrl: "pages/login/login-template.html",
     controller: 'LoginCtrl',
     data : { pageTitle: 'Login' }
   });
@@ -21,57 +21,57 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('signup', {
     url: '/signup',
     title: 'Sign Up',
-    templateUrl: 'signup/signup-template.html',
+    templateUrl: 'pages/signup/signup-template.html',
     controller: 'SignupCtrl'
   })
 
   $stateProvider.state('vip', {
     url: '/vip',
     title: 'VIP',
-    templateUrl: 'vip/vip-template.html',
+    templateUrl: 'pages/vip/vip-template.html',
     controller: 'VipCtrl'
   })
 
   $stateProvider.state({
     name: 'overview',
     url: '/overview',
-    templateUrl: "overview/overview-template.html"
+    templateUrl: "pages/overview/overview-template.html"
   });
 
   $stateProvider.state({
     name: 'overview-long',
     url: '/overview-long',
-    templateUrl: "overview-long/overview-long-template.html"
+    templateUrl: "pages/overview-long/overview-long-template.html"
   });
 
   $stateProvider.state({
     name: 'overview-long-binance',
     url: '/overview-long-binance',
-    templateUrl: "overview-long-binance/overview-long-template.html"
+    templateUrl: "pages/overview-long-binance/overview-long-template.html"
   });
 
   $stateProvider.state({
     name: 'faq',
     url: '/faq',
-    templateUrl: "faq/faq.html"
+    templateUrl: "pages/faq/faq.html"
   });
 
   $stateProvider.state({
     name: 'help',
     url: '/help',
-    templateUrl: 'help/help.html'
+    templateUrl: 'pages/help/help.html'
   });
 
   $stateProvider.state({
     name: 'realtime',
     url: '/realtime/{coin}',
-    templateUrl: 'realtime/realtime.html'
+    templateUrl: 'pages/realtime/realtime.html'
   });
 
   $stateProvider.state({
     name: 'realtime-multi',
     url: '/realtime-multi/{coins}',
-    templateUrl: 'realtime-multi/realtime-multi.html'
+    templateUrl: 'pages/realtime-multi/realtime-multi.html'
   });
 
   $stateProvider.state({
