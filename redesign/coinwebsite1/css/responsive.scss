@@ -1,0 +1,26 @@
+@media screen and (max-width: 1550px) {
+    .content__block .container {
+        width: 1170px;
+    }
+    .banner {
+        height: 350px;
+    }
+    .content__block:first-child .content__block-left {
+        padding-top: 0px;
+        padding-right: 30px;
+    }
+    .header__logo{
+        width: 30%;
+    }
+    .banner__title{
+        margin: 145px 0px 0px;
+    }
+    .menu__block li a{
+        padding-bottom: 31px 20px 37px
+    }
+}
+@media screen and (max-width: 1200px) {
+    .content__block .container {
+        width: 970px;
+    }
+}
