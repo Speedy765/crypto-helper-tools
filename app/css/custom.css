@@ -97,8 +97,24 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}
+
 body {
   line-height: 1.4;
+}
+
+a{
+  color: #004f64;
+}
+a:hover{
+  color: #003f50;
+  text-decoration: none;
+}
+a:focus{
+  color: #003f50;
+  text-decoration: none;
 }
 
 ol, ul {
@@ -198,13 +214,16 @@ body.body-header .header__login .btn {
 
 .title__line:after {
   content: "";
-  height: 3px;
+  height: 2px;
   width: 120px;
-  left: 50%;
-  margin-left: -60px;
+  left: 0;
   position: absolute;
   bottom: 0px;
-  background-color: #004f64;
+  background-color: #00637e;
+}
+
+.content__block .container {
+  width: 1250px;
 }
 
 /* HEADER */
@@ -315,6 +334,15 @@ body.body-header .header__login .btn {
   z-index: 2;
 }
 
+.banner__text{
+    font-size: 22px;
+    color: #fff;
+    text-align: center;
+    max-width: 41%;
+    line-height: 1.6;
+    margin-top: 24px;
+}
+
 .banner__content {
   position: absolute;
   left: 0px;
@@ -343,8 +371,8 @@ body.body-header .header__login .btn {
 }
 
 .banner__title {
-  font-size: 56px;
-  margin: 40px 0px 0px;
+  font-size: 42px;
+  margin: 60px 0px 0px;
   line-height: 1.5;
   color: #fff;
   text-transform: uppercase;
@@ -352,9 +380,25 @@ body.body-header .header__login .btn {
   text-align: center;
   font-weight: 300;
 }
-
+.img-vip {
+  max-width: 325px;
+}
+.flex-home{
+  display: flex;
+}
+.flex-home .content__block-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.flex-home .content__block-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .content__block-left {
-  text-align: center;
+  text-align: left;
 }
 
 .content__block-left p {
@@ -370,6 +414,18 @@ body.body-header .header__login .btn {
   margin-top: 15px;
 }
 
+.content__block:nth-child(odd) .content__block-left{
+  padding-right: 75px;
+}
+.content__block:nth-child(even) .content__block-left{
+  padding-left: 75px;
+}
+.content__block:nth-child(odd) {
+  background: #fff;
+  padding: 70px 0px;
+  border-left: 0px;
+  border-right: 0px;
+}
 .content__block:nth-child(even) {
   background: #f7f8fa;
   padding: 70px 0px;
@@ -427,4 +483,52 @@ body.body-header .header__login .btn {
 
 .footer li {
   margin: 0px 15px;
+}
+
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+  animation-duration: 2s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY,
+.animated.bounceIn,
+.animated.bounceOut {
+  animation-duration: .75s;
+}
+
+@keyframes tada {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  10%, 20% {
+    transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+  }
+
+  30%, 50%, 70%, 90% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+
+  40%, 60%, 80% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.tada {
+transition: all 500ms linear;
+  animation-name: tada;
 }

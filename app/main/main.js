@@ -129,6 +129,17 @@ function startAnalytics() {
   amplitude.getInstance().init("a0c5167900b0df014795a4d9ac0b60da");
 }
 
+setClass();
+setInterval(function () {
+  setClass();
+}, 5000);
+
+function setClass() {
+  $(".banner__content .btn").addClass("tada").delay(2000).queue(function(next){
+    $(this).removeClass("tada");
+    next();
+  }); 
+}
 
 //REDESING JS
 
@@ -141,3 +152,4 @@ $(window).scroll(function() {
       $("body").removeClass("body-header");
   }
 });
+
