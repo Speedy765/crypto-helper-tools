@@ -9,6 +9,7 @@ cryptotracky.directive('realtimeChart', function(RealtimeService) {
       if ($scope.coin.indexOf("-") === -1) {
         $scope.coin = "BTC-" + $scope.coin;
       }
+      var coin = $scope.coin;
       $scope.colors =  [ '#46BFBD', "#FF0000"];
       $scope.options = {
         type: "line",
@@ -36,17 +37,22 @@ cryptotracky.directive('realtimeChart', function(RealtimeService) {
       $scope.data = [];
       $scope.diffFromMax = 0;
 
-      RealtimeService.startPoll($scope.coin, 1, (res) => {
+      RealtimeService.startPoll(coin, 1, (res) => {
         $scope.data = res.data;
         $scope.labels = res.labels;
         $scope.diffFromMax = res.diffFromMax;
         $scope.marketInfo = res.marketInfo;
         $scope.dayDiff = (($scope.marketInfo.Bid * 100 / $scope.marketInfo.PrevDay) - 100).toFixed(1);
+        $scope.spread = calculateDiff(res.marketInfo.Bid, res.marketInfo.Ask);
       });
 
       $scope.$on("$destroy", function() {
         RealtimeService.stopPoll();
       });
+
+      function calculateDiff(start,end) {
+        return Number(((end * 100) / start - 100).toFixed(2));
+      }
     }
   };
 });

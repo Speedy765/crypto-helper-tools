@@ -1,23 +1,39 @@
-<div>
-	<h3><a href="https://bittrex.com/Market/Index?MarketName={{coin}}" target="_blank"> {{coin}}</a></h3>
-	<!-- <div> -->
-		<span> % below top of chart for current bid: {{diffFromMax}}</span>
-		<!-- <div> volume: {{marketInfo.BaseVolume}}</div> -->
-	<!-- </div> -->
+<div class="realtime-single-wrapper">
+	<div class="info-wrapper">
+		<div class="row-wrapper">
+			<div class="row-item first">
+				<a href="https://bittrex.com/Market/Index?MarketName={{coin}}" target="_blank"> {{coin}}</a>
+				<span> 24h diff <span ng-class="{'red-text-only': dayDiff < 0, 'green-text-only': dayDiff > 0}">{{dayDiff}}</span></span>
+			</div>
+			<div class="row-item ">
+				<span>{{marketInfo.Bid || "-"}} BTC</span>
+			</div>
+		</div>
+		<div class="row-wrapper">
 
-	<div class="float-right">
-		<div> 24h diff <span ng-class="{'red-text-only': dayDiff < 0, 'green-text-only': dayDiff > 0}">{{dayDiff}}</span></div>
-		<div>24 high: <span>{{marketInfo.High}}</span></div>
+			<div class="row-item first">
+				<span>spread: {{spread + " %"}}</span>
+			</div>
+			<div class="row-item ">
+				<div>{{marketInfo.High}} 24 high</div>
+			</div>
+		</div>
+		<div class="row-wrapper">
+			<div class="row-item first">
+				<span>% drop from  top of chart: {{diffFromMax}}</span>
+			</div>
+			<div class="row-item">
+				<div>{{marketInfo.Low}} 24h low</div>
+			</div>
+		</div>
+
 	</div>
+	<div class="canvas-wrapper">
+		<canvas id="line" class="chart chart-line" chart-data="data"
+			chart-labels="labels" chart-colors="colors" chart-series="series" chart-options="options"
+			chart-dataset-override="datasetOverride">
+		</canvas>
+	</div>
+		<!-- <div> volume: {{marketInfo.BaseVolume}}</div> -->
 
-
-	<canvas id="line" class="chart chart-line" chart-data="data"
-		chart-labels="labels" chart-colors="colors" chart-series="series" chart-options="options"
-		chart-dataset-override="datasetOverride">
-	</canvas>
-	<div class="float-right">24  low: <span>{{marketInfo.Low}}</span></div>
-	<!-- <canvas id="line" class="chart chart-line" chart-data="data"
-		chart-labels="labels" chart-colors="colors" chart-series="series" chart-options="options"
-		chart-dataset-override="datasetOverride">
-	</canvas> -->
 </div>
