@@ -51,6 +51,12 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   });
 
   $stateProvider.state({
+    name: 'overview-long-cryptopia',
+    url: '/overview-long-cryptopia',
+    templateUrl: "overview-long-cryptopia/overview-long-template.html"
+  });
+
+  $stateProvider.state({
     name: 'faq',
     url: '/faq',
     templateUrl: "faq/faq.html"
