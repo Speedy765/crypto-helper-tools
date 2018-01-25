@@ -1,5 +1,6 @@
 cryptotracky.controller('overviewLongController', function($rootScope, $http, $scope, localStorageService) {
 
+	$scope.activeState = "bittrex";
 	var localStorageKey = "overviewSettings-long";
 	var overviewSettings = localStorageService.get(localStorageKey);
 	if (!overviewSettings) {
@@ -98,7 +99,7 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 					if(coinData.volume.toFixed(0) > parseInt(overviewSettings.minVolume)){
 						$rootScope.finalList.push({
 							coin: coinData.coin,
-							link: "https://bittrex.com/Market/Index?MarketName=BTC-" + coinData.coin, 
+							link: "https://bittrex.com/Market/Index?MarketName=BTC-" + coinData.coin,
 							current: coinData.current.toFixed(8),
 							volume: Number(coinData.volume.toFixed(0)),
 							high: coinData.high.toFixed(8),

@@ -1,5 +1,6 @@
 cryptotracky.controller('overviewLongCryptopiaController', function($rootScope, $http, $scope, localStorageService) {
 
+	$scope.activeState = "cryptopia";
 	var localStorageKey = "overviewSettings-long";
 	var overviewSettings = localStorageService.get(localStorageKey);
 	if (!overviewSettings) {

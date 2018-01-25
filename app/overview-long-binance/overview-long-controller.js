@@ -1,5 +1,6 @@
 cryptotracky.controller('overviewLongBinanceController', function($rootScope, $http, $scope, localStorageService) {
 
+	$scope.activeState = "binance";
 	var localStorageKey = "overviewSettings-long";
 	var overviewSettings = localStorageService.get(localStorageKey);
 	if (!overviewSettings) {

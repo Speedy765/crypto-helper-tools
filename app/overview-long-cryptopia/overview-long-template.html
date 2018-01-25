@@ -36,7 +36,11 @@
 					</span>
 				</div>
 				<div class="panel-body">
-					<h3>Cryptopia</h3>
+          <div>
+					       <h3 ng-class="{'active' : activeState === 'bittrex'}"><a ui-sref="overview-long">Bittrex</a></h3>
+                 <h3 ng-class="{'active' : activeState === 'binance'}"><a ui-sref="overview-long-binance">Binance</a></h3>
+                 <h3 ng-class="{'active' : activeState === 'cryptopia'}"><a ui-sref="overview-long-cryptopia">Cryptopia</a></h3>
+          </div>
 					<p> You might have to click headers or refresh the page to apply certain changes. </p>
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-condensed table-hover" ng-if="finalList">
