@@ -1,15 +1,16 @@
-# crypto-helper-tools
+# www.cryptotracky.com
 
 ## What is it
-Some charts visualizing coins found on www.bittrex.com.
+An opensource website for tracking cryptocurreny on Bittrex, Binance and Cryptopia.
 Since they lack:
-- Realtime support of prices
-- A global overview of the state of all coins in a timespan smaller than 24 hours
+- Realtime support of prices and volumes
+- Daily overview with custom time intervals
 
 I decided to make some nice graphs for myself and the tweakers community and others interested.
 
-## Demo
+## Production
 http://www.cryptotracky.com
 
 ### Todo
-Better readme :-)
+- Better readme :-)
+- Lots of stuff, add new exchanges, improve
