@@ -66,3 +66,69 @@
 
   </ul> <!-- .cd-hero-slider -->
 </div>
+<div class="content__block">
+  <div class="container">
+    <div class="row flex-home">
+      <div class="col-sm-7 content__block-left">
+        <div class="content__block-left__content">
+          <h1 class="home__content__title title__line">VIP home </h1>
+          <div ng-show="vipActive">
+            <p> Your account is verified and active.</p>
+            <p> Thank you for support! Check below to see what is available.</p>
+          </div>
+          <div ng-show="!vipActive">
+            <h4>Not confirmed</h4>
+            <p>It seems your account is not validated. Contact me at martijn765@gmail.com or <a href="https://twitter.com/Crypto_Tracky" target="_blank"><b>Twitter</b></a> with your email and txid of your donation.</p>
+            <p> A donation of at least 0.2 LTC will get you access for life. But this is subject to change on any notice, but as early adopter the first period will always be cheap.</p>
+            <p> Check below to see what is available, but the access is still restricted for you.</p>
+            <a ui-sref="login" class="btn btn-primary waves-effect waves-button">Login</a>
+            <a ui-sref="signup" class="btn btn-primary waves-effect waves-button">Register</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-5 content__block-right">
+        <a ui-sref="overview-long">
+          <img src="img/bit-bin.jpg" class="img-responsive" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content__block">
+  <div class="container">
+    <div class="row flex-home">
+      <div class="col-sm-5 content__block-right">
+        <a ui-sref="vip">
+          <img src="img/ticket.png" class="img-responsive img-vip" alt="">
+        </a>
+      </div>
+      <div class="col-sm-7 content__block-left">
+        <div class="content__block-left__content">
+          <h1 class="home__content__title title__line">Binance and Cryptopia</h1>
+          <p>As VIP you are getting access to the Binance and Cryptopia overview instead of only Bittrex.</p>
+          <p></p>
+          <a ui-sref="overview-long-binance" class="btn btn-primary waves-effect waves-button">Check Binance!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content__block">
+  <div class="container">
+    <div class="row flex-home">
+      <div class="col-sm-7 content__block-left">
+        <div class="content__block-left__content">
+          <h1 class="home__content__title title__line">Multiple realtime charts.</h1>
+          <p> As VIP you are getting access to multiple realtime charts on a single page. You can replace the coins in the url with others.</p>
+          <a ui-sref="realtime-multi/usdt-btc,NEO,XRP,ADA,XVG,LSK" class="btn btn-primary waves-effect waves-button">Try it out</a>
+        </div>
+
+      </div>
+      <div class="col-sm-5 content__block-right">
+        <!-- <a ui-sref="/#!/realtime-multi/usdt-btc,NEO,XRP,ADA,XVG,LSK"> -->
+          <img src="img/bit-bin.jpg" class="img-responsive" alt="">
+        <!-- </a> -->
+      </div>
+    </div>
+  </div>
+</div>

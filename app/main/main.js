@@ -7,6 +7,7 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
     name: 'home',
     url: '/',
     templateUrl: "pages/home/home.html",
+    controller: 'HomeCtrl',
     data : { pageTitle: 'Home' }
   });
 
@@ -82,7 +83,15 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');
   startAnalytics();
+
 });
+
+cryptotracky.run(function($transitions, $rootScope) {
+
+    $transitions.onSuccess({}, function(transition) {
+      $rootScope.state = transition.to().name
+    });
+})
 
 function startAnalytics() {
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -137,7 +146,7 @@ function setClass() {
   $(".banner__content .btn").addClass("tada").delay(2000).queue(function(next){
     $(this).removeClass("tada");
     next();
-  }); 
+  });
 }
 
 

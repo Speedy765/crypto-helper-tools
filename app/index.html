@@ -41,6 +41,7 @@
         <script src="pages/realtime/realtime-controller.js"></script>
         <script src="pages/realtime-multi/realtime-multi-controller.js"></script>
         <script src="hitbtc/hitbtc-controller.js"></script>
+        <script src="pages/home/home-controller.js"></script>
         <script src="pages/login/login-controller.js"></script>
         <script src="pages/signup/signup-controller.js"></script>
         <script src="cognito/cognito-service.js"></script>
@@ -53,7 +54,7 @@
         <script src="/lib/jwd-decode.min.js"></script>
     </head>
     <body>
-      <header class="header">
+      <header ng-class="{'header__home' : state === 'home'}" class="header">
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-12 header__logo">
