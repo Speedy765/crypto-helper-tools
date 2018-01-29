@@ -1,25 +1,23 @@
 <div class="panel panel-default panel-default-overview">
 	<div class="panel-heading">Overview setttings</div>
 	<div class="panel-body">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="input-group input-group-overview">
-						<span class="input-group-addon input-group-left">Intervals</span>
-						<input class="form-control input-group-right" type="text" ng-model="overviewSettings.intervals" />
-					</div>
-					<div class="input-group input-group-overview">
-						<span class="input-group-addon input-group-left">Minimum volume maintable</span>
-						<input class="form-control input-group-right" type="text" ng-model="overviewSettings.minVolume" />
-					</div>
-					<div ng-show="settingsType === 'short'" class="input-group">
-						<span style="width:200px"class="input-group-addon">Maximum items in intervaltables</span>
-						<input style="width:300px" type="text" ng-model="overviewSettings.maxItemsInterval" />
-					</div>
-					<br/>
-					<button type="button" class="btn" ng-click="saveSettings()">Save</button>
-					<button type="button" class="btn" ng-click="resetSettings()">Reset</button>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="input-group input-group-overview">
+					<span class="input-group-addon input-group-left">Intervals</span>
+					<input class="form-control input-group-right" type="text" ng-model="overviewSettings.intervals" />
 				</div>
+				<div class="input-group input-group-overview">
+					<span class="input-group-addon input-group-left">Minimum volume maintable</span>
+					<input class="form-control input-group-right" type="text" ng-model="overviewSettings.minVolume" />
+				</div>
+				<div ng-show="settingsType === 'short'" class="input-group">
+					<span style="width:200px"class="input-group-addon">Maximum items in intervaltables</span>
+					<input style="width:300px" type="text" ng-model="overviewSettings.maxItemsInterval" />
+				</div>
+				<br/>
+				<button type="button" class="btn btn-primary" ng-click="saveSettings()">Save</button>
+				<button type="button" class="btn btn-primary" ng-click="resetSettings()">Reset</button>
 			</div>
 		</div>
 	</div>

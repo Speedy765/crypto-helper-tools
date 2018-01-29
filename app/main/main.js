@@ -140,6 +140,7 @@ function setClass() {
   }); 
 }
 
+
 //REDESING JS
 
 $(window).scroll(function() {
@@ -152,3 +153,9 @@ $(window).scroll(function() {
   }
 });
 
+$('.btn-push label').click(function(){
+  $(this).parent().toggleClass('btn-pushed');
+});
+
+
+ 
