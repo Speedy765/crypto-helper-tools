@@ -1,4 +1,4 @@
-cryptotracky.controller('overviewLongBinanceController', function($rootScope, $http, $scope, localStorageService) {
+cryptotracky.controller('overviewLongBinanceController', function($rootScope, $http, $scope, localStorageService, ChartService) {
 
 	$scope.activeState = "binance";
 	var localStorageKey = "overviewSettings-long";
@@ -109,7 +109,8 @@ cryptotracky.controller('overviewLongBinanceController', function($rootScope, $h
 								return x;
 							}),
 							volumeLog: coinData.volumeLog,
-							exchangeLink: "https://www.binance.com/trade.html?symbol=" + coinData.coin + "_BTC"
+							exchangeLink: "https://www.binance.com/tradeDetail.html?symbol=" + coinData.coin + "_BTC",
+							chart: ChartService.getSvgForCoin(coinData)
 						});
 					};
 				}

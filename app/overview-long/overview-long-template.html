@@ -83,6 +83,7 @@
 										</a>
 									</th>
 									<th></th>
+									<th></th>
 									<th style="text-align:right" ng-repeat="header in headers">
 										<span href="#" ng-click="$parent.orderByFieldLog=header; $parent.reverseSort = !$parent.reverseSort; $parent.orderByField=selectedSort + 'Log[' + $index + ']' ">
 											{{header}} min<span ng-show="$parent.orderByFieldLog == header"><span ng-show="!$parent.reverseSort">^</span><span ng-show="$parent.reverseSort">v</span></span>
@@ -96,12 +97,12 @@
 								<tr >
 									<td>
 										<a href="{{coin.link}}" target="_blank"> {{coin.coin}}</a>
-
 									</td>
 									<td>{{coin.current}}</td>
 									<td>{{coin.high}}</td>
 									<td>{{coin.low}}</td>
 									<td>{{coin.volume}}</td>
+                  <td><div style="width: 100px;height:30px" ng-bind-html="coin.chart"></div></td>
 									<td>Price change</td>
 									<td style="text-align:right" ng-class="{'red-text': logItem < -1 && logItem > -9999, 'green-text': logItem > 1}" ng-repeat="logItem in coin.priceLog track by $index ">
 										<span ng-show="logItem !== -9999">{{logItem.toFixed(1)}}%</span>

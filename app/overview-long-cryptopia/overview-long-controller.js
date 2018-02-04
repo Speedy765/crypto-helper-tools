@@ -1,4 +1,4 @@
-cryptotracky.controller('overviewLongCryptopiaController', function($rootScope, $http, $scope, localStorageService) {
+cryptotracky.controller('overviewLongCryptopiaController', function($rootScope, $http, $scope, localStorageService, ChartService) {
 
 	$scope.activeState = "cryptopia";
 	var localStorageKey = "overviewSettings-long";
@@ -109,7 +109,8 @@ cryptotracky.controller('overviewLongCryptopiaController', function($rootScope, 
 								return x;
 							}),
 							volumeLog: coinData.volumeLog,
-							exchangeLink: "https://www.cryptopia.co.nz/Exchange?market=" + coinData.coin + "_BTC"
+							exchangeLink: "https://www.cryptopia.co.nz/Exchange?market=" + coinData.coin + "_BTC",
+							chart: ChartService.getSvgForCoin(coinData)
 						});
 					};
 				}

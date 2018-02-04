@@ -1,4 +1,5 @@
-cryptotracky.controller('overviewLongController', function($rootScope, $http, $scope, localStorageService) {
+cryptotracky.controller('overviewLongController', function($rootScope, $http, $scope, localStorageService, ChartService) {
+
 
 	$scope.activeState = "bittrex";
 	var localStorageKey = "overviewSettings-long";
@@ -50,7 +51,7 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 	function updateData(keepOldData){
 		if(tempResponse == [] || !keepOldData){
 			backend = "https://overview-long.cryptotracky.com/min?market=" + $rootScope.activeMarket + "&intervals=" + $scope.inputIntervals;
-			// backend = "http://34.240.107.131:1405/min?market=" + $rootScope.activeMarket + "&intervals=" + $scope.inputIntervals;
+			// backend = "http://localhost:1336/min?market=" + $rootScope.activeMarket + "&intervals=" + $scope.inputIntervals;
 			$http.get(backend).
 			then(handleResponse);
 
@@ -92,6 +93,7 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 			var coins = Object.keys(response.data);
 			$rootScope.finalList = [];
 			var coinData;
+			var currentPrice;
 			coins.forEach(function(key) {
 				if (ignoreListLong.indexOf(key) == -1){
 					coinData = response.data[key];
@@ -111,7 +113,8 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 								};
 								return x;
 							}),
-							volumeLog: coinData.volumeLog
+							volumeLog: coinData.volumeLog,
+							chart: ChartService.getSvgForCoin(coinData)
 						});
 					};
 				}
@@ -137,7 +140,7 @@ cryptotracky.controller('overviewLongController', function($rootScope, $http, $s
 	//Start the code and load new data
 	updateData();
 
-	//Update the data with new data in x msec
+	// Update the data with new data in x msec
 	var updateInterval = setInterval(function() {
 		updateData();
 	}, 1000 * 60);
