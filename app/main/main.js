@@ -1,6 +1,6 @@
 
 var cryptotracky = angular.module('cryptotracky', ['ui.router', "chart.js", "LocalStorageModule"]);
-var version = "1.2";
+var version = "1.3";
 
 cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
@@ -54,6 +54,18 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
     name: 'overview-long-cryptopia',
     url: '/overview-long-cryptopia',
     templateUrl: "overview-long-cryptopia/overview-long-template.html"
+  });
+
+  $stateProvider.state({
+    name: 'overview-long-kucoin',
+    url: '/overview-long-kucoin',
+    templateUrl: "overview-long-kucoin/overview-long-template.html"
+  });
+
+  $stateProvider.state({
+    name: 'overview-long-huobi',
+    url: '/overview-long-huobi',
+    templateUrl: "overview-long-huobi/overview-long-template.html"
   });
 
   $stateProvider.state({
