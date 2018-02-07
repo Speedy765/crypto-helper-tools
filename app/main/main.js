@@ -41,31 +41,36 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'overview-long',
     url: '/overview-long',
-    templateUrl: "overview-long/overview-long-template.html"
+    templateUrl: "overview-long/overview-long-template.html",
+    controller: "overviewLongController"
   });
 
   $stateProvider.state({
     name: 'overview-long-binance',
     url: '/overview-long-binance',
-    templateUrl: "overview-long-binance/overview-long-template.html"
+    templateUrl: "overview-long/overview-long-template.html",
+    controller: "overviewLongController"
   });
 
   $stateProvider.state({
     name: 'overview-long-cryptopia',
     url: '/overview-long-cryptopia',
-    templateUrl: "overview-long-cryptopia/overview-long-template.html"
+    templateUrl: "overview-long/overview-long-template.html",
+    controller: "overviewLongController"
   });
 
   $stateProvider.state({
     name: 'overview-long-kucoin',
     url: '/overview-long-kucoin',
-    templateUrl: "overview-long-kucoin/overview-long-template.html"
+    templateUrl: "overview-long/overview-long-template.html",
+    controller: "overviewLongController"
   });
 
   $stateProvider.state({
     name: 'overview-long-huobi',
     url: '/overview-long-huobi',
-    templateUrl: "overview-long-huobi/overview-long-template.html"
+    templateUrl: "overview-long/overview-long-template.html",
+    controller: "overviewLongController"
   });
 
   $stateProvider.state({
