@@ -92,7 +92,7 @@
 										</a>
 									</th>
 									<th> Ignore</th>
-									<th> Live Chart</th>
+									<th ng-if="activeState === 'bittrex'"> Live Chart</th>
 								</tr>
 							</thead>
 							<tbody ng-repeat="coin in finalList | orderBy:orderByField:reverseSort">
@@ -110,7 +110,7 @@
 										<span ng-show="logItem !== -9999">{{logItem.toFixed(1)}}%</span>
 									</td>
 									<td> <span href="javascript:void(0)" ng-click="ignore(coin.coin)" class="btn-link"> X</a></td>
-									<td><a target="_blank" href="/#!/realtime/{{coin.coin}}" ng-click="logRealtime(coin.coin)">Open</a></td>
+									<td ng-if="activeState === 'bittrex'"><a target="_blank" href="/#!/realtime/{{coin.coin}}" ng-click="logRealtime(coin.coin)">Open</a></td>
 								</tr>
 								<tr ng-show="showVolume === true">
 									<td>
