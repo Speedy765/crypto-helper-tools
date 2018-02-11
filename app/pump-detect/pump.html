@@ -1,0 +1,25 @@
+<ul class="cd-hero-slider" ng-controller="pumpDetectController">
+
+  <li class="selected">
+    <div class="heading">
+
+        <h1>Pump detect (beta)</h1>
+    </div>
+    <div class="cd-full-width">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="content first-content">
+            <div class="panel panel-default">
+              <div class="container-fluid">
+                <div class="realtime-multi-wrapper">
+                  <div class="realtime-chart" ng-repeat="coin in activeCoins" coin="coin" realtime-chart>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
