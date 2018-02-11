@@ -56,7 +56,7 @@ cryptotracky.controller('overviewLongController', function($state, $rootScope, $
 	function updateData(keepOldData){
 		if(tempResponse == [] || !keepOldData){
 			backend = "https://overview-long.cryptotracky.com/min-" + exchange + "&intervals=" + $scope.inputIntervals;
-			// backend = "http://localhost:1336/min?market=" + $rootScope.activeMarket + "&intervals=" + $scope.inputIntervals;
+			// backend = "http://34.240.107.131:1338/min-" + $rootScope.activeMarket + "&intervals=" + $scope.inputIntervals;
 			$http.get(backend).
 			then(handleResponse);
 

@@ -98,6 +98,12 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   });
 
   $stateProvider.state({
+    name: 'pump-detect',
+    url: '/pump-detect',
+    templateUrl: 'pump-detect/pump.html'
+  });
+
+  $stateProvider.state({
     name: 'hitbtc-status',
     url: '/hitbtc-status',
     templateUrl: 'hitbtc/hitbtc-status.html'

@@ -1,6 +1,6 @@
 
-const baseUrl = "https://realtime.cryptotracky.com/realtimeChart"
-// const baseUrl = "http://localhost:1400/realtimeChart";
+// const baseUrl = "https://realtime.cryptotracky.com/realtimeChart"
+const baseUrl = "http://localhost:1400/realtimeChart";
 
 const calculateDiff = (start,end) => {
   return Number(((end * 100) / start - 100).toFixed(1));
@@ -26,26 +26,32 @@ cryptotracky.service('RealtimeService', function($http) {
 
   // Method to start the poll and schedule it
   this.startPoll = (coin, seconds, cb) => {
-    coin = coin.toUpperCase()
+    coin = coin.toUpperCase();
     console.debug("Starting poll for " + coin);
     // Add the coin to the list for polling
     activeCoins.push(coin);
     // Initial run
-    // this.poll(coin, cb)
-    coinLog[coin] = {
-      ask: [],
-      bid: [],
-      data: [],
-      labels: [],
-      diffFromMax: 0,
-      marketInfo: {}
-    }
+
     callBacks[coin] = cb;
     // Set the interval to run the poll
     this.stopPoll();
     this.interval = setInterval(() => this.poll(), seconds * 1000)
+  }
 
-
+  this.getLog = (coin) => {    
+    coin = coin.toUpperCase();
+    return $http.get(baseUrl + "-log" + "?coins=" + coin).then(result => {
+      coinLog[coin] = {
+        ask: [],
+        bid: [],
+        data: [],
+        labels: [],
+        diffFromMax: 0,
+        marketInfo: {}
+      };
+      coinLog[coin].bid = result.data.result[coin].bidLog;
+      coinLog[coin].ask = result.data.result[coin].askLog;
+    });
   }
 
   // Method to stop the poll
