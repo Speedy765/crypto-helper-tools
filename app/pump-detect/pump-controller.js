@@ -14,7 +14,7 @@ cryptotracky.controller('pumpDetectController', function($http, $scope, $statePa
   function handleResponse(response) {
     if (response.data) {
       response.data.forEach(function(coin) {
-        if (coin.diff > 5 && coinNotActive(coin.coin)) {
+        if (coin.diff > 5 && coin.coin.indexOf("BTC-") === 0 && coinNotActive(coin.coin)) {
           $scope.activeCoins.push(coin.coin);
           Push.create(coin.coin, {
             body: 'How\'s it hangin\'?',
