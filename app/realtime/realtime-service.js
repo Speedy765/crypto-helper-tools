@@ -1,6 +1,6 @@
 
-// const baseUrl = "https://realtime.cryptotracky.com/realtimeChart"
-const baseUrl = "http://localhost:1400/realtimeChart";
+const baseUrl = "https://realtime.cryptotracky.com/realtimeChart"
+// const baseUrl = "http://localhost:1400/realtimeChart";
 
 const calculateDiff = (start,end) => {
   return Number(((end * 100) / start - 100).toFixed(1));
@@ -38,7 +38,7 @@ cryptotracky.service('RealtimeService', function($http) {
     this.interval = setInterval(() => this.poll(), seconds * 1000)
   }
 
-  this.getLog = (coin) => {    
+  this.getLog = (coin) => {
     coin = coin.toUpperCase();
     return $http.get(baseUrl + "-log" + "?coins=" + coin).then(result => {
       coinLog[coin] = {
