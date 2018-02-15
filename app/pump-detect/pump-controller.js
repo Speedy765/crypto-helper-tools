@@ -1,7 +1,9 @@
 cryptotracky.controller('pumpDetectController', function($http, $scope, $stateParams) {
 
   $scope.activeCoins = [];
-  var backend = "http://localhost:1400/pump-detect?interval=5";
+
+  var backend = "https://realtime.cryptotracky.com/pump-detect?interval=5";
+  // var backend = "http://localhost:1400/pump-detect?interval=5";
   setInterval(function() {
     $http.get(backend).
     then(handleResponse);
