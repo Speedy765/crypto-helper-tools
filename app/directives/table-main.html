@@ -5,26 +5,26 @@
 			<thead>
 				<tr>
 					<th>
-						<span ng-click="orderByField='coin'; reverseSort = !reverseSort">
+						<span class="head" ng-click="orderByField='coin'; reverseSort = !reverseSort">
 							Coin
 							<span ng-show="orderByField == 'coin'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 						</span>
 					</th>
 					<th>
-						<span ng-click="orderByField='start'; reverseSort = !reverseSort">
+						<span class="head" ng-click="orderByField='start'; reverseSort = !reverseSort">
 							Start
 							<span ng-show="orderByField == 'start'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 						</span>
 					</th>
 					<th>
-						<span ng-click="orderByField='price'; reverseSort = !reverseSort">
+						<span  class="head" ng-click="orderByField='price'; reverseSort = !reverseSort">
 							Price
 							<span ng-show="orderByField == 'price'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 						</span>
 					</th>
 					<th style="text-align:right">
 						<span ng-click="orderByField='diffSinceStart'; reverseSort = !reverseSort">
-							Price Diff.
+							<span class="head">Price Diff.</span>
 							<span ng-show="orderByField == 'diffSinceStart'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 						</span>
 					</th>

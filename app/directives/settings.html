@@ -12,8 +12,8 @@
 					<input class="form-control input-group-right" type="text" ng-model="overviewSettings.minVolume" />
 				</div>
 				<div ng-show="settingsType === 'short'" class="input-group">
-					<span style="width:200px"class="input-group-addon">Maximum items in intervaltables</span>
-					<input style="width:300px" type="text" ng-model="overviewSettings.maxItemsInterval" />
+					<span class="input-group-addon input-group-left">Maximum items in intervaltables</span>
+					<input type="text" class="form-control input-group-right" ng-model="overviewSettings.maxItemsInterval" />
 				</div>
 				<br/>
 				<button type="button" class="btn btn-primary" ng-click="saveSettings()">Save</button>

@@ -43,43 +43,43 @@
 							<thead>
 								<tr>
 									<th>
-										<span href="#" ng-click="orderByField='coin'; reverseSort = !reverseSort; orderByFieldLog=-1">
+										<span href="#" class="head" ng-click="orderByField='coin'; reverseSort = !reverseSort; orderByFieldLog=-1">
 											Coin
 											<span ng-show="orderByField == 'coin'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 										</a>
 									</th>
 									<th>
-										<span href="#" ng-click="orderByField='current'; reverseSort = !reverseSort; orderByFieldLog=-1">
+										<span href="#" class="head" ng-click="orderByField='current'; reverseSort = !reverseSort; orderByFieldLog=-1">
 											Current price
 											<span ng-show="orderByField == 'current'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 										</a>
 									</th>
 									<th>
-										<span href="#" ng-click="orderByField='high'; reverseSort = !reverseSort; orderByFieldLog=-1">
+										<span href="#" class="head" ng-click="orderByField='high'; reverseSort = !reverseSort; orderByFieldLog=-1">
 											24h high
 											<span ng-show="orderByField == 'high'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 										</a>
 									</th>
 									<th>
-										<span href="#" ng-click="orderByField='low'; reverseSort = !reverseSort; orderByFieldLog=-1">
+										<span href="#" class="head" ng-click="orderByField='low'; reverseSort = !reverseSort; orderByFieldLog=-1">
 											24h low
 											<span ng-show="orderByField == 'low'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 										</a>
 									</th>
 
 									<th>
-										<span href="#" ng-click="orderByField='volume'; reverseSort = !reverseSort; orderByFieldLog=-1">
+										<span href="#" class="head" ng-click="orderByField='volume'; reverseSort = !reverseSort; orderByFieldLog=-1">
 											Volume
 											<span ng-show="orderByField == 'volume'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 										</a>
 									</th>
 									<th></th>
-									<th style="text-align:right" ng-repeat="header in headers">
+									<th style="text-align:right" class="head" ng-repeat="header in headers">
 										<span href="#" ng-click="$parent.orderByFieldLog=header; $parent.reverseSort = !$parent.reverseSort; $parent.orderByField=selectedSort + 'Log[' + $index + ']' ">
 											{{header}} min<span ng-show="$parent.orderByFieldLog == header"><span ng-show="!$parent.reverseSort">^</span><span ng-show="$parent.reverseSort">v</span></span>
 										</a>
 									</th>
-									<th> Ignore</th>
+									<th class="head"> Ignore</th>
 									<!-- <th> Live Chart</th> -->
 								</tr>
 							</thead>
