@@ -19,11 +19,13 @@ cryptotracky.directive('overviewPanelSettings', function($rootScope, localStorag
           }
         );
         $scope.overviewSettings = localStorageService.get(keyToUse);
+        window.location.reload();
       }
 
       $scope.saveSettings = function(){
         localStorageService.set(keyToUse,$scope.overviewSettings);
         $rootScope.$emit("settingsUpdate", ["data"]);
+        window.location.reload();
       }
 
       if (!$scope.overviewSettings) {

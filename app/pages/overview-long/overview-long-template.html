@@ -31,7 +31,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<span class="btn btn-push">
-							<input ng-model="showVolume" id="showVolume" name="showVolume" type="checkbox"> 
+							<input ng-model="showVolume" id="showVolume" name="showVolume" type="checkbox">
 							<label for="showVolume">Show volume</label>
 						</span>
 						<span style="margin-left: 15px">Sort on
@@ -49,8 +49,7 @@
 					</div>
 					<div class="panel-body">
 						<h3>Bittrex</h3>
-						<span> This page is still under heavy development but works fine, you might have to click headers or refresh the page to apply certain changes. </span>
-	
+
 						<!-- <h4> Select market: </h4>
 							<input style="margin-right:5px" name="market" type="radio" value="btc" ng-model="activeMarket" ng-click="marketUpdate('btc')">BTC</input>
 							<input style="margin-right:5px" name="market" type="radio" value="eth" ng-model="activeMarket" ng-click="marketUpdate('eth')">ETH</input>
@@ -83,13 +82,14 @@
 												<span ng-show="orderByField == 'low'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 											</a>
 										</th>
-	
+
 										<th>
 											<span href="#" class="head" ng-click="orderByField='volume'; reverseSort = !reverseSort; orderByFieldLog=-1">
 												Volume
 												<span ng-show="orderByField == 'volume'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
 											</a>
 										</th>
+										<th></th>
 										<th></th>
 										<th style="text-align:right" ng-repeat="header in headers">
 											<span href="#" class="head" ng-click="$parent.orderByFieldLog=header; $parent.reverseSort = !$parent.reverseSort; $parent.orderByField=selectedSort + 'Log[' + $index + ']' ">
@@ -104,12 +104,13 @@
 									<tr >
 										<td>
 											<a href="{{coin.link}}" target="_blank"> {{coin.coin}}</a>
-	
+
 										</td>
 										<td>{{coin.current}}</td>
 										<td>{{coin.high}}</td>
 										<td>{{coin.low}}</td>
 										<td>{{coin.volume}}</td>
+										<td><div style="width: 100px;height:30px" ng-bind-html="coin.chart"></div></td>
 										<td>Price change</td>
 										<td style="text-align:right" ng-class="{'red-text': logItem < -1 && logItem > -9999, 'green-text': logItem > 1}" ng-repeat="logItem in coin.priceLog track by $index ">
 											<span ng-show="logItem !== -9999">{{logItem.toFixed(1)}}%</span>
@@ -119,7 +120,7 @@
 									</tr>
 									<tr ng-show="showVolume === true">
 										<td>
-	
+
 										</td>
 										<td></td>
 										<td></td>
