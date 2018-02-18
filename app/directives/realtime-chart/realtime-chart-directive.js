@@ -37,14 +37,17 @@ cryptotracky.directive('realtimeChart', function(RealtimeService) {
       $scope.data = [];
       $scope.diffFromMax = 0;
 
-      RealtimeService.startPoll(coin, 1, (res) => {
-        $scope.data = res.data;
-        $scope.labels = res.labels;
-        $scope.diffFromMax = res.diffFromMax;
-        $scope.marketInfo = res.marketInfo;
-        $scope.dayDiff = (($scope.marketInfo.Bid * 100 / $scope.marketInfo.PrevDay) - 100).toFixed(1);
-        $scope.spread = calculateDiff(res.marketInfo.Bid, res.marketInfo.Ask);
-      });
+      RealtimeService.getLog($scope.coin).then(_ => {
+        RealtimeService.startPoll($scope.coin, 1, (res) => {
+          $scope.data = res.data;
+          $scope.labels = res.labels;
+          $scope.diffFromMax = res.diffFromMax;
+          $scope.marketInfo = res.marketInfo;
+          $scope.dayDiff = (($scope.marketInfo.Bid * 100 / $scope.marketInfo.PrevDay) - 100).toFixed(1);
+        });
+      })
+
+
 
       $scope.$on("$destroy", function() {
         RealtimeService.stopPoll();

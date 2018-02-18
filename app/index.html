@@ -34,12 +34,15 @@
         <script src="directives/settings-directive.js"></script>
         <script src="directives/btc-price/btc-price-directive.js"></script>
         <script src="directives/realtime-chart/realtime-chart-directive.js"></script>
+
         <script src="pages/overview/overview-controller.js"></script>
         <script src="pages/overview-long/overview-long-controller.js"></script>
         <script src="pages/overview-long-binance/overview-long-controller.js"></script>
         <script src="pages/realtime/realtime-service.js"></script>
         <script src="pages/realtime/realtime-controller.js"></script>
         <script src="pages/realtime-multi/realtime-multi-controller.js"></script>
+        <script src="pump-detect/pump-controller.js"></script>
+
         <script src="hitbtc/hitbtc-controller.js"></script>
         <script src="pages/home/home-controller.js"></script>
         <script src="pages/login/login-controller.js"></script>
@@ -47,11 +50,13 @@
         <script src="cognito/cognito-service.js"></script>
         <script src="pages/vip/vip-controller.js"></script>
         <script src="security/security-service.js"></script>
+        <script src="services/chart-service.js"></script>
 
         <script src="/lib/aws-cognito-sdk.min.js"></script>
         <script src="/lib/amazon-cognito-identity.min.js"></script>
         <script src="/lib/aws-sdk.min.js"></script>
         <script src="/lib/jwd-decode.min.js"></script>
+        <script src="https://pushjs.org/scripts/push.min.js"></script>
     </head>
     <body>
       <header ng-class="{'header__home' : state === 'home'}" class="header">

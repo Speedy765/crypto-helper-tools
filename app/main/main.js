@@ -1,6 +1,6 @@
 
 var cryptotracky = angular.module('cryptotracky', ['ui.router', "chart.js", "LocalStorageModule"]);
-var version = "1.0";
+var version = "1.3";
 
 cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
@@ -48,7 +48,29 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
     name: 'overview-long-binance',
     url: '/overview-long-binance',
-    templateUrl: "pages/overview-long-binance/overview-long-template.html"
+    templateUrl: "pages/overview-long/overview-long-template.html",
+    controller: "overviewLongController"
+  });
+
+  $stateProvider.state({
+    name: 'overview-long-cryptopia',
+    url: '/overview-long-cryptopia',
+    templateUrl: "pages/overview-long/overview-long-template.html",
+    controller: "overviewLongController"
+  });
+
+  $stateProvider.state({
+    name: 'overview-long-kucoin',
+    url: '/overview-long-kucoin',
+    templateUrl: "pages/overview-long/overview-long-template.html",
+    controller: "overviewLongController"
+  });
+
+  $stateProvider.state({
+    name: 'overview-long-huobi',
+    url: '/overview-long-huobi',
+    templateUrl: "pages/overview-long/overview-long-template.html",
+    controller: "overviewLongController"
   });
 
   $stateProvider.state({
@@ -73,6 +95,12 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
     name: 'realtime-multi',
     url: '/realtime-multi/{coins}',
     templateUrl: 'pages/realtime-multi/realtime-multi.html'
+  });
+
+  $stateProvider.state({
+    name: 'pump-detect',
+    url: '/pump-detect',
+    templateUrl: 'pump-detect/pump.html'
   });
 
   $stateProvider.state({
@@ -165,6 +193,3 @@ $(window).scroll(function() {
 $('.btn-push label').click(function(){
   $(this).parent().toggleClass('btn-pushed');
 });
-
-
-
