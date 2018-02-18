@@ -188,7 +188,7 @@ table {
 .table > thead:first-child > tr:first-child > th,
 .table > caption + thead > tr:first-child > td,
 .table > colgroup + thead > tr:first-child > td,
-.table > thead:first-child > tr:first-child > td { 
+.table > thead:first-child > tr:first-child > td {
   border-top: 0;
   background-color: #f7f8fa;
   min-height: 60px;
@@ -196,7 +196,7 @@ table {
   padding: 0px 0.8rem 0px 0.8rem;
   border-right: 3px solid #fff;
   text-align: center!important;
-  font-weight: bold;  
+  font-weight: bold;
   color: #004f64;
   position: relative;
   flex-wrap: nowrap;
@@ -206,7 +206,7 @@ table {
 .table > thead:first-child > tr:first-child > th span.head,
 .table > caption + thead > tr:first-child > td span.head,
 .table > colgroup + thead > tr:first-child > td span.head,
-.table > thead:first-child > tr:first-child > td  span.head{ 
+.table > thead:first-child > tr:first-child > td  span.head{
  color: #004f64;
  font-weight: bold;
  cursor: pointer;
@@ -819,7 +819,7 @@ body.body-header .header__login .btn {
   padding-bottom: 20px;
   margin-bottom: 25px;
   font-weight: 400;
-  line-height: 1.4; 
+  line-height: 1.4;
 }
 
 .title__line:after {
@@ -867,7 +867,7 @@ body.body-header .header__login .btn {
 }
 
 .header__menu {
-  width: 40%;
+  width: 70%;
 }
 
 .header__btc_price {
@@ -1194,7 +1194,7 @@ body.body-header .header__login .btn {
 [type="radio"]:checked + label:after,
 [type="radio"]:not(:checked) + label:after {
   content: '';
-  width: 12px; 
+  width: 12px;
   height: 12px;
   background: #004f64;
   position: absolute;
