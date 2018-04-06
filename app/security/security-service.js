@@ -1,5 +1,5 @@
 cryptotracky.run(function ($transitions, cognitoService, $rootScope) {
-  var vipRestriction = true;
+  var vipRestriction = false;
   $rootScope.vip = false;
   var restrictedStates = ["overview-long-binance", "realtime-multi", "pump-detect"];
   if (vipRestriction) {
