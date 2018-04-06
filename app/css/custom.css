@@ -1353,3 +1353,17 @@ body.body-header .header__login .btn {
 transition: all 500ms linear;
   animation-name: tada;
 }
+
+.primary-button a {
+  background-color: #004f64;
+  color: #fff;
+}
+
+.primary-button a:hover {
+  background-color: transparent;
+  color: black;
+}
+
+.content {
+  border-top: 15px solid #004f64;
+}
