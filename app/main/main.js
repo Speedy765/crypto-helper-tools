@@ -1,6 +1,6 @@
 
 var cryptotracky = angular.module('cryptotracky', ['ui.router', "chart.js", "LocalStorageModule"]);
-var version = "1.4";
+var version = "1.5";
 
 cryptotracky.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state({
@@ -101,12 +101,6 @@ cryptotracky.config(function($stateProvider, $urlRouterProvider) {
     name: 'pump-detect',
     url: '/pump-detect',
     templateUrl: 'pump-detect/pump.html'
-  });
-
-  $stateProvider.state({
-    name: 'hitbtc-status',
-    url: '/hitbtc-status',
-    templateUrl: 'hitbtc/hitbtc-status.html'
   });
 
   $urlRouterProvider.otherwise('/');
