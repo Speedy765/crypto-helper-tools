@@ -12,5 +12,5 @@ I decided to make some nice graphs for myself and the tweakers community and oth
 http://www.cryptotracky.com
 
 ### Todo
-- Better readme :-)
+- Better readme :-) :-)
 - Lots of stuff, add new exchanges, improve
